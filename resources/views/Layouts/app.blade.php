@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Combustible</title>
+    <title>Sistema de Diagnostico</title>
     <link rel="icon" href="{{ asset('img/icono.PNG') }}" type="image/PNG">
     
     <!-- Otros estilos y scripts que ya tenías en el head -->
@@ -367,7 +367,7 @@
 
             <div class="brand-container">
                 <a href="{{ route('menu') }}" class="brand {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}" id="brandLink">
-                    Gestión de Combustible
+                    Sistema de Diagnostico
                 </a>
             </div>
 
@@ -385,7 +385,7 @@
             <div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
             
             <a href="{{ route('registrovehicular.index') }}" class="nav-link {{ request()->routeIs('registrovehicular.*') ? 'active' : '' }}">
-                <i class="fas fa-car"></i> Registro vehicular
+                <i class="fas fa-desktop"></i> Registro de diagnostico
             </a>
             
            
