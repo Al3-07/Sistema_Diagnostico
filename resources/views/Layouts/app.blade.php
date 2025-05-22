@@ -384,7 +384,7 @@
 
             <div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
             
-            <a href="{{ route('registrovehicular.index') }}" class="nav-link {{ request()->routeIs('registrovehicular.*') ? 'active' : '' }}">
+            <a href="{{ route('registrodiagnostico.index') }}" class="nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
                 <i class="fas fa-desktop"></i> Registro de diagnostico
             </a>
             

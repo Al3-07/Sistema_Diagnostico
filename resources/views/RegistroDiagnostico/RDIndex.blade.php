@@ -1,6 +1,7 @@
 @extends('Layouts.app')
 
-@section('titulo', 'Gestión de Registros Vehiculares')
+@section('titulo', 'Gestión de Diagnósticos de Equipos')
+
 
 @section('contenido')
 
@@ -204,28 +205,23 @@
 <div class="container mt-5">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h2 class="card-title mb-0">
-                </i><b>Registro vehicular</b>
-            </h2>
+            <h2 class="card-title mb-0"><b>Diagnósticos de Equipos</b></h2>
             @if(Auth::user()->role !== 'Visualizador')
-                <a href="{{ route('registrovehicular.create') }}" class="btn btn-info btn-sm btn-nuevo-registro">
-                    <i class="fas fa-plus"></i> Nuevo registro
+                <a href="{{ route('registrodiagnostico.create') }}" class="btn btn-info btn-sm btn-nuevo-registro">
+                    <i class="fas fa-plus"></i> Nuevo diagnóstico
                 </a>
             @endif
         </div>
         <div class="card-body p-4">
             <div class="table-responsive mt-3">
-                <table class="table table-bordered table-striped w-100" id="vehiculos-table">
+                <table class="table table-bordered table-striped w-100" id="equipos-table">
                     <thead>
                         <tr>
-                            <th>Equipo</th>
-                            <th>Marca</th>
-                            <th>Placa</th>
+                            <th>Hardware</th>
                             <th>Modelo</th>
-                            <th>Motor</th>
+                            <th>Marca</th>
                             <th>Serie</th>
-                            <th>Asignado</th>
-                            <th>Observación</th>
+                            <th>Descripción</th>
                             <th class="acciones-columna text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -239,32 +235,23 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#vehiculos-table').DataTable({
+        $('#equipos-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ route('registrovehicular.table') }}',
+            ajax: '{{ route('registrodiagnostico.table') }}',
             columns: [
                 { data: 'equipo', name: 'equipo' },
-                { data: 'marca', name: 'marca' },
-                { data: 'placa', name: 'placa' },
                 { data: 'modelo', name: 'modelo' },
-                { data: 'motor', name: 'motor' },
-                { 
-                    data: 'serie', 
-                    name: 'serie', 
-                    render: function(data) { 
-                        return data ? data.substring(0, 6) : ''; 
-                    } 
-                },
-                { data: 'asignado', name: 'asignado' },
-                { 
-                    data: 'observacion', 
-                    name: 'observacion', 
-                    render: function(data) { 
-                        return data ? data.substring(0, 6) : ''; 
-                    } 
-                },
-                { data: 'acciones', name: 'acciones', orderable: false, searchable: false, className: 'acciones-columna' }
+                { data: 'marca', name: 'marca' },
+                { data: 'serie', name: 'serie' },
+                { data: 'descripcion', name: 'descripcion' },
+                {
+                    data: 'acciones',
+                    name: 'acciones',
+                    orderable: false,
+                    searchable: false,
+                    className: 'acciones-columna'
+                }
             ],
             language: {
                 "processing": "Procesando...",

@@ -2,22 +2,36 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\RegistroVehicularController;
+use App\Http\Controllers\RegistroDiagnosticoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegistroRolController;
 use App\Http\Controllers\UserController;
 
 Route::middleware(['auth'])->group(function () {
-    // RUTAS DE VEHÍCULO
-    Route::get('registrovehicular/table', [RegistroVehicularController::class, 'getTableData'])->name('registrovehicular.table');
-    Route::get('registrovehicular', [RegistroCombustibleController::class, 'index'])->name('registrovehicular.index');
-    Route::get('/vehiculo_create', [RegistroVehicularController::class, 'create'])->name('registrovehicular.create');
-    Route::post('/vehiculo_store', [RegistroVehicularController::class, 'store'])->name('registrovehicular.store');
-    Route::get('/registrovehicular/{id}/edit', [RegistroVehicularController::class, 'edit'])->name('registrovehicular.RVEdit');
-    Route::put('/registrovehicular/{id}', [RegistroVehicularController::class, 'update'])->name('registrovehicular.update');
-    Route::delete('/registrovehicular/{id}', [RegistroVehicularController::class, 'destroy'])->name('registrovehicular.destroy');
-    // Mostrar detalles de un vehículo
-    Route::get('registrovehicular/{id}', [RegistroVehicularController::class, 'show'])->name('registrovehicular.show');
+    // RUTAS DE Diagnostic
+   // Obtener datos para tabla (si lo necesitas para DataTables u otra tabla AJAX)
+Route::get('registrodiagnostico/table', [RegistroDiagnosticoController::class, 'getTableData'])->name('registrodiagnostico.table');
+
+// Vista índice (listar todos los diagnósticos)
+Route::get('registrodiagnostico', [RegistroDiagnosticoController::class, 'index'])->name('registrodiagnostico.index');
+
+// Formulario para crear nuevo diagnóstico
+Route::get('/diagnostico_create', [RegistroDiagnosticoController::class, 'create'])->name('registrodiagnostico.create');
+
+// Guardar nuevo diagnóstico
+Route::post('/diagnostico_store', [RegistroDiagnosticoController::class, 'store'])->name('registrodiagnostico.store');
+
+// Editar diagnóstico
+Route::get('/registrodiagnostico/{id}/edit', [RegistroDiagnosticoController::class, 'edit'])->name('registrodiagnostico.edit');
+
+// Actualizar diagnóstico
+Route::put('/registrodiagnostico/{id}', [RegistroDiagnosticoController::class, 'update'])->name('registrodiagnostico.update');
+
+// Eliminar diagnóstico
+Route::delete('/registrodiagnostico/{id}', [RegistroDiagnosticoController::class, 'destroy'])->name('registrodiagnostico.destroy');
+
+// Mostrar detalles de diagnóstico
+Route::get('registrodiagnostico/{id}', [RegistroDiagnosticoController::class, 'show'])->name('registrodiagnostico.show');
 
    
     // RUTAS DE ROL

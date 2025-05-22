@@ -18,9 +18,6 @@ return new class extends Migration
             $table->string('marca');
             $table->string('serie');
             $table->string('descripcion');
-            // imágenes antes / después string  guardas la ruta ej. /public/img/123_antes.jpg.
-        $table->string('foto_antes')->nullable();
-        $table->string('foto_despues')->nullable();
             $table->timestamps();
         });
     }

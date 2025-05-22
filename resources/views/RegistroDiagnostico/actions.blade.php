@@ -1,15 +1,16 @@
 <div class="d-flex gap-2">
-<a href="{{ route('registrovehicular.show', $registro->id) }}" class="btn btn-info btn-sm">
-<i class="fas fa-eye"></i>
-        </a>
+    <a href="{{ route('registrodiagnostico.show', $equipo->id) }}" class="btn btn-info btn-sm" title="Ver diagnóstico">
+        <i class="fas fa-eye"></i>
+    </a>
+
     @if(Auth::user()->role !== 'Visualizador')
         <!-- Botón de editar -->
-        <a href="{{ route('registrovehicular.RVEdit', $registro->id) }}" class="btn btn-warning btn-sm" title="Editar">
+        <a href="{{ route('registrodiagnostico.edit', $equipo->id) }}" class="btn btn-warning btn-sm" title="Editar diagnóstico">
             <i class="fas fa-edit"></i>
         </a>
 
         <!-- Botón de eliminación -->
-        <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="{{ $registro->id }}" title="Eliminar">
+        <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="{{ $equipo->id }}" title="Eliminar diagnóstico">
             <i class="fas fa-trash"></i>
         </button>
     @endif
@@ -21,50 +22,41 @@
 
 <script>
     $(document).on('click', '.delete-btn', function () {
-        var registroId = $(this).data('id'); // Obtiene el ID del registro
+        var equipoId = $(this).data('id');
 
-        // Muestra la alerta de confirmación con SweetAlert
         Swal.fire({
             title: '¿Estás seguro?',
-            text: "¡Este registro será eliminado permanentemente!",
+            text: "¡Este diagnóstico será eliminado permanentemente!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Sí, eliminar',
             cancelButtonText: 'Cancelar',
         }).then((result) => {
             if (result.isConfirmed) {
-                // Si se confirma, realiza la petición AJAX
                 $.ajax({
-                    url: '{{ route("registrovehicular.destroy", ":id") }}'.replace(':id', registroId),  // Usar la ruta con el ID del registro
-                    type: 'DELETE',  // Método DELETE
+                    url: '{{ route("registrodiagnostico.destroy", ":id") }}'.replace(':id', equipoId),
+                    type: 'DELETE',
                     data: {
-                        _token: '{{ csrf_token() }}',  // Token CSRF
+                        _token: '{{ csrf_token() }}',
                     },
                     success: function(response) {
                         if (response.success) {
-                            // Muestra mensaje de éxito
                             Swal.fire('Eliminado!', response.message, 'success');
+                            $('#equipo-' + equipoId).remove();
 
-                            // Elimina la fila correspondiente de la tabla de inmediato
-                            $('#registro-' + registroId).remove();  // Elimina la fila con el ID 'registro-{id}'
-
-                            // Recargar la página para reflejar los cambios
                             setTimeout(function() {
                                 location.reload();
-                            }, 1000); // Esperar 1 segundo antes de recargar la página
-
+                            }, 1000);
                         } else {
-                            // Si hubo un error
                             Swal.fire('Error!', response.message, 'error');
                         }
                     },
                     error: function(xhr, status, error) {
                         console.error(error);
-                        Swal.fire('Error!', 'Hubo un problema al eliminar el registro.', 'error');
+                        Swal.fire('Error!', 'Hubo un problema al eliminar el diagnóstico.', 'error');
                     }
                 });
             }
         });
     });
 </script>
-
