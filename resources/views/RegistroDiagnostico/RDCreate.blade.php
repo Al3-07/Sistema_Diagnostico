@@ -8,6 +8,13 @@
 
 <style>
     /* Puedes reutilizar aquí los estilos que ya tienes si deseas */
+    .img-preview {
+        display: none;
+        max-width: 200px;
+        margin-top: 10px;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
 </style>
 
 <div class="card p-4">
@@ -69,32 +76,55 @@
                 </div>
             </div>
 
-        <!-- Botones -->
-        <div class="d-flex justify-content-end gap-3">
-           <a href="{{ route('registrodiagnostico.index') }}" class="btn btn-secondary">
-                <i class="fas fa-arrow-left me-1"></i> Regresar
-            </a>
-            <button type="submit" class="btn btn-custom">
-                <i class="fas fa-save me-1"></i> Guardar
-            </button>
+            <!-- Campos para imágenes -->
+            <div class="form-row mt-3">
+                <div class="form-group">
+                    <label for="foto_antes">Foto Antes</label>
+                    <input type="file" id="foto_antes" name="foto_antes" accept="image/*" class="form-control @error('foto_antes') is-invalid @enderror" onchange="previewImage(this, 'previewAntes')">
+                    @error('foto_antes')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    <img id="previewAntes" class="img-preview" alt="Vista previa foto antes">
+                </div>
+
+                <div class="form-group">
+                    <label for="foto_despues">Foto Después</label>
+                    <input type="file" id="foto_despues" name="foto_despues" accept="image/*" class="form-control @error('foto_despues') is-invalid @enderror" onchange="previewImage(this, 'previewDespues')">
+                    @error('foto_despues')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    <img id="previewDespues" class="img-preview" alt="Vista previa foto después">
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="d-flex justify-content-end gap-3 mt-4">
+               <a href="{{ route('registrodiagnostico.index') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-1"></i> Regresar
+                </a>
+                <button type="submit" class="btn btn-custom">
+                    <i class="fas fa-save me-1"></i> Guardar
+                </button>
+            </div>
         </div>
     </form>
+
     <script>
-    function previewImage(input, previewId) {
-        const file = input.files[0];
-        const reader = new FileReader();
+        function previewImage(input, previewId) {
+            const file = input.files[0];
+            const reader = new FileReader();
 
-        reader.onload = function (e) {
-            const img = document.getElementById(previewId);
-            img.src = e.target.result;
-            img.style.display = 'block';
-        };
+            reader.onload = function (e) {
+                const img = document.getElementById(previewId);
+                img.src = e.target.result;
+                img.style.display = 'block';
+            };
 
-        if (file) {
-            reader.readAsDataURL(file);
+            if (file) {
+                reader.readAsDataURL(file);
+            }
         }
-    }
-</script>
-
+    </script>
 </div>
+
 @endsection

@@ -145,6 +145,15 @@
             flex: 1 1 100%;
         }
     }
+
+    /* Estilos para vista previa imágenes */
+    .img-preview {
+        display: block;
+        max-width: 200px;
+        margin-top: 10px;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
 </style>
 
 <div class="card p-4">
@@ -212,15 +221,46 @@
                 </div>
             </div>
 
+            <!-- Campos para imágenes -->
+            <div class="form-row mt-3">
+                <div class="form-group" style="flex: 1 1 50%;">
+                    <label for="foto_antes">Foto Antes</label>
+                    <input type="file" id="foto_antes" name="foto_antes" accept="image/*" class="form-control @error('foto_antes') is-invalid @enderror" onchange="previewImage(this, 'previewAntes')">
+                    @error('foto_antes')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
 
-        <!-- Botones -->
-        <div class="d-flex justify-content-end gap-3">
-             <a href="{{ route('registrodiagnostico.index') }}" class="btn btn-secondary">
-                <i class="fas fa-arrow-left me-1"></i> Regresar
-            </a>
-            <button type="submit" class="btn btn-info">
-                <i class="fas fa-sync-alt me-1"></i> Actualizar
-            </button>
+                    @if($registro->foto_antes)
+                        <img src="{{ asset('img/post/' . $registro->foto_antes) }}" alt="Foto Antes actual" class="img-preview" id="previewAntes">
+                    @else
+                        <img id="previewAntes" class="img-preview" style="display:none;" alt="Vista previa foto antes">
+                    @endif
+                </div>
+
+                <div class="form-group" style="flex: 1 1 50%;">
+                    <label for="foto_despues">Foto Después</label>
+                    <input type="file" id="foto_despues" name="foto_despues" accept="image/*" class="form-control @error('foto_despues') is-invalid @enderror" onchange="previewImage(this, 'previewDespues')">
+                    @error('foto_despues')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                    @if($registro->foto_despues)
+                        <img src="{{ asset('img/post/' . $registro->foto_despues) }}" alt="Foto Después actual" class="img-preview" id="previewDespues">
+                    @else
+                        <img id="previewDespues" class="img-preview" style="display:none;" alt="Vista previa foto después">
+                    @endif
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="d-flex justify-content-end gap-3 mt-4">
+                 <a href="{{ route('registrodiagnostico.index') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-1"></i> Regresar
+                </a>
+                <button type="submit" class="btn btn-info">
+                    <i class="fas fa-sync-alt me-1"></i> Actualizar
+                </button>
+            </div>
         </div>
     </form>
 
@@ -240,8 +280,6 @@
         }
     }
 </script>
-
-
 
 </div>
 

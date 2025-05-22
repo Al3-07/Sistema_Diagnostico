@@ -5,6 +5,14 @@
 @section('contenido')
 
 <style>
+    .img-mismo-tamano {
+        width: 300px;
+        height: auto;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        margin-bottom: 15px;
+    }
     .btn-secondary {
         background-color: #f1f5f9;
         color: #000;
@@ -14,9 +22,27 @@
     .btn-secondary:hover {
         background-color: #e2e8f0;
     }
+
+    .foto-detalle {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        margin-bottom: 15px;
+    }
+
+    .foto-container {
+        margin-top: 15px;
+    }
+
+    .foto-label {
+        font-weight: 600;
+        color: #344767;
+        margin-bottom: 5px;
+        display: block;
+    }
 </style>
 
-<!-- Mostrar los detalles del equipo -->
 <div class="container mt-5">        
     <div class="card shadow">
         <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #e2e8f0; color: #344767;">
@@ -37,7 +63,24 @@
                 </div>
                 <div class="col-md-6">
                     <p style="color: #334155;"><strong>Descripción:</strong> {{ $registro->descripcion }}</p>
-                    
+
+                    <div class="foto-container">
+                     <span class="foto-label">Foto Antes:</span>
+                     @if($registro->foto_antes)
+                    <img src="{{ asset('img/post/' . $registro->foto_antes) }}" alt="Foto Antes" class="img-mismo-tamano">
+                     @else
+                    <p>No hay foto antes disponible.</p>
+                    @endif
+                    </div>
+
+                    <div class="foto-container">
+                        <span class="foto-label">Foto Después:</span>
+                        @if($registro->foto_despues)
+                            <img src="{{ asset('img/post/' . $registro->foto_despues) }}" alt="Foto Después" class="img-mismo-tamano">
+                        @else
+                            <p>No hay foto después disponible.</p>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

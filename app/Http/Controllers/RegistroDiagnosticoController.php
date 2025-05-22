@@ -22,16 +22,29 @@ class RegistroDiagnosticoController extends Controller
     }
 
     // Obtener datos para datatable
-   public function getTableData()
+  public function getTableData()
 {
-    $registros = RegistroDiagnostico::select(['id', 'equipo', 'modelo', 'marca', 'serie', 'descripcion']);
+    $registros = RegistroDiagnostico::select(['id', 'equipo', 'modelo', 'marca', 'serie', 'descripcion', 'foto_antes', 'foto_despues']);
 
     return datatables()->of($registros)
+        ->addColumn('foto_antes_img', function($registro) {
+            if ($registro->foto_antes) {
+                $url = asset('img/post/' . $registro->foto_antes);
+                return '<img src="'.$url.'" alt="Foto Antes" style="max-width:80px; max-height:60px; border-radius:6px;">';
+            }
+            return '';
+        })
+        ->addColumn('foto_despues_img', function($registro) {
+            if ($registro->foto_despues) {
+                $url = asset('img/post/' . $registro->foto_despues);
+                return '<img src="'.$url.'" alt="Foto Después" style="max-width:80px; max-height:60px; border-radius:6px;">';
+            }
+            return '';
+        })
         ->addColumn('acciones', function($registro) {
             $ver = '<a href="'.route('registrodiagnostico.show', $registro->id).'" class="btn btn-info btn-sm" title="Ver"><i class="fas fa-eye"></i></a>';
             $editar = '<a href="'.route('registrodiagnostico.edit', $registro->id).'" class="btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a>';
-            $eliminar = '<button data-id="'.$registro->id.'" class="btn btn-danger btn-sm btn-eliminar" title="Eliminar"><i class="fas fa-trash-alt"></i></button>';
-            return '<div style="display:flex; gap:5px; justify-content:center;">'.$ver.' '.$editar.' '.$eliminar.'</div>';
+ $eliminar = '<button type="button" class="btn btn-danger btn-sm delete-btn" data-id="'.$registro->id.'" title="Eliminar diagnóstico"><i class="fas fa-trash"></i></button>';            return '<div style="display:flex; gap:5px; justify-content:center;">'.$ver.' '.$editar.' '.$eliminar.'</div>';
         })
         ->rawColumns(['acciones']) // permite renderizar el HTML
         ->make(true);
@@ -49,14 +62,38 @@ class RegistroDiagnosticoController extends Controller
     // Guardar nuevo diagnóstico
 public function store(Request $request)
 {
+    $request->validate([
+            'equipo' => 'required|string|max:50',
+            'modelo' => 'nullable|string|max:30',
+            'marca' => 'nullable|string|max:30',
+            'serie' => 'nullable|string|max:40',
+            'descripcion' => 'nullable|string|max:300',
+            'foto_antes' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto_despues' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
     $registro = new RegistroDiagnostico;
 
-    // Otros campos...
     $registro->equipo = $request->equipo;
     $registro->modelo = $request->modelo;
     $registro->marca = $request->marca;
     $registro->serie = $request->serie;
     $registro->descripcion = $request->descripcion;
+
+    // Subir foto_antes
+        if ($request->hasFile('foto_antes')) {
+            $imagen = $request->file('foto_antes');
+            $nombre = $imagen->getClientOriginalName();
+            $imagen->move(public_path('img/post'), $nombre);
+            $registro->foto_antes = $nombre;
+        }
+        // Subir foto_despues
+        if ($request->hasFile('foto_despues')) {
+            $imagen = $request->file('foto_despues');
+            $nombre = $imagen->getClientOriginalName();
+            $imagen->move(public_path('img/post'), $nombre);
+            $registro->foto_despues = $nombre;
+        }
+    
 
     $registro->save();
 
@@ -80,12 +117,40 @@ public function store(Request $request)
         'marca' => 'nullable|string|max:30',
         'serie' => 'nullable|string|max:40',
         'descripcion' => 'nullable|string|max:300',
+        'foto_antes' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto_despues' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
        
     ]);
 
     $registro = RegistroDiagnostico::findOrFail($id);
+    $registro->equipo = $request->equipo;
+    $registro->modelo = $request->modelo;
+    $registro->marca = $request->marca;
+    $registro->serie = $request->serie;
+    $registro->descripcion = $request->descripcion;
 
-    $registro->fill($request->only(['equipo', 'modelo', 'marca', 'serie', 'descripcion']));
+    // Subir y reemplazar foto_antes si se envía una nueva imagen
+    if ($request->hasFile('foto_antes')) {
+        // Opcional: eliminar imagen anterior si existe
+        if ($registro->foto_antes && file_exists(public_path('img/post/' . $registro->foto_antes))) {
+            unlink(public_path('img/post/' . $registro->foto_antes));
+        }
+        $imagen = $request->file('foto_antes');
+        $nombre = $imagen->getClientOriginalName();
+        $imagen->move(public_path('img/post'), $nombre);
+        $registro->foto_antes = $nombre;
+    }
+    // Subir y reemplazar foto_despues si se envía una nueva imagen
+    if ($request->hasFile('foto_despues')) {
+        // Opcional: eliminar imagen anterior si existe
+        if ($registro->foto_despues && file_exists(public_path('img/post/' . $registro->foto_despues))) {
+            unlink(public_path('img/post/' . $registro->foto_despues));
+        }
+        $imagen = $request->file('foto_despues');
+        $nombre = $imagen->getClientOriginalName();
+        $imagen->move(public_path('img/post'), $nombre);
+        $registro->foto_despues = $nombre;
+    }
 
 
     $registro->save();

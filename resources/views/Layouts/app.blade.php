@@ -437,7 +437,7 @@
         <footer class="footer">
             <div class="container">
                 <div class="footer-content">
-                    © 2025 Todos los derechos reservados. Grupo Plasencia (Gestión Combustible) - Clasificadora y Exportadora de Tabaco S.A. 
+                    © 2025 Todos los derechos reservados. Grupo Plasencia (Sistema de Diagnostico) - Clasificadora y Exportadora de Tabaco S.A. 
                 </div>
             </div>
         </footer>
