@@ -152,26 +152,6 @@
 <footer class="welcome-footer">
     <h1 class="text-center">Bienvenid@, {{ Auth::user()->name }}</h1>
 </footer>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let images = [
-            "img/1-1.jpg",
-            "img/2-2.jpg",
-            "img/3-3.jpg",
-            "img/4-4.jpg",
-            "img/5-5.jpg",
-            "img/6-6.jpg",
-        ];
-        
-        let index = 0;
-        
-        function changeBackground() {
-            document.body.style.backgroundImage = `url('${images[index]}')`;
-            index = (index + 1) % images.length; // Cicla las imágenes
-        }
 
-        setInterval(changeBackground, 5000); // Cambia cada 5 segundos
-    });
-</script>
 </body>
 </html>
