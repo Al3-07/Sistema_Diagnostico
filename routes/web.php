@@ -32,6 +32,8 @@ Route::delete('/registrodiagnostico/{id}', [RegistroDiagnosticoController::class
 
 // Mostrar detalles de diagnóstico
 Route::get('registrodiagnostico/{id}', [RegistroDiagnosticoController::class, 'show'])->name('registrodiagnostico.show');
+Route::resource('registrodiagnostico', RegistroDiagnosticoController::class);
+
 
    
     // RUTAS DE ROL

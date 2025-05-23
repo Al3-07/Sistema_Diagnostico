@@ -112,5 +112,40 @@
         });
     });
 </script>
+<script>
+    // Delegamos evento a los botones con clase .delete-btn
+    $(document).on('click', '.delete-btn', function () {
+        var id = $(this).data('id');
+        var url = "{{ url('registrodiagnostico') }}/" + id;
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function (response) {
+                        $('#equipos-table').DataTable().ajax.reload(null, false);
+                        Swal.fire('¡Eliminado!', 'El diagnóstico ha sido eliminado.', 'success');
+                    },
+                    error: function (xhr) {
+                        Swal.fire('Error', 'No se pudo eliminar el diagnóstico.', 'error');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
 
 @endsection
