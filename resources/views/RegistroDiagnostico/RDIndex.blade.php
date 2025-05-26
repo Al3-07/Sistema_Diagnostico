@@ -41,8 +41,8 @@
                             <th>Serie</th>
                             <th>Descripción</th>
                              <th>Estado</th>
-                            <th>Condición Original</th>
-                            <th>Resultado Final</th>
+                            <th>Imagen Inicial</th>
+                            <th>Imagen Final</th>
                             <th class="acciones-columna text-center">Acciones</th>
                         </tr>
                     </thead>
