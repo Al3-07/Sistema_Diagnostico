@@ -174,12 +174,14 @@
     <select id="empresa" name="empresa" class="form-control @error('empresa') is-invalid @enderror">
         <option value="">Seleccione una opción</option>
         <option value="TAOSA" {{ old('empresa', $registro->empresa ?? '') == 'TAOSA' ? 'selected' : '' }}>TAOSA</option>
+         <option value="TAOPAR" {{ old('empresa', $registro->empresa ?? '') == 'TAOPAR' ? 'selected' : '' }}>TAOPAR</option>
         <option value="Clasificadora y Exportadora de Tabaco" {{ old('empresa', $registro->empresa ?? '') == 'Clasificadora y Exportadora de Tabaco' ? 'selected' : '' }}>Clasificadora y Exportadora de Tabaco</option>
         <option value="TAOMOR" {{ old('empresa', $registro->empresa ?? '') == 'TAOMOR' ? 'selected' : '' }}>TAOMOR</option>
         <option value="TAOCA" {{ old('empresa', $registro->empresa ?? '') == 'TAOCA' ? 'selected' : '' }}>TAOCA</option>
         <option value="TAOGUALI" {{ old('empresa', $registro->empresa ?? '') == 'TAOGUALI' ? 'selected' : '' }}>TAOGUALI</option>
         <option value="La Vega" {{ old('empresa', $registro->empresa ?? '') == 'La Vega' ? 'selected' : '' }}>La Vega</option>
         <option value="Calpule" {{ old('empresa', $registro->empresa ?? '') == 'Calpule' ? 'selected' : '' }}>Calpule</option>
+        <option value="San Luis" {{ old('empresa', $registro->empresa ?? '') == 'San Luis' ? 'selected' : '' }}>San Luis</option>
         <option value="Azacualpa" {{ old('empresa', $registro->empresa ?? '') == 'Azacualpa' ? 'selected' : '' }}>Azacualpa</option>
         <option value="Escogida3" {{ old('empresa', $registro->empresa ?? '') == 'Escogida3' ? 'selected' : '' }}>Escogida3</option>
     </select>

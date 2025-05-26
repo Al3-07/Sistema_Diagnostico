@@ -65,7 +65,7 @@
                     <p style="color: #334155;"><strong>Descripción:</strong> {{ $registro->descripcion }}</p>
 
                     <div class="foto-container">
-                     <span class="foto-label">Condición Original:</span>
+                     <span class="foto-label">Imagen Inicial:</span>
                      @if($registro->foto_antes)
                     <img src="{{ asset('img/post/' . $registro->foto_antes) }}" alt="Foto Antes" class="img-mismo-tamano">
                      @else
@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="foto-container">
-                        <span class="foto-label">Resultado Final:</span>
+                        <span class="foto-label">Imagen Final:</span>
                         @if($registro->foto_despues)
                             <img src="{{ asset('img/post/' . $registro->foto_despues) }}" alt="Foto Después" class="img-mismo-tamano">
                         @else
@@ -85,6 +85,10 @@
             </div>
         </div>
     </div>
+    <a href="{{ route('registro_diagnostico.pdf', $registro->id) }}" class="btn btn-danger" target="_blank">
+    Descargar PDF
+</a>
+
 </div>
 
 @endsection

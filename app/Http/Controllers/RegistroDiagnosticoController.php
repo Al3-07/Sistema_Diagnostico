@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\RegistroDiagnostico;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RegistroDiagnosticoController extends Controller
 {
@@ -68,7 +69,7 @@ public function store(Request $request)
             'modelo' => 'required|string|max:30',
             'marca' => 'required|string|max:30',
             'serie' => 'required|string|max:40',
-            'descripcion' => 'nullable|string|max:300',
+            'descripcion' => 'nullable|string|max:1000',
             'estado' => 'required|string',
             'foto_antes' => 'required|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
             'foto_despues' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
@@ -131,7 +132,7 @@ public function store(Request $request)
         'modelo' => 'required|string|max:30',
         'marca' => 'required|string|max:30',
         'serie' => 'required|string|max:40',
-        'descripcion' => 'nullable|string|max:300',
+        'descripcion' => 'nullable|string|max:1000',
          'estado' => 'required|string',
         'foto_antes' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
             'foto_despues' => 'required|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
@@ -206,4 +207,12 @@ public function store(Request $request)
         $registro = RegistroDiagnostico::findOrFail($id);
         return view('RegistroDiagnostico.RDShow', compact('registro'));
     }
+    public function generarPDF($id)
+{
+    $registro = RegistroDiagnostico::findOrFail($id);
+
+    $pdf = Pdf::loadView('registrodiagnostico.reporte', compact('registro'))->setPaper('letter');
+
+    return $pdf->stream('diagnostico_' . $registro->id . '.pdf');
+}
 }

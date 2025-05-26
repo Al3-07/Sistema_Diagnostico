@@ -34,12 +34,14 @@
                     <select id="empresa" name="empresa" class="form-control @error('empresa') is-invalid @enderror" value="{{ old('empresa') }}">
                         <option value="">Seleccione una opción</option>
                     <option value="TAOSA">TAOSA</option>
+                    <option value="TAOSA">TAOPAR</option>
                     <option value="Clasificadora y Exportadora de Tabaco">Clasificadora y Exportadora de Tabaco</option>
                     <option value="TAOMOR">TAOMOR </option>
                     <option value="TAOCA">TAOCA</option>
                     <option value="TAOGUALI">TAOGUALI</option>
                     <option value="La Vega">La Vega</option>
                     <option value="Calpule">Calpule</option>
+                    <option value="Calpule">San Luis</option>
                     <option value="Azacualpa">Azacualpa</option>
                     <option value="Escogida3">Escogida3</option>
                 </select>

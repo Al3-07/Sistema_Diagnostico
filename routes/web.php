@@ -17,6 +17,7 @@ Route::get('registrodiagnostico/table', [RegistroDiagnosticoController::class, '
     
 Route::resource('registrodiagnostico', RegistroDiagnosticoController::class);
 
+
 /*Route::get('registrodiagnostico/table', [RegistroDiagnosticoController::class, 'getTableData'])->name('registrodiagnostico.table');
 
 // Vista índice (listar todos los diagnósticos)
@@ -41,6 +42,8 @@ Route::delete('/registrodiagnostico/{id}', [RegistroDiagnosticoController::class
 Route::get('registrodiagnostico/{id}', [RegistroDiagnosticoController::class, 'show'])->name('registrodiagnostico.show');
 Route::resource('registrodiagnostico', RegistroDiagnosticoController::class);
 */
+Route::get('/registro-diagnostico/{id}/pdf', [App\Http\Controllers\RegistroDiagnosticoController::class, 'generarPDF'])->name('registro_diagnostico.pdf');
+
 
    
     // RUTAS DE ROL
