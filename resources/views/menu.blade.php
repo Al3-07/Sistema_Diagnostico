@@ -20,9 +20,9 @@
     <style>
 
             body {
-                background: url('img/4-4.jpg') no-repeat center center fixed;
-                background-size: 1550px 780px; /* Ancho x Alto */
-                transition: background 2s ease-in-out; /* Transición suave */
+                 background: url("{{ asset('img/Flogin.webp') }}") no-repeat center center fixed;
+                 background-size: cover;
+   
             }
 
             /* Pseudo-elemento para crear un efecto de degradado */

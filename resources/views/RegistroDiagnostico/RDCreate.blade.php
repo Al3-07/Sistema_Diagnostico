@@ -7,7 +7,7 @@
 @include('sweetalert::alert')
 
 <style>
-    /* Puedes reutilizar aquí los estilos que ya tienes si deseas */
+    
     .img-preview {
         display: none;
         max-width: 200px;

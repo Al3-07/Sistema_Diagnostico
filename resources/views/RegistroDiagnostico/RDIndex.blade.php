@@ -112,6 +112,8 @@
         });
     });
 </script>
+
+</script>
 <script>
     // Delegamos evento a los botones con clase .delete-btn
     $(document).on('click', '.delete-btn', function () {
