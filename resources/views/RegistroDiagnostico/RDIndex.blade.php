@@ -41,8 +41,8 @@
                             <th>Serie</th>
                             <th>Descripción</th>
                              <th>Estado</th>
-                            <th>Estado Inicial del Equipo</th>
-                            <th>Estado Final del Equipo</th>
+                            <th>Condición Original</th>
+                            <th>Resultado Final</th>
                             <th class="acciones-columna text-center">Acciones</th>
                         </tr>
                     </thead>

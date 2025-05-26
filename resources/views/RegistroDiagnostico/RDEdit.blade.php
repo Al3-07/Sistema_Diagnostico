@@ -261,7 +261,7 @@
             <!-- Campos para imágenes -->
             <div class="form-row mt-3">
                 <div class="form-group" style="flex: 1 1 50%;">
-                    <label for="foto_antes">Estado Inicial del Equipo</label>
+                    <label for="foto_antes">Condición Original</label>
                     <input type="file" id="foto_antes" name="foto_antes" accept="image/*" class="form-control @error('foto_antes') is-invalid @enderror" onchange="previewImage(this, 'previewAntes')">
                     @error('foto_antes')
                         <span class="text-danger">{{ $message }}</span>
@@ -275,7 +275,7 @@
                 </div>
 
                 <div class="form-group" style="flex: 1 1 50%;">
-                    <label for="foto_despues">Estado Final del Equipo</label>
+                    <label for="foto_despues">Resultado Final</label>
                     <input type="file" id="foto_despues" name="foto_despues" accept="image/*" class="form-control @error('foto_despues') is-invalid @enderror" onchange="previewImage(this, 'previewDespues')">
                     @error('foto_despues')
                         <span class="text-danger">{{ $message }}</span>

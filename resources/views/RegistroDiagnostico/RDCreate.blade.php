@@ -112,7 +112,7 @@
             <!-- Campos para imágenes -->
             <div class="form-row mt-3">
                 <div class="form-group">
-                    <label for="foto_antes">Estado Inicial del Equipo</label>
+                    <label for="foto_antes">Condición Original</label>
                     <input type="file" id="foto_antes" name="foto_antes" accept="image/*" class="form-control @error('foto_antes') is-invalid @enderror" onchange="previewImage(this, 'previewAntes')">
                     @error('foto_antes')
                         <span class="text-danger">{{ $message }}</span>
