@@ -65,7 +65,7 @@
                     <p style="color: #334155;"><strong>Descripción:</strong> {{ $registro->descripcion }}</p>
 
                     <div class="foto-container">
-                     <span class="foto-label">Foto Antes:</span>
+                     <span class="foto-label">Estado Inicial del Equipo:</span>
                      @if($registro->foto_antes)
                     <img src="{{ asset('img/post/' . $registro->foto_antes) }}" alt="Foto Antes" class="img-mismo-tamano">
                      @else
@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="foto-container">
-                        <span class="foto-label">Foto Después:</span>
+                        <span class="foto-label">Estado Final del Equipo:</span>
                         @if($registro->foto_despues)
                             <img src="{{ asset('img/post/' . $registro->foto_despues) }}" alt="Foto Después" class="img-mismo-tamano">
                         @else

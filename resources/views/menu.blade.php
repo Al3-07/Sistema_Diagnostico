@@ -19,24 +19,52 @@
 
     <style>
 
-            body {
-                background: url('img/4-4.jpg') no-repeat center center fixed;
-                background-size: 1550px 780px; /* Ancho x Alto */
-                transition: background 2s ease-in-out; /* Transición suave */
-            }
+          body {
+    position: relative;
+    overflow: hidden;
+        }
 
-            /* Pseudo-elemento para crear un efecto de degradado */
-            body::before {
-                content: "";
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(rgba(43, 42, 42, 0.3), rgba(43, 42, 42, 0.7));
-                z-index: -1;
-            }
+        /* Imagen con animación suave */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('{{ asset('img/Flogin.webp') }}') no-repeat center center fixed;
+            background-size: cover;
+            transform: scale(1.05);
+            filter: blur(8px);
+            opacity: 0;
+            animation: smoothBg 2s ease-out forwards;
+            z-index: -2;
+        }
 
+        /* Capa de oscurecimiento encima */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Cambia 0.4 por más o menos opacidad */
+            z-index: -1;
+        }
+
+        @keyframes smoothBg {
+            0% {
+                opacity: 0;
+                transform: scale(1.1);
+                filter: blur(15px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                filter: blur(0);
+            }
+        }
 
 
         /* Estilo del sidebar */

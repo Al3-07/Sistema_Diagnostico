@@ -39,8 +39,8 @@
                             <th>Marca</th>
                             <th>Serie</th>
                             <th>Descripción</th>
-                            <th>Foto Antes</th>
-                            <th>Foto Después</th>
+                            <th>Estado Inicial del Equipo</th>
+                            <th>Estado Final del Equipo</th>
                             <th class="acciones-columna text-center">Acciones</th>
                         </tr>
                     </thead>

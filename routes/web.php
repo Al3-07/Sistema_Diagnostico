@@ -8,9 +8,16 @@ use App\Http\Controllers\RegistroRolController;
 use App\Http\Controllers\UserController;
 
 Route::middleware(['auth'])->group(function () {
-    // RUTAS DE Diagnostic
-   // Obtener datos para tabla (si lo necesitas para DataTables u otra tabla AJAX)
+    // RUTAS DE Diagnostico
+   /* Obtener datos para tabla (si lo necesitas para DataTables u otra tabla AJAX)
+   Esa línea Route::resource automatiza 7 rutas esenciales del CRUD (crear, listar, editar, actualizar, borrar, etc.).
+   */
+
 Route::get('registrodiagnostico/table', [RegistroDiagnosticoController::class, 'getTableData'])->name('registrodiagnostico.table');
+    
+Route::resource('registrodiagnostico', RegistroDiagnosticoController::class);
+
+/*Route::get('registrodiagnostico/table', [RegistroDiagnosticoController::class, 'getTableData'])->name('registrodiagnostico.table');
 
 // Vista índice (listar todos los diagnósticos)
 Route::get('registrodiagnostico', [RegistroDiagnosticoController::class, 'index'])->name('registrodiagnostico.index');
@@ -33,7 +40,7 @@ Route::delete('/registrodiagnostico/{id}', [RegistroDiagnosticoController::class
 // Mostrar detalles de diagnóstico
 Route::get('registrodiagnostico/{id}', [RegistroDiagnosticoController::class, 'show'])->name('registrodiagnostico.show');
 Route::resource('registrodiagnostico', RegistroDiagnosticoController::class);
-
+*/
 
    
     // RUTAS DE ROL
