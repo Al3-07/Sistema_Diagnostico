@@ -367,7 +367,7 @@
 
             <div class="brand-container">
                 <a href="{{ route('menu') }}" class="brand {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}" id="brandLink">
-                    Sistema de Diagnostico
+                    Sistema de Diagnóstico
                 </a>
             </div>
 
@@ -385,17 +385,17 @@
             <div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
             
             <a href="{{ route('registrodiagnostico.index') }}" class="nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
-                <i class="fas fa-desktop"></i> Registro de diagnostico
+                <i class="fas fa-desktop"></i> Registro de Diagnóstico
             </a>
             
            
             @if(Auth::user()->role === 'Administrador')
             <div class="sidebar-section-title">ADMINISTRACIÓN DE USUARIO</div>
             <a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user.*') ? 'active' : '' }}">
-                <i class="fas fa-user"></i> Registro de usuario
+                <i class="fas fa-user"></i> Registro de Usuario
             </a>
             <a href="{{ route('registrorol.table') }}" class="nav-link {{ request()->routeIs('registrorol.*') ? 'active' : '' }}">
-                <i class="fas fa-users"></i> Gestor de roles
+                <i class="fas fa-users"></i> Gestor de Roles
             </a>
             @endif
             
@@ -408,7 +408,7 @@
             <div class="user-info" onclick="window.location.href='{{ route('login') }}'">
                 <i class="fas fa-sign-in-alt user-icon"></i>
                 <div class="user-details">
-                    <h5>Iniciar sesión</h5>
+                    <h5>Iniciar Sesión</h5>
                 </div>
             </div>
             @endif
@@ -437,7 +437,7 @@
         <footer class="footer">
             <div class="container">
                 <div class="footer-content">
-                    © 2025 Todos los derechos reservados. Grupo Plasencia (Sistema de Diagnostico) - Clasificadora y Exportadora de Tabaco S.A. 
+                    © 2025 Todos los derechos reservados. Grupo Plasencia (Sistema de Diagnóstico) - Clasificadora y Exportadora de Tabaco S.A. 
                 </div>
             </div>
         </footer>

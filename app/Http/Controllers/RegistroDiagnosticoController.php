@@ -64,12 +64,23 @@ public function store(Request $request)
 {
     $request->validate([
             'equipo' => 'required|string|max:50',
-            'modelo' => 'nullable|string|max:30',
-            'marca' => 'nullable|string|max:30',
-            'serie' => 'nullable|string|max:40',
+            'modelo' => 'required|string|max:30',
+            'marca' => 'required|string|max:30',
+            'serie' => 'required|string|max:40',
             'descripcion' => 'nullable|string|max:300',
-            'foto_antes' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'foto_despues' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto_antes' => 'required|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
+            'foto_despues' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
+            ], [
+        'foto_antes.required' => 'La imagen es obligatoria.',
+        'foto_antes.file' => 'La imagen debe ser un archivo válido.',
+        'foto_antes.mimes' => 'La imagen debe ser un archivo de tipo: jpg, jpeg, png, gif, bmp, webp, svg.',
+         'equipo.required' => 'El campo equipo es obligatorio.',
+        'modelo.required' => 'El campo modelo es obligatorio.',
+        'marca.required' => 'El campo marca es obligatorio.',
+        'serie.required' => 'El campo serie es obligatorio.',
+
+
+
         ]);
     $registro = new RegistroDiagnostico;
 
@@ -113,12 +124,21 @@ public function store(Request $request)
 {
     $request->validate([
         'equipo' => 'required|string|max:50',
-        'modelo' => 'nullable|string|max:30',
-        'marca' => 'nullable|string|max:30',
-        'serie' => 'nullable|string|max:40',
+        'modelo' => 'required|string|max:30',
+        'marca' => 'required|string|max:30',
+        'serie' => 'required|string|max:40',
         'descripcion' => 'nullable|string|max:300',
-        'foto_antes' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'foto_despues' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        'foto_antes' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
+            'foto_despues' => 'required|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
+
+         ],   [
+        'foto_despues.required' => 'La imagen es obligatoria.',
+        'foto_despues.file' => 'La imagen debe ser un archivo válido.',
+        'foto_despues.mimes' => 'La imagen debe ser un archivo de tipo: jpg, jpeg, png, gif, bmp, webp, svg.',
+         'equipo.required' => 'El campo equipo es obligatorio.',
+        'modelo.required' => 'El campo modelo es obligatorio.',
+        'marca.required' => 'El campo marca es obligatorio.',
+        'serie.required' => 'El campo serie es obligatorio.',
        
     ]);
 

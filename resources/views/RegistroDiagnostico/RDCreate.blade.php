@@ -79,7 +79,7 @@
             <!-- Campos para imágenes -->
             <div class="form-row mt-3">
                 <div class="form-group">
-                    <label for="foto_antes">Foto Antes</label>
+                    <label for="foto_antes">Estado Inicial del Equipo</label>
                     <input type="file" id="foto_antes" name="foto_antes" accept="image/*" class="form-control @error('foto_antes') is-invalid @enderror" onchange="previewImage(this, 'previewAntes')">
                     @error('foto_antes')
                         <span class="text-danger">{{ $message }}</span>
@@ -87,6 +87,7 @@
                     <img id="previewAntes" class="img-preview" alt="Vista previa foto antes">
                 </div>
 
+                <!--
                 <div class="form-group">
                     <label for="foto_despues">Foto Después</label>
                     <input type="file" id="foto_despues" name="foto_despues" accept="image/*" class="form-control @error('foto_despues') is-invalid @enderror" onchange="previewImage(this, 'previewDespues')">
@@ -95,6 +96,9 @@
                     @enderror
                     <img id="previewDespues" class="img-preview" alt="Vista previa foto después">
                 </div>
+   
+                    -->
+            
             </div>
 
             <!-- Botones -->
