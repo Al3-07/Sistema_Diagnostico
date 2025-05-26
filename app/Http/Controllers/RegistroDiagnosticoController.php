@@ -24,7 +24,7 @@ class RegistroDiagnosticoController extends Controller
     // Obtener datos para datatable
   public function getTableData()
 {
-    $registros = RegistroDiagnostico::select(['id', 'equipo', 'modelo', 'marca', 'serie', 'descripcion', 'foto_antes', 'foto_despues']);
+    $registros = RegistroDiagnostico::select(['id', 'empresa','equipo', 'modelo', 'marca', 'serie', 'descripcion', 'foto_antes', 'foto_despues']);
 
     return datatables()->of($registros)
         ->addColumn('foto_antes_img', function($registro) {
@@ -63,6 +63,7 @@ class RegistroDiagnosticoController extends Controller
 public function store(Request $request)
 {
     $request->validate([
+         'empresa' => 'required|string|max:150',
             'equipo' => 'required|string|max:50',
             'modelo' => 'required|string|max:30',
             'marca' => 'required|string|max:30',
@@ -83,7 +84,7 @@ public function store(Request $request)
 
         ]);
     $registro = new RegistroDiagnostico;
-
+    $registro->empresa = $request->empresa;
     $registro->equipo = $request->equipo;
     $registro->modelo = $request->modelo;
     $registro->marca = $request->marca;
@@ -123,6 +124,7 @@ public function store(Request $request)
    public function update(Request $request, $id)
 {
     $request->validate([
+        'empresa' => 'required|string|max:150',
         'equipo' => 'required|string|max:50',
         'modelo' => 'required|string|max:30',
         'marca' => 'required|string|max:30',
@@ -143,6 +145,7 @@ public function store(Request $request)
     ]);
 
     $registro = RegistroDiagnostico::findOrFail($id);
+     $registro->empresa = $request->empresa;
     $registro->equipo = $request->equipo;
     $registro->modelo = $request->modelo;
     $registro->marca = $request->marca;

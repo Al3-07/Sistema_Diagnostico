@@ -28,6 +28,14 @@
 
         <div class="card-body">
             <!-- Primera fila -->
+             <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label" for="empresa">Empresa</label>
+                    <input type="text" id="empresa" name="empresa" class="form-control @error('empresa') is-invalid @enderror" value="{{ old('equipo') }}">
+                    @error('empresa')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label" for="equipo">Hardware</label>

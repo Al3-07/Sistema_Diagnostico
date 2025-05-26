@@ -34,6 +34,7 @@
                 <table class="table table-bordered table-striped w-100" id="equipos-table">
                     <thead>
                         <tr>
+                             <th>Empresa</th>
                             <th>Hardware</th>
                             <th>Modelo</th>
                             <th>Marca</th>
@@ -59,6 +60,7 @@
             serverSide: true,
             ajax: '{{ route('registrodiagnostico.table') }}',
             columns: [
+                 { data: 'empresa', name: 'empresa' },
                 { data: 'equipo', name: 'equipo' },
                 { data: 'modelo', name: 'modelo' },
                 { data: 'marca', name: 'marca' },

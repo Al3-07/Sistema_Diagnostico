@@ -168,9 +168,20 @@
 
         <div class="card-body">
             <!-- Primera fila: Equipo y Modelo -->
+              <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label" for="empresa">Empresa</label>
+                    <input type="text" id="empresa" name="empresa" class="form-control @error('equipo') is-invalid @enderror"
+                           value="{{ old('empresa', $registro->empresa) }}" maxlength="50">
+                    @error('empresa')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label" for="equipo">Equipo</label>
+                    <label class="form-label" for="equipo">Hardware</label>
                     <input type="text" id="equipo" name="equipo" class="form-control @error('equipo') is-invalid @enderror"
                            value="{{ old('equipo', $registro->equipo) }}" maxlength="50">
                     @error('equipo')
