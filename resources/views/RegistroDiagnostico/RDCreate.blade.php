@@ -31,7 +31,18 @@
              <div class="form-row">
                 <div class="form-group">
                     <label class="form-label" for="empresa">Empresa</label>
-                    <input type="text" id="empresa" name="empresa" class="form-control @error('empresa') is-invalid @enderror" value="{{ old('equipo') }}">
+                    <select id="empresa" name="empresa" class="form-control @error('empresa') is-invalid @enderror" value="{{ old('empresa') }}">
+                        <option value="">Seleccione una opción</option>
+                    <option value="TAOSA">TAOSA</option>
+                    <option value="Clasificadora y Exportadora de Tabaco">Clasificadora y Exportadora de Tabaco</option>
+                    <option value="TAOMOR">TAOMOR </option>
+                    <option value="TAOCA">TAOCA</option>
+                    <option value="TAOGUALI">TAOGUALI</option>
+                    <option value="La Vega">La Vega</option>
+                    <option value="Calpule">Calpule</option>
+                    <option value="Azacualpa">Azacualpa</option>
+                    <option value="Escogida3">Escogida3</option>
+                </select>
                     @error('empresa')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -83,6 +94,20 @@
                     @enderror
                 </div>
             </div>
+ <!-- Cuarta fila -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label" for="estado">Estado</label>
+                    <select id="estado" name="estado" class="form-control @error('estado') is-invalid @enderror" value="{{ old('estado') }}">
+                        <option value="">Seleccione una opción</option>
+                    <option value="Mal estado">Mal estado</option>
+                    <option value="Buen estado">Buen estado</option>
+                    
+                </select>
+                    @error('estado')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
 
             <!-- Campos para imágenes -->
             <div class="form-row mt-3">

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('marca');
             $table->string('serie');
             $table->string('descripcion');
+            $table->string('estado');
             // Campos para las fotos de antes y después
             $table->string('foto_antes')->nullable();
             $table->string('foto_despues')->nullable();

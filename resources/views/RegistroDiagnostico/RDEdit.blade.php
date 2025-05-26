@@ -170,13 +170,23 @@
             <!-- Primera fila: Equipo y Modelo -->
               <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label" for="empresa">Empresa</label>
-                    <input type="text" id="empresa" name="empresa" class="form-control @error('equipo') is-invalid @enderror"
-                           value="{{ old('empresa', $registro->empresa) }}" maxlength="50">
-                    @error('empresa')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
+    <label class="form-label" for="empresa">Empresa</label>
+    <select id="empresa" name="empresa" class="form-control @error('empresa') is-invalid @enderror">
+        <option value="">Seleccione una opción</option>
+        <option value="TAOSA" {{ old('empresa', $registro->empresa ?? '') == 'TAOSA' ? 'selected' : '' }}>TAOSA</option>
+        <option value="Clasificadora y Exportadora de Tabaco" {{ old('empresa', $registro->empresa ?? '') == 'Clasificadora y Exportadora de Tabaco' ? 'selected' : '' }}>Clasificadora y Exportadora de Tabaco</option>
+        <option value="TAOMOR" {{ old('empresa', $registro->empresa ?? '') == 'TAOMOR' ? 'selected' : '' }}>TAOMOR</option>
+        <option value="TAOCA" {{ old('empresa', $registro->empresa ?? '') == 'TAOCA' ? 'selected' : '' }}>TAOCA</option>
+        <option value="TAOGUALI" {{ old('empresa', $registro->empresa ?? '') == 'TAOGUALI' ? 'selected' : '' }}>TAOGUALI</option>
+        <option value="La Vega" {{ old('empresa', $registro->empresa ?? '') == 'La Vega' ? 'selected' : '' }}>La Vega</option>
+        <option value="Calpule" {{ old('empresa', $registro->empresa ?? '') == 'Calpule' ? 'selected' : '' }}>Calpule</option>
+        <option value="Azacualpa" {{ old('empresa', $registro->empresa ?? '') == 'Azacualpa' ? 'selected' : '' }}>Azacualpa</option>
+        <option value="Escogida3" {{ old('empresa', $registro->empresa ?? '') == 'Escogida3' ? 'selected' : '' }}>Escogida3</option>
+    </select>
+    @error('empresa')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
+</div>
 
 
             <div class="form-row">
@@ -231,6 +241,22 @@
                     @enderror
                 </div>
             </div>
+
+             <!-- Cuarta fila -->
+            <div class="form-row">
+                <div class="form-group">
+    <label for="estado">Estado</label>
+    <select name="estado" id="estado" class="form-control @error('estado') is-invalid @enderror">
+        <option value="">Seleccione una opción</option>
+        <option value="Mal estado" {{ old('estado', $registro->estado ?? '') == 'Mal estado' ? 'selected' : '' }}>Mal estado</option>
+        <option value="Buen estado" {{ old('estado', $registro->estado ?? '') == 'Buen estado' ? 'selected' : '' }}>Buen estado</option>
+    </select>
+    @error('estado')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
+</div>
+
+                </div>
 
             <!-- Campos para imágenes -->
             <div class="form-row mt-3">

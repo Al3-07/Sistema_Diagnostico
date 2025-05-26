@@ -24,7 +24,7 @@ class RegistroDiagnosticoController extends Controller
     // Obtener datos para datatable
   public function getTableData()
 {
-    $registros = RegistroDiagnostico::select(['id', 'empresa','equipo', 'modelo', 'marca', 'serie', 'descripcion', 'foto_antes', 'foto_despues']);
+    $registros = RegistroDiagnostico::select(['id', 'empresa','equipo', 'modelo', 'marca', 'serie', 'descripcion', 'estado', 'foto_antes', 'foto_despues']);
 
     return datatables()->of($registros)
         ->addColumn('foto_antes_img', function($registro) {
@@ -69,6 +69,7 @@ public function store(Request $request)
             'marca' => 'required|string|max:30',
             'serie' => 'required|string|max:40',
             'descripcion' => 'nullable|string|max:300',
+            'estado' => 'required|string',
             'foto_antes' => 'required|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
             'foto_despues' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
             ], [
@@ -90,6 +91,7 @@ public function store(Request $request)
     $registro->marca = $request->marca;
     $registro->serie = $request->serie;
     $registro->descripcion = $request->descripcion;
+     $registro->estado = $request->estado;
 
     // Subir foto_antes
         if ($request->hasFile('foto_antes')) {
@@ -130,6 +132,7 @@ public function store(Request $request)
         'marca' => 'required|string|max:30',
         'serie' => 'required|string|max:40',
         'descripcion' => 'nullable|string|max:300',
+         'estado' => 'required|string',
         'foto_antes' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
             'foto_despues' => 'required|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
 
@@ -151,6 +154,7 @@ public function store(Request $request)
     $registro->marca = $request->marca;
     $registro->serie = $request->serie;
     $registro->descripcion = $request->descripcion;
+     $registro->estado = $request->estado;
 
     // Subir y reemplazar foto_antes si se envía una nueva imagen
     if ($request->hasFile('foto_antes')) {

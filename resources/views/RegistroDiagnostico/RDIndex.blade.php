@@ -40,6 +40,7 @@
                             <th>Marca</th>
                             <th>Serie</th>
                             <th>Descripción</th>
+                             <th>Estado</th>
                             <th>Estado Inicial del Equipo</th>
                             <th>Estado Final del Equipo</th>
                             <th class="acciones-columna text-center">Acciones</th>
@@ -66,6 +67,7 @@
                 { data: 'marca', name: 'marca' },
                 { data: 'serie', name: 'serie' },
                 { data: 'descripcion', name: 'descripcion' },
+                 { data: 'estado', name: 'estado' },
                 {
                     data: 'foto_antes',
                     name: 'foto_antes',
