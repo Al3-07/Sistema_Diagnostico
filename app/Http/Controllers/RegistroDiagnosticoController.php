@@ -135,10 +135,10 @@ public function store(Request $request)
         'descripcion' => 'nullable|string|max:1000',
          'estado' => 'required|string',
         'foto_antes' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
-            'foto_despues' => 'required|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
+            'foto_despues' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
 
          ],   [
-        'foto_despues.required' => 'La imagen es obligatoria.',
+        'foto_despues.nullable' => 'La imagen es obligatoria.',
         'foto_despues.file' => 'La imagen debe ser un archivo válido.',
         'foto_despues.mimes' => 'La imagen debe ser un archivo de tipo: jpg, jpeg, png, gif, bmp, webp, svg.',
          'equipo.required' => 'El campo equipo es obligatorio.',

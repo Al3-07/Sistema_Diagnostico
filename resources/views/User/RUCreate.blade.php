@@ -173,7 +173,7 @@
 
         <!-- Título centrado con fondo gris claro -->
         <div class="text-center mb-5" style="background-color: #f0f0f0; color: #344767; padding: 15px; border-radius: 8px;">
-            <h3 class="m-0">Registro de usuario</h3>
+            <h3 class="m-0">Registro de Usuario</h3>
         </div>
 
         <div class="card-body">

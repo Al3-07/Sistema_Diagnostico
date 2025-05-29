@@ -22,10 +22,11 @@
             body {
                  background: url("{{ asset('img/Flogin.webp') }}") no-repeat center center fixed;
                  background-size: cover;
+                 transition: background-image 1s ease-in-out;
    
             }
 
-        /* Imagen con animación suave */
+        /* Imagen con animación suave. */
         body::before {
             content: "";
             position: fixed;
@@ -42,7 +43,7 @@
             z-index: -2;
         }
 
-        /* Capa de oscurecimiento encima */
+        /* Capa de oscurecimiento encima. */
         body::after {
             content: "";
             position: fixed;
@@ -50,7 +51,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Cambia 0.4 por más o menos opacidad */
+            background: rgba(0, 0, 0, 0.4); /* Cambia 0.4 por más o menos opacidad de la imagen del menú.*/
             z-index: -1;
         }
 
@@ -68,7 +69,7 @@
         }
 
 
-        /* Estilo del sidebar */
+        /* Estilo del sidebar. */
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -79,6 +80,7 @@
             padding: 15px;
             color: white;
             transition: all 0.3s;
+             animation: slideIn 0.5s ease-out;
         }
 
         .sidebar .nav-link {
@@ -130,7 +132,7 @@
             transition: left 0.3s;
         }
 
-        /* Estilos cuando el menú está oculto */
+        /* Estilos cuando el menú está oculto. */
         .sidebar.hidden {
             left: -250px;
         }
@@ -143,7 +145,7 @@
             left: 10px;
         }
 
-        /* Estilos para el mensaje de bienvenida */
+        /* Estilos para el mensaje de bienvenida. */
         .welcome-footer h1 {
             position: fixed;
             bottom: 40px;
@@ -159,7 +161,16 @@
             word-spacing: 5px; /* Espaciado entre palabras */
         }
 
-        /* Ajuste para móviles */
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Ajuste para móviles. */
         @media (max-width: 768px) {
             .sidebar {
                 left: -250px;
@@ -177,10 +188,50 @@
 </head>
 <body>
 
-<!-- Mensaje de bienvenida en la parte inferior -->
+<!-- Mensaje de bienvenida en la parte inferior. -->
 <footer class="welcome-footer">
     <h1 class="text-center">Bienvenid@, {{ Auth::user()->name }}</h1>
 </footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Cambio de fondo automático cada 5 segundos
+        let images = [
+            "img/1-1.jpg",
+            "img/2-2.jpg",
+            "img/3-3.jpg",
+            "img/4-4.jpg",
+            "img/5-5.jpg",
+            "img/6-6.jpg",
+        ];
+        
+        let index = 0;
+        function changeBackground() {
+            document.body.style.backgroundImage = `url('${images[index]}')`;
+            index = (index + 1) % images.length;
+        }
+        setInterval(changeBackground, 5000);
+
+        // 👉 Toggle Sidebar con animación (menu desplegable con animación).
+        const sidebar = document.querySelector('.sidebar');
+        const toggleBtn = document.getElementById('toggleSidebar');
+        const content = document.querySelector('.content');
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function () {
+                const isHidden = sidebar.classList.toggle('hidden');
+                content.classList.toggle('full-width');
+                toggleBtn.classList.toggle('hidden');
+
+                if (!isHidden) {
+                    // 💡 Reinicia animación cuando se vuelve a mostrar.
+                    sidebar.classList.remove('slide-animation'); 
+                    void sidebar.offsetWidth; 
+                    sidebar.classList.add('slide-animation');
+                }
+            });
+        }
+    });
+</script>
 
 </body>
 </html>

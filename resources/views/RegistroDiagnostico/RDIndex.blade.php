@@ -7,28 +7,149 @@
 @include('sweetalert::alert')
 
 <style>
-    /* (Mantén todos tus estilos actuales) */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8f9fa;
+    }
 
-    /* Ajuste para las imágenes en la tabla */
+    .card {
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+    }
+
+    .card-header {
+        background-color: rgb(226, 228, 230); 
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        color: #344767;
+        font-weight: 600;
+    }
+
+    .btn-nuevo-registro {
+        background-color: #0ea5e9;
+        border-color: #0ea5e9;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        padding: 0.75rem 1rem;
+        font-size: 0.80rem;
+        border-radius: 8px;
+        min-width: 160px;
+        text-align: center;
+    }
+
+    .btn-nuevo-registro:hover {
+        background-color: #0284c7;
+        border-color: #0284c7;
+        box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+        transform: translateY(-2px);
+    }
+
+    /* Aquí agregas el CSS que me diste */
     .img-table {
-        max-width: 80px;
-        max-height: 60px;
+        max-width: 60px;
+        max-height: 50px;
         border-radius: 6px;
         object-fit: cover;
         box-shadow: 0 0 3px rgba(0,0,0,0.15);
     }
+
+    table.dataTable tbody tr {
+    border-radius: 8px;
+    transition: background 0.2s ease;
+    }
+
+    table.dataTable tbody tr:hover {
+        background-color: #f1f5f9;
+    }
+
+
+    table.dataTable tbody td {
+    padding: 12px 14px;
+    font-size: 14px;
+    vertical-align: middle;
+    }
+
+
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .datatable-controls {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+
+    .datatable-controls .dataTables_length,
+    .datatable-controls .dataTables_filter {
+        margin-bottom: 10px;
+    }
+
+    table.dataTable thead th {
+    background-color: #e2e8f0;
+    color: #1f2937;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 12px 14px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        padding: 0 5px;
+    }
+
+    .table {
+    width: 100%;
+    table-layout: auto;
+    word-wrap: break-word;
+    }
+
+    td,
+    th {
+        white-space: normal;
+        word-break: break-word;
+        max-width: 150px;
+    }
+
+    .descripcion-celda {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 13px;
+        max-width: 200px;
+    }
 </style>
+
 
 <div class="container mt-5">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h2 class="card-title mb-0"><b>Diagnósticos de Equipos</b></h2>
-            @if(Auth::user()->role !== 'Visualizador')
-                <a href="{{ route('registrodiagnostico.create') }}" class="btn btn-info btn-sm btn-nuevo-registro">
-                    <i class="fas fa-plus"></i> Nuevo diagnóstico
-                </a>
-            @endif
-        </div>
+    <h2 class="card-title mb-0">
+        <b>Diagnósticos de Equipos</b>
+    </h2>
+    
+    @if(Auth::user()->role !== 'Visualizador')
+        <a href="{{ route('registrodiagnostico.create') }}" class="btn btn-info btn-sm btn-nuevo-registro">
+            <i class="fas fa-plus"></i> Nuevo Diagnóstico
+        </a>
+    @endif
+</div>
+
         <div class="card-body p-4">
             <div class="table-responsive mt-3">
                 <table class="table table-bordered table-striped w-100" id="equipos-table">
@@ -66,7 +187,14 @@
                 { data: 'modelo', name: 'modelo' },
                 { data: 'marca', name: 'marca' },
                 { data: 'serie', name: 'serie' },
-                { data: 'descripcion', name: 'descripcion' },
+{
+    data: 'descripcion',
+    name: 'descripcion',
+    render: function(data) {
+        if (!data) return '';
+        return `<div class="descripcion-celda" title="${data}">${data}</div>`;
+    }
+},
                  { data: 'estado', name: 'estado' },
                 {
                     data: 'foto_antes',

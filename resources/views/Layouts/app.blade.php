@@ -521,7 +521,7 @@
                 });
 
                 // Ocultar el menú cuando se selecciona una opción en pantallas pequeñas
-                links.forEach(link => {
+               /* links.forEach(link => {
                     link.addEventListener('click', function () {
                         if (window.innerWidth <= 768) {
                             sidebar.classList.add('hidden');
@@ -530,7 +530,20 @@
                             updateToggleVisibility(true);
                         }
                     });
+                });*/
+
+
+
+                links.forEach(link => {
+                    link.addEventListener('click', function () {
+                        // Cierra el sidebar en cualquier resolución
+                        sidebar.classList.add('hidden');
+                        content.classList.add('full-width');
+                        localStorage.setItem('sidebarHidden', 'true');
+                        updateToggleVisibility(true);
+                    });
                 });
+
 
                 // Ajustes especiales para móviles
                 if (window.innerWidth <= 768) {

@@ -189,12 +189,12 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h2 class="card-title mb-0">
-                <b>Registro de usuarios</b>
+                <b>Registro de Usuarios</b>
             </h2>
            
             @if(Auth::user()->role !== 'Visualizador')
                 <a href="{{ route('user.create') }}" class="btn btn-info btn-sm btn-nuevo-registro">
-                    <i class="fas fa-plus"></i> Nuevo registro
+                    <i class="fas fa-plus"></i> Nuevo Registro
                 </a>
             @endif
         </div>
