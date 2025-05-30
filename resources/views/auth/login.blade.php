@@ -15,7 +15,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: url("{{ asset('img/Flogin.webp') }}") no-repeat center center fixed;
+            background: url("{{ asset('img/fincav.jpg') }}") no-repeat center center fixed;
             background-size: cover;
             height: 100vh;
             display: flex;
@@ -67,7 +67,7 @@
             font-family: 'Cinzel', serif;
             font-size: 24px;
             font-weight: 700;
-            color:rgb(50, 93, 166);
+            color: #16a34a; /* Verde un poco más oscuro al hacer hover */            
             margin-bottom: 5px;
         }
 
@@ -125,7 +125,7 @@
         }
 
         .btn-primary {
-            background-color:rgb(34, 135, 197); /* verde */
+            background-color: #16a34a; /* Verde un poco más oscuro al hacer hover */ /* verde */
             border: none;
             color: white;
             font-weight: 600;
@@ -136,7 +136,7 @@
         }
 
         .btn-primary:hover {
-            background-color:rgb(22, 135, 163); /* verde más oscuro */
+            background-color:rgb(57, 218, 116); /* Verde un poco más oscuro al hacer hover */ /* verde más oscuro */
             box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
         }
 

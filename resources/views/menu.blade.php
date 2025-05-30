@@ -18,9 +18,8 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <style>
-
             body {
-                 background: url("{{ asset('img/Flogin.webp') }}") no-repeat center center fixed;
+                 background: url("{{ asset('img/login1.webp') }}") no-repeat center center fixed;
                  background-size: cover;
                  transition: background-image 1s ease-in-out;
    
@@ -34,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('{{ asset('img/Flogin.webp') }}') no-repeat center center fixed;
+            background: url('{{ asset('') }}') no-repeat center center fixed;
             background-size: cover;
             transform: scale(1.05);
             filter: blur(8px);
@@ -196,12 +195,12 @@
     document.addEventListener("DOMContentLoaded", function () {
         // Cambio de fondo automático cada 5 segundos
         let images = [
-            "img/1-1.jpg",
-            "img/2-2.jpg",
-            "img/3-3.jpg",
-            "img/4-4.jpg",
-            "img/5-5.jpg",
-            "img/6-6.jpg",
+            "img/Plasenciah.jpg",
+            "img/fincap.jpg",
+            "img/cajah.jpg",
+            "img/hojas.avif",
+            "img/cosecha1.jpg",
+            "img/fincab.webp",
         ];
         
         let index = 0;
@@ -209,7 +208,7 @@
             document.body.style.backgroundImage = `url('${images[index]}')`;
             index = (index + 1) % images.length;
         }
-        setInterval(changeBackground, 5000);
+        setInterval(changeBackground, 4000);
 
         // 👉 Toggle Sidebar con animación (menu desplegable con animación).
         const sidebar = document.querySelector('.sidebar');
