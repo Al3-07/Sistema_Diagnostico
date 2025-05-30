@@ -35,7 +35,7 @@
 
         .tabla-firmas {
             margin-top: 150px;
-            width: 100%;
+            width: 33%;
             text-align: center;
         }
 
@@ -46,10 +46,23 @@
         }
 
         .firma {
-            border-top: 1px solid #000;
-            padding-top: 10px;
-            font-weight: bold;
-        }
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+   
+}
+
+        .firma {
+        text-align: center;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .firma-img {
+        display: block;
+        margin: 0 auto;
+        height: 80px;
+        object-fit: contain;
+    }
     </style>
 </head>
 <body>
@@ -88,7 +101,25 @@
     @else
         <p><strong>Imagen de membrete no encontrada.</strong></p>
     @endif
+    
+    @php
+    function firmaBase64($ruta) {
+        $path = public_path('storage/' . $ruta);
+        if (file_exists($path)) {
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            return 'data:image/' . $type . ';base64,' . base64_encode($data);
+        }
+        return null;
+    }
+
+    $firmaRealizado = $registro->firma_realizado ? firmaBase64($registro->firma_realizado) : null;
+    $firmaSupervisado = $registro->firma_supervisado ? firmaBase64($registro->firma_supervisado) : null;
+    $firmaRecibido = $registro->firma_recibido ? firmaBase64($registro->firma_recibido) : null;
+@endphp
+
 </header>
+
 
 <div class="fecha">
     <strong></strong> {{ $correlativo }}<br>
@@ -100,23 +131,49 @@
 <div class="descripcion">
     {{ $registro->descripcion }}
 </div>
+@php
+    $estado = $registro->estado;
+@endphp
 
-<table class="tabla-firmas">
+<div style="margin-top: 30px;">
+    <strong>Estado del equipo:</strong><br><br>
+
+    [{{ $estado === 'Mal estado' ? 'X' : ' ' }}] Mal Estado<br>
+    [{{ $estado === 'Regular' ? 'X' : ' ' }}] Regular<br>
+    [{{ $estado === 'Buen estado' ? 'X' : ' ' }}] Buen Estado<br>
+</div>
+
+    <table width="100%" style="margin-top: 150px;">
     <tr>
-        <td>
-            <div class="firma">Realizado por:</div>
+        <td style="text-align: center;">
+            <div class="firma">Realizado por</div>
+            @if ($firmaRealizado)
+                <img src="{{ $firmaRealizado }}" class="firma-img" alt="Firma realizado">
+            @endif
+            <div style="border-top: 1px solid #000; width: 80%; margin: 10px auto 0;"></div>
         </td>
         <td></td>
-        <td>
-            <div class="firma">Supervisado por:</div>
+        <td style="text-align: center;">
+            <div class="firma">Supervisado por</div>
+            @if ($firmaSupervisado)
+                <img src="{{ $firmaSupervisado }}" class="firma-img" alt="Firma supervisado">
+            @endif
+            <div style="border-top: 1px solid #000; width: 80%; margin: 10px auto 0;"></div>
         </td>
     </tr>
     <tr>
-        <td colspan="3" style="padding-top: 100px;">
-            <div class="firma" style="width: 40%; margin: auto;">Recibido por:</div>
+        <td colspan="3" style="padding-top: 80px; text-align: center;">
+            <div class="firma">Recibido por</div>
+            @if ($firmaRecibido)
+                <img src="{{ $firmaRecibido }}" class="firma-img" alt="Firma recibido">
+            @endif
+            <div style="border-top: 1px solid #000; width: 30%; margin: 10px auto 0;"></div>
         </td>
     </tr>
 </table>
+
+
+
 
 </body>
 </html>

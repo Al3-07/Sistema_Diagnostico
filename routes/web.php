@@ -6,6 +6,8 @@ use App\Http\Controllers\RegistroDiagnosticoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegistroRolController;
 use App\Http\Controllers\UserController;
+use App\Models\RegistroDiagnostico;
+
 
 Route::middleware(['auth'])->group(function () {
     // RUTAS DE Diagnostico
@@ -43,7 +45,19 @@ Route::get('registrodiagnostico/{id}', [RegistroDiagnosticoController::class, 's
 Route::resource('registrodiagnostico', RegistroDiagnosticoController::class);
 */
 Route::get('/registro-diagnostico/{id}/pdf', [App\Http\Controllers\RegistroDiagnosticoController::class, 'generarPDF'])->name('registro_diagnostico.pdf');
+Route::get('/diagnostico/{id}/vista-previa', function ($id) {
+    $registro = RegistroDiagnostico::findOrFail($id);
 
+    $pdf = Pdf::loadView('emails.reporte_diagnostico', compact('registro'));
+
+    return $pdf->stream('reporte_diagnostico.pdf');
+});
+
+Route::post('/diagnostico/{id}/enviar-reporte', [RegistroDiagnosticoController::class, 'enviarReporte'])->name('diagnostico.enviar');
+Route::get('/diagnostico/{id}/descargar', [RegistroDiagnosticoController::class, 'descargarPDF'])->name('diagnostico.descargar');
+Route::get('/diagnostico/{id}/pdf', [RegistroDiagnosticoController::class, 'descargarPDF'])->name('diagnostico.pdf');
+
+Route::post('/diagnostico/{id}/guardar-firma', [RegistroDiagnosticoController::class, 'guardarFirma'])->name('guardar.firma');
 
    
     // RUTAS DE ROL

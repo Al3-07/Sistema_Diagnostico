@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\RegistroDiagnostico;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Mail\MailManager;
+use Barryvdh\DomPDF\Facade\Pdf; 
+
+
 
 class RegistroDiagnosticoController extends Controller
 {
@@ -94,6 +97,7 @@ public function store(Request $request)
     $registro->descripcion = $request->descripcion;
      $registro->estado = $request->estado;
 
+
     // Subir foto_antes
         if ($request->hasFile('foto_antes')) {
             $imagen = $request->file('foto_antes');
@@ -108,7 +112,47 @@ public function store(Request $request)
             $imagen->move(public_path('img/post'), $nombre);
             $registro->foto_despues = $nombre;
         }
-    
+    // Actualizar firmas si se envían nuevas
+if ($request->has('firma_realizado')) {
+    $firma1 = str_replace('data:image/png;base64,', '', $request->firma_realizado);
+    $firma1 = str_replace(' ', '+', $firma1);
+    $firma1 = 'firma_realizado_' . time() . '.png';
+    Storage::disk('public')->put('firmas/' . $firma1, base64_decode($firma1));
+
+    // Eliminar firma antigua si existe
+    if ($registro->firma_realizado && Storage::disk('public')->exists('firmas/' . $registro->firma_realizado)) {
+        Storage::disk('public')->delete('firmas/' . $registro->firma_realizado);
+    }
+
+    $registro->firma_realizado = $firma1;
+}
+
+if ($request->has('firma_supervisado')) {
+    $firma2 = str_replace('data:image/png;base64,', '', $request->firma_supervisado);
+    $firma2 = str_replace(' ', '+', $firma2);
+    $firma2 = 'firma_supervisado_' . time() . '.png';
+    Storage::disk('public')->put('firmas/' . $firma2, base64_decode($firma2));
+
+    if ($registro->firma_supervisado && Storage::disk('public')->exists('firmas/' . $registro->firma_supervisado)) {
+        Storage::disk('public')->delete('firmas/' . $registro->firma_supervisado);
+    }
+
+    $registro->firma_supervisado = $firma2;
+}
+
+if ($request->has('firma_recibido')) {
+    $firma3 = str_replace('data:image/png;base64,', '', $request->firma_recibido);
+    $firma3 = str_replace(' ', '+', $firma3);
+    $firma3 = 'firma_recibido_' . time() . '.png';
+    Storage::disk('public')->put('firmas/' . $firma3, base64_decode($firma3));
+
+    if ($registro->firma_recibido && Storage::disk('public')->exists('firmas/' . $registro->firma_recibido)) {
+        Storage::disk('public')->delete('firmas/' . $registro->firma_recibido);
+    }
+
+    $registro->firma_recibido = $firma3;
+}
+
 
     $registro->save();
 
@@ -179,6 +223,47 @@ public function store(Request $request)
         $imagen->move(public_path('img/post'), $nombre);
         $registro->foto_despues = $nombre;
     }
+    // Actualizar firmas si se envían nuevas
+if ($request->has('firma_realizado')) {
+    $firma1 = str_replace('data:image/png;base64,', '', $request->firma_realizado);
+    $firma1 = str_replace(' ', '+', $firma1);
+    $firma1 = 'firma_realizado_' . time() . '.png';
+    Storage::disk('public')->put('firmas/' . $firma1, base64_decode($firma1));
+
+    // Eliminar firma antigua si existe
+    if ($registro->firma_realizado && Storage::disk('public')->exists('firmas/' . $registro->firma_realizado)) {
+        Storage::disk('public')->delete('firmas/' . $registro->firma_realizado);
+    }
+
+    $registro->firma_realizado = $firma1;
+}
+
+if ($request->has('firma_supervisado')) {
+    $firma2 = str_replace('data:image/png;base64,', '', $request->firma_supervisado);
+    $firma2 = str_replace(' ', '+', $firma2);
+    $firma2 = 'firma_supervisado_' . time() . '.png';
+    Storage::disk('public')->put('firmas/' . $firma2, base64_decode($firma2));
+
+    if ($registro->firma_supervisado && Storage::disk('public')->exists('firmas/' . $registro->firma_supervisado)) {
+        Storage::disk('public')->delete('firmas/' . $registro->firma_supervisado);
+    }
+
+    $registro->firma_supervisado = $firma2;
+}
+
+if ($request->has('firma_recibido')) {
+    $firma3 = str_replace('data:image/png;base64,', '', $request->firma_recibido);
+    $firma3 = str_replace(' ', '+', $firma3);
+    $firma3 = 'firma_recibido_' . time() . '.png';
+    Storage::disk('public')->put('firmas/' . $firma3, base64_decode($firma3));
+
+    if ($registro->firma_recibido && Storage::disk('public')->exists('firmas/' . $registro->firma_recibido)) {
+        Storage::disk('public')->delete('firmas/' . $registro->firma_recibido);
+    }
+
+    $registro->firma_recibido = $firma3;
+}
+
 
 
     $registro->save();
@@ -211,8 +296,125 @@ public function store(Request $request)
 {
     $registro = RegistroDiagnostico::findOrFail($id);
 
-    $pdf = Pdf::loadView('registrodiagnostico.reporte', compact('registro'))->setPaper('letter');
+    // Función para convertir la firma a base64
+    function firmaBase64($ruta) {
+        $path = public_path('storage/' . $ruta);
+        if (file_exists($path)) {
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            return 'data:image/' . $type . ';base64,' . base64_encode($data);
+        }
+        return null;
+    }
 
-    return $pdf->stream('diagnostico_' . $registro->id . '.pdf');
+    $firmaRealizado = $registro->firma_realizado ? firmaBase64($registro->firma_realizado) : null;
+    $firmaSupervisado = $registro->firma_supervisado ? firmaBase64($registro->firma_supervisado) : null;
+    $firmaRecibido = $registro->firma_recibido ? firmaBase64($registro->firma_recibido) : null;
+
+    $pdf = PDF::loadView('diagnostico.pdf', [
+        'registro' => $registro,
+        'firmaRealizado' => $firmaRealizado,
+        'firmaSupervisado' => $firmaSupervisado,
+        'firmaRecibido' => $firmaRecibido,
+    ]);
+
+    return $pdf->download('diagnostico.pdf');
 }
+
+
+
+public function descargarPDF($id)
+{
+    $registro = RegistroDiagnostico::findOrFail($id);
+
+    function firmaBase64($ruta) {
+        $path = public_path('storage/' . $ruta);
+        if (file_exists($path)) {
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            return 'data:image/' . $type . ';base64,' . base64_encode($data);
+        }
+        return null;
+    }
+
+    $firmaRealizado = $registro->firma_realizado ? firmaBase64($registro->firma_realizado) : null;
+    $firmaSupervisado = $registro->firma_supervisado ? firmaBase64($registro->firma_supervisado) : null;
+    $firmaRecibido = $registro->firma_recibido ? firmaBase64($registro->firma_recibido) : null;
+
+    $pdf = Pdf::loadView('emails.reporte_diagnostico', [
+        'registro' => $registro,
+        'firmaRealizado' => $firmaRealizado,
+        'firmaSupervisado' => $firmaSupervisado,
+        'firmaRecibido' => $firmaRecibido,
+    ]);
+
+    return $pdf->download('diagnostico-' . $registro->id . '.pdf');
+}
+
+
+public function enviarReporte($id)
+{
+    $registro = \App\Models\RegistroDiagnostico::findOrFail($id);
+    $pdf = Pdf::loadView('emails.reporte_diagnostico', compact('registro'));
+
+    $correos = ['sandyrodriguezmejia@gmail.com', 'correo2@ejemplo.com'];
+
+    // Crear el mailer temporal con esta configuración
+    $mailManager = app()->make(MailManager::class);
+    $customMailer = $mailManager->mailer('custom', fn () => $smtpConfig);
+
+    $customMailer->send([], [], function ($message) use ($pdf, $correos, $registro) {
+        $message->to($correos)
+                ->subject('Reporte de Diagnóstico: ' . $registro->id)
+                ->attachData($pdf->output(), 'reporte.pdf', [
+                    'mime' => 'application/pdf',
+                ])
+                ->setBody('Se adjunta el reporte de diagnóstico correspondiente.', 'text/html');
+    });
+
+    return back()->with('success', 'Reporte enviado correctamente');
+}
+
+public function guardarFirma(Request $request, $id)
+{
+    $registro = RegistroDiagnostico::findOrFail($id);
+    $mensaje = '';
+
+    $firmaBase64 = $request->input('firma');
+    $tipo = $request->input('tipo_firma'); // recibido desde el formulario
+
+    if ($firmaBase64 && $tipo) {
+        $firmaBase64 = str_replace('data:image/png;base64,', '', $firmaBase64);
+        $firmaBase64 = str_replace(' ', '+', $firmaBase64);
+        $nombre = 'firma_' . $tipo   . 'png';
+
+        Storage::disk('public')->put('firmas/' . $nombre, base64_decode($firmaBase64));
+
+        switch ($tipo) {
+            case 'realizado':
+                $registro->firma_realizado = 'firmas/' . $nombre;
+                $mensaje = 'Firma de realizado guardada correctamente.';
+                break;
+            case 'supervisado':
+                $registro->firma_supervisado = 'firmas/' . $nombre;
+                $mensaje = 'Firma de supervisado guardada correctamente.';
+                break;
+            case 'recibido':
+                $registro->firma_recibido = 'firmas/' . $nombre;
+                $mensaje = 'Firma de recibido guardada correctamente.';
+                break;
+            default:
+                return redirect()->back()->with('error', 'Tipo de firma no válido.');
+        }
+
+        $registro->save();
+        return redirect()->back()->with('success', $mensaje);
+    }
+
+    return redirect()->back()->with('error', 'No se pudo guardar la firma.');
+}
+
+
+
+
 }
