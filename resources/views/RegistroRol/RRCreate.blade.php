@@ -147,7 +147,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h2 class="card-title mb-0">
-                <b>Registro de roles</b>
+                <b>Registro de Roles</b>
             </h2>
         </div>
         <div class="card-body p-4">
@@ -178,20 +178,25 @@ $(document).ready(function () {
             {data: 'estado_texto', name: 'estado_texto', orderable: false, searchable: false},
             {data: 'acciones', name: 'acciones', orderable: false, searchable: false}
         ],
-        searching: true,
+        searching: false,
         paging: true,
-        language: {
-            "processing": "Procesando...",
-            "zeroRecords": "No se encontraron resultados",
-            "paginate": {
-                "first": "Primero",
-                "last": "Último",
-                "next": "Siguiente",
-                "previous": "Anterior"
-            }
-            
-        },
-        lengthChange: true 
+       language: {
+    processing: "Procesando...",
+    lengthMenu: "Mostrar _MENU_ registros",
+    zeroRecords: "No se encontraron resultados",
+    info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+    infoFiltered: "(filtrado de un total de _MAX_ registros)",
+    search: "Buscar:",
+    paginate: {
+        first: "Primero",
+        last: "Último",
+        next: "Siguiente",
+        previous: "Anterior"
+    }
+},
+
+        lengthChange: false 
     });
 
    // Evento para cambiar el estado con AJAX

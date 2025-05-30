@@ -53,7 +53,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
+            background-color:rgb(248, 249, 250);
         }
 
         /* Estilo del sidebar */
@@ -205,7 +205,7 @@
         #toggleSidebar {
             cursor: pointer;
             font-size: 2.2rem; 
-            color: #0ea5e9; 
+           color: #22c55e; /* Verde moderno */ 
             font-weight: 700;
             background-color: #f8fafc;
             width: 50px;
@@ -224,14 +224,14 @@
 
         #toggleSidebar:hover {
             transform: scale(1.1);
-            background-color: #e2e8f0;
+            color: #16a34a; /* Verde un poco más oscuro al hacer hover */
         }
 
         /* Estilos para el botón cuando el sidebar está oculto */
         #toggleSidebar.hidden {
             right: auto;
             left: 20px;
-            background-color: #0ea5e9;
+            color: #16a34a; /* Verde un poco más oscuro al hacer hover */            
             color: white;
         }
 
@@ -284,8 +284,8 @@
             bottom: 20px;
             right: 20px;
             z-index: 1002;
-            background: #0ea5e9;
-            color: white;
+            color: #16a34a; /* Verde un poco más oscuro al hacer hover */
+             color: white;
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -307,7 +307,7 @@
             position: fixed;
             top: 20px;
             left: 20px;
-            background-color: #0ea5e9;
+            background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
             color: white;
             width: 50px;
             height: 50px;
@@ -355,6 +355,132 @@
             font-size: 0.8rem;
             color: #718096;
         }
+
+        .modern-user-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.modern-user-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+}
+
+.avatar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-icon {
+    font-size: 28px;
+    color: #22c55e; /* Verde moderno */
+}
+
+.user-details .username {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color:rgb(126, 117, 117);
+}
+
+.user-details .user-role {
+    font-size: 13px;
+    color: #a0aec0;
+}
+
+.arrow-icon {
+    margin-left: auto;
+    color: #a0aec0;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.modern-user-card:hover .arrow-icon {
+    transform: translateX(4px);
+}
+
+
+.modern-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05); /* translúcido claro */
+    border-radius: 12px;
+    color: rgb(126, 117, 117); /* texto por defecto */
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s, color 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 8px;
+    min-height: 44px;
+}
+
+.modern-nav-link i {
+    color: #22c55e; /* verde moderno */
+    min-width: 20px;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.modern-nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+    color: rgb(90, 90, 90); /* más visible al pasar el mouse */
+}
+
+.modern-nav-link.active {
+    background: rgba(255, 255, 255, 0.2); /* un poco más sólido */
+    color: rgb(70, 70, 70); /* texto oscuro y visible */
+    font-weight: 600;
+    border-left: 4px solid #22c55e;
+    padding-left: 12px;
+}
+
+.modern-nav-link.active i {
+    color: #22c55e; /* mantiene ícono verde */
+}
+
+
+
+.brand-modern-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    margin: 40px 0 20px 0; /* ↑ esto lo baja */
+    color: rgb(90, 90, 90);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.brand-modern-title:hover {
+    transform: scale(1.02);
+}
+
+.brand-modern-title #brandLink {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: rgb(60, 60, 60);
+}
+
+.brand-modern-title .icon-below {
+    font-size: 24px;
+    color: #22c55e;
+}
+
     </style>
 
     @yield('styles')
@@ -365,39 +491,53 @@
             <!-- Botón para mostrar/ocultar el menú -->
             <div id="toggleSidebar">≡</div>
 
-            <div class="brand-container">
-                <a href="{{ route('menu') }}" class="brand {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}" id="brandLink">
-                    Sistema de Diagnóstico
-                </a>
+            <div class="brand-modern-title">
+                <span id="brandLink">Sistema de Diagnóstico</span>
+                <i class="fas fa-laptop-code icon-below"></i>
             </div>
+
+
 
             <!-- Usuario con función de logout -->
             @if(Auth::check())
-            <div class="user-info" id="user-profile">
-                <i class="fas fa-user user-icon"></i>
-                <div class="user-details">
-                    <h5>{{ Auth::user()->name }}</h5>
-                    <small>{{ Auth::user()->role }}</small>
+            <div class="user-info modern-user-card" id="user-profile">
+                <div class="avatar-container">
+                    <i class="fas fa-user-circle avatar-icon"></i>
                 </div>
-                <i class="fas fa-sign-out-alt logout-icon"></i>
+                <div class="user-details">
+                    <h5 class="username">{{ Auth::user()->name }}</h5>
+                    <small class="user-role">{{ Auth::user()->role }}</small>
+                </div>
+                <i class="fas fa-chevron-right arrow-icon"></i>
             </div>
 
-            <div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
-            
-            <a href="{{ route('registrodiagnostico.index') }}" class="nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
-                <i class="fas fa-desktop"></i> Registro de Diagnóstico
-            </a>
-            
-           
-            @if(Auth::user()->role === 'Administrador')
-            <div class="sidebar-section-title">ADMINISTRACIÓN DE USUARIO</div>
-            <a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user.*') ? 'active' : '' }}">
-                <i class="fas fa-user"></i> Registro de Usuario
-            </a>
-            <a href="{{ route('registrorol.table') }}" class="nav-link {{ request()->routeIs('registrorol.*') ? 'active' : '' }}">
-                <i class="fas fa-users"></i> Gestor de Roles
-            </a>
-            @endif
+
+
+           <a href="{{ route('menu') }}" class="modern-nav-link {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}">
+    <i class="fas fa-home"></i> Inicio
+</a>
+
+<div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
+
+<a href="{{ route('registrodiagnostico.index') }}" class="modern-nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
+    <i class="fas fa-desktop"></i> Registro de Diagnóstico
+</a>
+
+@if(Auth::user()->role === 'Administrador')
+<div class="sidebar-section-title">ADMINISTRACIÓN DE USUARIO</div>
+<a href="{{ route('user.index') }}" class="modern-nav-link {{ request()->routeIs('user.*') ? 'active' : '' }}">
+    <i class="fas fa-user"></i> Registro de Usuario
+</a>
+<a href="{{ route('registrorol.table') }}" class="modern-nav-link {{ request()->routeIs('registrorol.*') ? 'active' : '' }}">
+    <i class="fas fa-users"></i> Gestor de Roles
+</a>
+@endif
+
+<a href="#" id="sidebarLogout" class="modern-nav-link text-start">
+    <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+</a>
+
+
             
             <!-- Formulario oculto para logout -->
             <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
@@ -521,7 +661,7 @@
                 });
 
                 // Ocultar el menú cuando se selecciona una opción en pantallas pequeñas
-                links.forEach(link => {
+               /* links.forEach(link => {
                     link.addEventListener('click', function () {
                         if (window.innerWidth <= 768) {
                             sidebar.classList.add('hidden');
@@ -530,7 +670,20 @@
                             updateToggleVisibility(true);
                         }
                     });
+                });*/
+
+
+
+                links.forEach(link => {
+                    link.addEventListener('click', function () {
+                        // Cierra el sidebar en cualquier resolución
+                        sidebar.classList.add('hidden');
+                        content.classList.add('full-width');
+                        localStorage.setItem('sidebarHidden', 'true');
+                        updateToggleVisibility(true);
+                    });
                 });
+
 
                 // Ajustes especiales para móviles
                 if (window.innerWidth <= 768) {
@@ -551,34 +704,34 @@
                     });
                     
                     // Cerrar sesión y resetear preferencias
-                    $('#user-profile').on('click', function(e) {
-                        e.preventDefault();
-                        
-                        if (typeof Swal !== 'undefined') {
-                            Swal.fire({
-                                title: '¿Cerrar sesión?',
-                                text: '¿Estás seguro que deseas cerrar tu sesión?',
-                                icon: 'question',
-                                showCancelButton: true,
-                                confirmButtonColor: '#ef4444',
-                                cancelButtonColor: '#0ea5e9',
-                                confirmButtonText: 'Sí, cerrar sesión',
-                                cancelButtonText: 'Cancelar'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    // Establecer bandera para la próxima sesión
-                                    localStorage.removeItem('sidebarHidden');
-                                    // Enviar formulario de logout
-                                    document.getElementById('logout-form').submit();
-                                }
-                            });
-                        } else {
-                            if (confirm('¿Estás seguro que deseas cerrar tu sesión?')) {
-                                localStorage.removeItem('sidebarHidden');
-                                document.getElementById('logout-form').submit();
-                            }
-                        }
-                    });
+                    // Cierre desde el botón del sidebar
+$('#sidebarLogout').on('click', function(e) {
+    e.preventDefault();
+
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: '¿Cerrar sesión?',
+            text: '¿Estás seguro que deseas cerrar tu sesión?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444',
+            cancelButtonColor: '#0ea5e9',
+            confirmButtonText: 'Sí, cerrar sesión',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem('sidebarHidden');
+                document.getElementById('logout-form').submit();
+            }
+        });
+    } else {
+        if (confirm('¿Estás seguro que deseas cerrar tu sesión?')) {
+            localStorage.removeItem('sidebarHidden');
+            document.getElementById('logout-form').submit();
+        }
+    }
+});
+
                 }
             });
         </script>
