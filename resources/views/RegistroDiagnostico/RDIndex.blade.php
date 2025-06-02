@@ -6,7 +6,7 @@
 
 @include('sweetalert::alert')
 
-<style>
+<style> /*CSS estilo del titulo, texto, tabla y botones.*/
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #f8f9fa;
@@ -31,7 +31,7 @@
     }
 
     .btn-nuevo-registro {
-        background-color: #0ea5e9;
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
         border-color: #0ea5e9;
         color: white;
         font-weight: 600;
@@ -44,13 +44,13 @@
     }
 
     .btn-nuevo-registro:hover {
-        background-color: #0284c7;
-        border-color: #0284c7;
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover. */;
+        border-color: #16a34a;
         box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
         transform: translateY(-2px);
     }
 
-    /* Aquí agregas el CSS que me diste */
+    /* Muestra el diseño de la tabla.*/
     .img-table {
         max-width: 60px;
         max-height: 50px;
@@ -135,21 +135,21 @@
     }
 </style>
 
-
+    <!-- Vista los datos del Index. -->
 <div class="container mt-5">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
     <h2 class="card-title mb-0">
         <b>Diagnósticos de Equipos</b>
     </h2>
-    
+    <!-- Muestra nombre del usuario y boton de nuevo registro. -->
     @if(Auth::user()->role !== 'Visualizador')
         <a href="{{ route('registrodiagnostico.create') }}" class="btn btn-info btn-sm btn-nuevo-registro">
             <i class="fas fa-plus"></i> Nuevo Diagnóstico
         </a>
     @endif
 </div>
-
+            <!-- Campos de la tabla. -->
         <div class="card-body p-4">
             <div class="table-responsive mt-3">
                 <table class="table table-bordered table-striped w-100" id="equipos-table">
@@ -174,7 +174,7 @@
         </div>
     </div>
 </div>
-
+    <!-- Funcionalidad de la tabla con sus campos. -->
 <script type="text/javascript">
     $(document).ready(function () {
         $('#equipos-table').DataTable({
@@ -227,7 +227,7 @@
                     searchable: false,
                     className: 'acciones-columna'
                 }
-            ],
+            ],//Muestra de traductor de idioma en los campos.
             language: {
                 "processing": "Procesando...",
                 "lengthMenu": "Mostrar _MENU_ registros",
@@ -247,7 +247,7 @@
 
 </script>
 <script>
-    // Delegamos evento a los botones con clase .delete-btn
+    // Delegamos evento a los botones con clase .delete-btn mensaje de error.
     $(document).on('click', '.delete-btn', function () {
         var id = $(this).data('id');
         var url = "{{ url('registrodiagnostico') }}/" + id;

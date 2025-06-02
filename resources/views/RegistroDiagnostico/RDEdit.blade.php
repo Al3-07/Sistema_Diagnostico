@@ -6,7 +6,7 @@
 
 @include('sweetalert::alert')
 
-<style>
+<style> /* Estilos CSS para la vista, agregados titulos, textos imagenes, botones.*/
     body {
         background: #f3f4f6;
         font-family: 'Poppins', sans-serif;
@@ -74,7 +74,7 @@
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 1rem;
     }
-
+/*Muestra el tamaño de la imagen y su calidad.*/
     .img-preview {
         margin-top: 0.5rem;
         max-width: 100%;
@@ -83,7 +83,7 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         cursor: pointer;
     }
-
+/*Estilo del boton.*/
     .btn {
         font-weight: 600;
         padding: 0.5rem 1.25rem;
@@ -103,14 +103,14 @@
     }
 
     .btn-info {
-        background-color: #3b82f6;
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
         border-color: #3b82f6;
         color: white;
     }
 
     .btn-info:hover {
-        background-color: #2563eb;
-        border-color: #2563eb;
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
+        border-color: #16a34a;
     }
 
     .btn-group {
@@ -119,7 +119,7 @@
         gap: 1rem;
         margin-top: 2rem;
     }
-
+/*Visualiza la imagen mas de cerca.*/
     .lightbox {
         position: fixed;
         top: 0;
@@ -151,14 +151,14 @@
         to { opacity: 1; }
     }
 </style>
-
+<!-- Vista de editor . -->
 <div class="container-custom">
     <h3 class="title">Editar Diagnóstico de Equipo</h3>
 
     <form method="post" action="{{ route('registrodiagnostico.update', $registro->id) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-
+<!-- Muestra su select para seleccionar cada una de las empresas. -->
         <div class="form-group">
             <label for="empresa">Empresa</label>
             <select id="empresa" name="empresa" class="form-control @error('empresa') is-invalid @enderror">
@@ -169,7 +169,7 @@
             </select>
             @error('empresa') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
-
+<!-- Muestra en texto los datos ya creados.. -->
         <div class="form-row">
             <div class="form-group">
                 <label for="equipo">Hardware</label>
@@ -219,7 +219,7 @@
             </select>
             @error('estado') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
-
+<!-- Muestra las imagenes tanto iniciales y finales. -->
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
     <div class="form-group" style="flex: 1; min-width: 200px;">
         <label for="foto_antes">Imagen Inicial</label>
@@ -241,7 +241,7 @@
              onclick="openLightbox('{{ asset('img/post/' . $registro->foto_despues) }}')">
     </div>
 </div>
-
+<!-- Boton para actualizar. -->
         <div class="btn-group">
             <a href="{{ route('registrodiagnostico.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left me-1"></i> Regresar</a>
             <button type="submit" class="btn btn-info"><i class="fas fa-sync-alt me-1"></i> Actualizar</button>
@@ -249,12 +249,12 @@
     </form>
 </div>
 
-<!-- Lightbox general -->
+<!-- Lightbox general. -->
 <div id="globalLightbox" class="lightbox" onclick="closeLightbox()">
     <img id="lightboxImage" src="" alt="Vista ampliada">
 </div>
 
-<script>
+<script>    //Funcion para que las imagenes se puedan visualizar mas grandes o mas de cerca
     function previewImage(input, previewId) {
         const file = input.files[0];
         const reader = new FileReader();

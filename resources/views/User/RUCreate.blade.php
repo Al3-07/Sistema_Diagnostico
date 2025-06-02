@@ -5,7 +5,7 @@
 @section('contenido')
 
 <style>  
-    /* Estilos base */
+    /* Estilos base de la vista, implementados, titulos, textos, botones y colores. */
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #f8f9fa;
@@ -43,7 +43,7 @@
         margin-bottom: 0.25rem;
     }
 
-    /* LABELS */
+    /* LABELS de texto. */
     .form-label {
         display: block;
         margin-bottom: 4px;
@@ -53,7 +53,7 @@
         letter-spacing: 0.3px;
     }
 
-    /* INPUTS */
+    /* INPUTS para escribir dentro de ellos. */
     .form-control, .form-select {
         width: 100%;
         padding: 8px 12px;
@@ -81,7 +81,7 @@
         display: block;
     }
     
-    /* Botones */
+    /* Botones. */
     .btn {
         padding: 0.5rem 1rem;
         border-radius: 8px;
@@ -106,20 +106,20 @@
     }
 
     .btn-custom {
-        background-color: #0ea5e9;
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
         border-color: #0ea5e9;
         color: #344767;  /* Color de texto igual al botón Regresar */
     }
 
     .btn-custom:hover {
-        background-color: #0284c7;
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
         border-color: #0284c7;
         color: white;  /* Cambia a blanco cuando se pasa el cursor */
         box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
         transform: translateY(-2px);
     }
     
-    /* Footer para botones */
+    /* Footer para botones, pie de página. */
     .d-flex {
         display: flex;
     }
@@ -132,7 +132,7 @@
         gap: 0.75rem;
     }
     
-    /* Estilos específicos para el campo de contraseña */
+    /* Estilos específicos para el campo de contraseña. */
     .input-group {
         position: relative;
         display: flex;
@@ -177,7 +177,7 @@
         </div>
 
         <div class="card-body">
-            <!-- Campo Nombre -->
+            <!-- Campo Nombre. -->
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label" for="nombreUsuario">Nombre:</label>
@@ -188,7 +188,7 @@
                 </div>
             </div>
 
-            <!-- Campo Rol -->
+            <!-- Campo Rol. -->
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label" for="rolUsuario">Rol:</label>
@@ -201,7 +201,7 @@
                 </div>
             </div>
 
-            <!-- Campo Contraseña -->
+            <!-- Campo Contraseña. -->
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label" for="passwordUsuario">Contraseña:</label>
@@ -214,7 +214,7 @@
                 </div>
             </div>
 
-            <!-- Campo Confirmar Contraseña -->
+            <!-- Campo Confirmar Contraseña. -->
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label" for="passwordConfirmUsuario">Confirmar contraseña:</label>
@@ -228,7 +228,7 @@
             </div>
         </div>
 
-        <!-- Botones alineados a la derecha -->
+        <!-- Botones para guardar y regresar, alineados a la derecha. -->
         <div class="d-flex justify-content-end gap-3">
             <a href="{{ route('user.index') }}" class="btn btn-secondary">
                 <i class="fas fa-arrow-left me-1"></i> Regresar
@@ -240,7 +240,7 @@
     </form>
 </div>
 
-<script>
+<script> //Funcion crear la contraseña.
 document.addEventListener('DOMContentLoaded', function() {
     // Mostrar/ocultar contraseña
     document.querySelectorAll(".toggle-password").forEach(button => {
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Guardar usuario con confirmación de SweetAlert
+    // Guardar usuario con confirmación de SweetAlert.
     document.getElementById("btnGuardarUsuario").addEventListener("click", function() {
         Swal.fire({
             title: "¿Guardar usuario?",
@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-
+    //Funcion para enviar el formulario.
     function enviarFormulario() {
     let formData = new FormData(document.getElementById("formCrearUsuario"));
 
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
         headers: {
             "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
         }
-    })
+    })// mensaje de confirmacion y exito.
     .then(response => response.json())
     .then(data => {
         if (data.success) {
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             Swal.fire("Error", mensaje, "error");
         }
-    })
+    })//Mensaje de error.
     .catch(error => {
         console.error("Error:", error);
         Swal.fire("Error", "Ocurrió un error al procesar la solicitud", "error");

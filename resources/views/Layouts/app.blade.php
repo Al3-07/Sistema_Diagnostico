@@ -508,7 +508,6 @@
                     <h5 class="username">{{ Auth::user()->name }}</h5>
                     <small class="user-role">{{ Auth::user()->role }}</small>
                 </div>
-                <i class="fas fa-chevron-right arrow-icon"></i>
             </div>
 
 

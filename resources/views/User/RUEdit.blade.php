@@ -106,13 +106,13 @@
     }
 
     .btn-custom {
-        background-color: #0ea5e9;
-        border-color: #0ea5e9;
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
+        border-color: #16a34a;
         color: #344767;  /* Color de texto igual al botón Regresar */
     }
 
     .btn-custom:hover {
-        background-color: #0284c7;
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
         border-color: #0284c7;
         color: white;  /* Cambia a blanco cuando se pasa el cursor */
         box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
@@ -121,7 +121,7 @@
 
     /* Estilo para botón btn-custom cuando está deshabilitado */
     .btn-custom:disabled {
-        background-color: #0ea5e9 !important; /* Mismo azul */
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
         border-color: #0ea5e9 !important;
         color: #344767 !important; /* Mismo color de texto */
         opacity: 1 !important;

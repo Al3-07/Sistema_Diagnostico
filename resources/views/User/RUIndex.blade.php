@@ -7,7 +7,7 @@
 <!--asegura que los mensajes de SweetAlert se muestren -->
 @include('sweetalert::alert')
 
-<style>
+<style>/*Vista con CSS incluye el texto, titulos, botones, colores.*/
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #f8f9fa;
@@ -34,7 +34,7 @@
         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
     }
     
-    /* Estilos para la tarjeta principal */
+    /* Estilos para la tarjeta principal. */
     .card {
         border-radius: 12px;
         border: none;
@@ -48,28 +48,28 @@
     }
 
     .card-header {
-        background-color: rgb(226, 228, 230); /* Color gris claro */
+        background-color: rgb(226, 228, 230); /* Color gris claro. */
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         padding: 1.5rem;
     }
 
-    /* Botones de acción */
+    /* Botones de acción. */
     .btn-sm {
         padding: 0.25rem 0.5rem;
         border-radius: 6px;
         font-size: 0.75rem;
     }
     
-    /* Estilos para los botones */
+    /* Estilos para los botones. */
     .btn-info {
         background-color: #0ea5e9;
         border-color: #0ea5e9;
         color: white;
         font-weight: 500;
         transition: all 0.3s ease;
-        padding: 0.1rem 0.2rem; /* Ajuste moderado en el tamaño */
-        font-size: 0.95rem; /* Ligera mejora en el tamaño del texto */
-        border-radius: 8px; /* Mantiene bordes suaves */
+        padding: 0.1rem 0.2rem; /* Ajuste moderado en el tamaño. */
+        font-size: 0.95rem; /* Ligera mejora en el tamaño del texto. */
+        border-radius: 8px; /* Mantiene bordes suaves. */
     }
     
     .btn-info:hover {
@@ -79,7 +79,7 @@
         transform: translateY(-2px);
     }
     
-    /* Estilos para la tabla */
+    /* Estilos para la tabla. */
     .table {
         width: 100%;
         border-collapse: separate;
@@ -107,20 +107,20 @@
         background-color: #f1f5f9;
     }
     
-    /* Reducir ancho de la columna "Acciones" */
+    /* Reducir ancho de la columna "Acciones". */
     .acciones-columna {
         width: 120px;
         text-align: center;
     }
 
-    /* Centrar los botones en la columna de acciones */
+    /* Centrar los botones en la columna de acciones. */
     .acciones-columna div {
         display: flex;
         justify-content: center;
         gap: 5px;
     }
     
-    /* Paginación */
+    /* Paginación. */
     .dataTables_paginate .paginate_button {
         border-radius: 6px !important;
         margin: 0 2px !important;
@@ -144,7 +144,7 @@
     }
 
     .btn-nuevo-registro {
-        background-color: #0ea5e9;
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
         border-color: #0ea5e9;
         color: white;
         font-weight: 600;
@@ -157,48 +157,48 @@
     }
 
     .btn-nuevo-registro:hover {
-        background-color: #0284c7;
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
         border-color: #0284c7;
         box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
         transform: translateY(-2px);
     }
 
-    /* Efecto al pasar el cursor sobre los botones */
+    /* Efecto al pasar el cursor sobre los botones. */
     .btn-info:hover, .btn-warning:hover, .btn-danger:hover {
         color: #000000; /* El texto se pondrá negro */
         transform: translateY(-2px); /* Los botones se moverán ligeramente hacia arriba */
         box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3); /* Agrega una sombra para resaltar */
     }
 
-    /* Estilos para el botón de "editar" */
+    /* Estilos para el botón de "editar". */
     .btn-warning {
         background-color: #f59e0b;
         border-color: #f59e0b;
         color: white;
     }
 
-    /* Estilos para el botón de "eliminar" */
+    /* Estilos para el botón de "eliminar". */
     .btn-danger {
         background-color: #ef4444;
         border-color: #ef4444;
         color: white;
     }
 </style>
-
+<!-- Vista de los datos de Registro. -->
 <div class="container mt-5">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h2 class="card-title mb-0">
                 <b>Registro de Usuarios</b>
             </h2>
-           
+           <!-- Muestar el rol de cad usuario ingresado y el botón de nuevo registro. -->
             @if(Auth::user()->role !== 'Visualizador')
                 <a href="{{ route('user.create') }}" class="btn btn-info btn-sm btn-nuevo-registro">
                     <i class="fas fa-plus"></i> Nuevo Registro
                 </a>
             @endif
         </div>
-        <div class="card-body p-4">
+        <div class="card-body p-4"> <!-- Muestra de tabla con sus respectivos campos. -->
             <div class="table-responsive mt-3">
                 <table class="table table-bordered table-striped w-100" id="users-table">
                     <thead>
@@ -215,7 +215,7 @@
         </div>
     </div>
 </div>
-
+<!-- El diseño de la tabla con sus respectivos campos. -->
 <script type="text/javascript">
     $(document).ready(function () {
         $('#users-table').DataTable({
@@ -226,7 +226,7 @@
                 {data: 'name', name: 'name'},
                 {data: 'role', name: 'role'},
                 {data: 'acciones', name: 'acciones', orderable: false, searchable: false, className: 'acciones-columna'}
-            ],
+            ],//Traductor de cada una de las palabras que se generen en inglés.
             language: {
                 "processing": "Procesando...",
                 "lengthMenu": "Mostrar _MENU_ registros",

@@ -4,7 +4,7 @@
 @include('sweetalert::alert')  
 
 <style>     
-    /*Imagen inicial y la imagen final*/
+    /*Imagen inicial y la imagen final.*/
     .img-preview {         
         display: none;         
         max-width: 200px;         
@@ -12,7 +12,7 @@
         border-radius: 8px;         
         box-shadow: 0 0 5px rgba(0,0,0,0.2);     
     }     
-    /* LIGHTBOX elegante y sin distorsión */
+    /* LIGHTBOX elegante y sin distorsión. */
     #lightbox {
         display: none;
         position: fixed;
@@ -40,11 +40,11 @@
         font-weight: bold;     
     }     
     .btn-custom {         
-        background-color: #007bff;         
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
         color: white;     
     }     
     .btn-custom:hover {         
-        background-color: #0069d9;         
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
         color: white;     
     }     
     .card {         
@@ -142,6 +142,7 @@
             @enderror         
         </div>          
 
+        <!-- Muestra las imagen inicial. -->
         <div class="mb-3">             
             <label for="foto_antes" class="form-label">Imagen Inicial</label>             
             <input type="file" id="foto_antes" name="foto_antes" accept="image/*" class="form-control @error('foto_antes') is-invalid @enderror" onchange="previewImage(this, 'previewAntes')">             
@@ -163,7 +164,7 @@
         </div>     
     </form> 
 </div>  
-<!-- Contenedor invisible para ampliar image inicialn -->
+<!-- Contenedor invisible para ampliar image inicial. -->
 <div id="lightbox" onclick="this.classList.remove('show')">
     <img src="" alt="Imagen ampliada">
 </div>
