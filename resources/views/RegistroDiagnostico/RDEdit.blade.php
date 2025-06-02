@@ -103,14 +103,12 @@
     }
 
     .btn-info {
-        background-color: #3b82f6;
-        border-color: #3b82f6;
+        background-color: #28a745;
         color: white;
     }
 
     .btn-info:hover {
-        background-color: #2563eb;
-        border-color: #2563eb;
+        background-color: rgb(122, 224, 146);
     }
 
     .btn-group {

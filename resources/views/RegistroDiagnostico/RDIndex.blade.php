@@ -31,21 +31,19 @@
     }
 
     .btn-nuevo-registro {
-        background-color: #0ea5e9;
-        border-color: #0ea5e9;
+        background-color: #28a745;
         color: white;
         font-weight: 600;
         transition: all 0.3s ease;
         padding: 0.75rem 1rem;
         font-size: 0.80rem;
-        border-radius: 8px;
         min-width: 160px;
         text-align: center;
+        
     }
 
     .btn-nuevo-registro:hover {
-        background-color: #0284c7;
-        border-color: #0284c7;
+        background-color:rgb(122, 224, 146);
         box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
         transform: translateY(-2px);
     }
@@ -133,6 +131,12 @@
         font-size: 13px;
         max-width: 200px;
     }
+    table.dataTable th.acciones-columna {
+    width: 400px !important;
+    max-width: 400px !important;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
 </style>
 
 

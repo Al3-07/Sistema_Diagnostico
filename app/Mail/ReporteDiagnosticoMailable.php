@@ -23,14 +23,14 @@ class ReporteDiagnosticoMailable extends Mailable
 
     public function build()
     {
-        // Generar el PDF desde la vista Blade
+        // Generar el PDF desde la vista Blade.
         $pdf = Pdf::loadView('emails.reporte_diagnostico', ['registro' => $this->registro]);
 
         return $this->subject('Reporte de Diagnóstico')
             ->attachData($pdf->output(), 'reporte_diagnostico.pdf', [
                 'mime' => 'application/pdf',
             ])
-            ->view('mail.reporte_diagnostico', ['registro' => $this->registro]); // si deseas incluirlo en el cuerpo
+            ->view('mail.reporte_diagnostico', ['registro' => $this->registro]); // Si deseas incluirlo en el cuerpo.
     }
     public function envelope(): Envelope
     {

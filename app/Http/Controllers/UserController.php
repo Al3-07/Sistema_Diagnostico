@@ -15,7 +15,7 @@ class UserController extends Controller
         $this->middleware('auth'); 
     }
 
-    // Método para obtener los registros en formato JSON
+    // Método para obtener los registros en formato JSON.
     public function getTableData(){
         $usuarios = User::select('id', 'name', 'role', 'is_protected')->get();
         return datatables()->of($usuarios)
@@ -32,7 +32,7 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('User.RUCreate'); // Vista para formulario de nuevo usuario
+        return view('User.RUCreate'); // Vista para formulario de nuevo usuario.
     }
 
     public function store(Request $request){
@@ -54,11 +54,11 @@ class UserController extends Controller
             if ($validator->fails()) {
                 return response()->json([
                     'success' => false,
-                    'errors' => $validator->errors() // Retorna errores correctamente
+                    'errors' => $validator->errors() // Retorna errores correctamente.
                 ], 422);
             }
     
-            // Guardar usuario correctamente
+            // Guardar usuario correctamente.
             $user = new User();
             $user->name = $request->nombre;
             $user->role = $request->rol;
@@ -77,14 +77,14 @@ class UserController extends Controller
     public function edit($id)
     {
         try {
-            $usuario = User::findOrFail($id); // Buscar usuario por ID
+            $usuario = User::findOrFail($id); // Buscar usuario por ID.
             
-            // Verificar si el usuario está protegido
+            // Verificar si el usuario está protegido.
             if ($usuario->is_protected) {
                 return redirect()->route('user.index')->with('error', 'Este usuario administrador está protegido y no puede ser editado');
             }
 
-            return view('User.RUEdit', compact('usuario')); // Retornar la vista con el usuario
+            return view('User.RUEdit', compact('usuario')); // Retornar la vista con el usuario.
         } catch (\Exception $e) {
             \Log::error('Error al buscar usuario: ' . $e->getMessage());
 
@@ -96,7 +96,7 @@ class UserController extends Controller
         try {
             $usuario = User::findOrFail($id);
             
-            // Verificar si el usuario está protegido
+            // Verificar si el usuario está protegido.
             if ($usuario->is_protected) {
                 return response()->json([
                     'success' => false,
@@ -104,7 +104,7 @@ class UserController extends Controller
                 ], 403);
             }
     
-            // Validación de datos
+            // Validación de datos.
             $validator = Validator::make($request->all(), [
                 'nombre' => 'required|string|max:255|unique:users,name,' . $id,
                 'rol' => 'required|string|in:Administrador,Usuario,Visualizador',
@@ -124,44 +124,44 @@ class UserController extends Controller
                 ], 422);
             }
     
-            // Verificar cambios específicos
+            // Verificar cambios específicos.
             $nombreActual = $usuario->name;
             $rolActual = $usuario->role;
             
             $nombreNuevo = $request->nombre;
             $rolNuevo = $request->rol;
     
-            // Bandera para detectar cambios
+            // Bandera para detectar cambios.
             $seActualizo = false;
     
-            // Verificar cambio de nombre
+            // Verificar cambio de nombre.
             if ($nombreActual !== $nombreNuevo) {
                 $usuario->name = $nombreNuevo;
                 $seActualizo = true;
             }
     
-            // Verificar cambio de rol
+            // Verificar cambio de rol.
             if ($rolActual !== $rolNuevo) {
                 $usuario->role = $rolNuevo;
                 $seActualizo = true;
             }
     
-            // Verificar cambio de contraseña
+            // Verificar cambio de contraseña.
             if ($request->filled('password')) {
                 $usuario->password = Hash::make($request->password);
                 $seActualizo = true;
             }
     
-            // Si no hubo cambios, devolver respuesta específica
+            // Si no hubo cambios, devolver respuesta específica.
             if (!$seActualizo) {
                 return response()->json([
                     'success' => true,
-                    'noChanges' => true,  // Nuevo campo para indicar que no hubo cambios
+                    'noChanges' => true,  // Nuevo campo para indicar que no hubo cambios.
                     'message' => 'No se detectaron modificaciones'
                 ]);
             }
     
-            // Guardar cambios
+            // Guardar cambios.
             $usuario->save();
     
             return response()->json([
@@ -183,7 +183,7 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($id);
             
-            // Verificar si el usuario está protegido
+            // Verificar si el usuario está protegido.
             if ($user->is_protected) {
                 return response()->json([
                     'success' => false,
@@ -191,12 +191,12 @@ class UserController extends Controller
                 ], 403);
             }
 
-            // Verifica si el usuario tiene rol de administrador
+            // Verifica si el usuario tiene rol de administrador.
             if ($user->role === 'Administrador') {
                 // Cuenta cuántos administradores hay
                 $totalAdmins = User::where('role', 'Administrador')->count();
 
-                // Si solo hay un administrador, no permitir eliminarlo
+                // Si solo hay un administrador, no permitir eliminarlo.
                 if ($totalAdmins <= 1) {
                     return response()->json([
                         'success' => false,
@@ -205,7 +205,7 @@ class UserController extends Controller
                 }
             }
 
-            // Elimina el usuario si no es el último administrador
+            // Elimina el usuario si no es el último administrador.
             $user->delete();
 
             return response()->json([
