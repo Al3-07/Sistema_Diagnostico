@@ -10,7 +10,7 @@ class RegistroRolController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth'); // Asegura que solo usuarios autenticados accedan
+        $this->middleware('auth'); // Asegura que solo usuarios autenticados accedan.
     }
 
     public function getData(Request $request)
@@ -28,7 +28,7 @@ class RegistroRolController extends Controller
 
             return datatables()->of($roles)
                 ->addColumn('acciones', function ($role) {
-                    // Cambiamos el ícono a pleca y X
+                    // Cambiamos el ícono a pleca y X.
                     $btnClass = $role->estado ? 'btn-danger' : 'btn-success';
                     $iconClass = $role->estado ? 'fa-times text-white' : 'fa-check text-white';
 
@@ -49,7 +49,7 @@ class RegistroRolController extends Controller
         return view('RegistroRol.RRCreate');
     }
 
-    // 🛠 MÉTODO PARA MOSTRAR FORMULARIO DE EDICIÓN
+    // Método para mostrar formulario de edición.
         public function edit($id)
     {
         if (!Auth::user() || Auth::user()->role !== 'Administrador') {
@@ -66,28 +66,28 @@ class RegistroRolController extends Controller
     }
 
 
-    //  MÉTODO PARA ACTUALIZAR EL ROL
+    //  Método para actualizar rol.
     public function update(Request $request, $id)
     {
-            // Validar que el campo estado venga correctamente
+            // Validar que el campo estado venga correctamente.
             $request->validate([
                 'estado' => 'required|in:1,0',
                 'rol' => 'required|string'
             ]);
         
-            // Buscar el registro en RegistroRol, no en User
+            // Buscar el registro en RegistroRol, no en User.
             $role = RegistroRol::find($id);
         
             if (!$role) {
                 return back()->withErrors(['error' => 'Rol no encontrado.']);
             }
         
-            // Si es el rol "Administrador" y se intenta desactivar, prevenirlo
+            // Si es el rol "Administrador" y se intenta desactivar, prevenirlo.
             if ($role->rol === 'Administrador' && $request->estado == 0) {
                 return back()->withErrors(['error' => 'No puedes desactivar al Administrador.']);
             }
         
-            // Actualizar los valores correctamente en la tabla registro_rols
+            // Actualizar los valores correctamente en la tabla registro_rols.
             $role->update([
                 'rol' => $request->rol,
                 'estado' => $request->estado
@@ -100,7 +100,7 @@ class RegistroRolController extends Controller
     {
         $role = RegistroRol::findOrFail($request->id);
 
-        // Prevenir desactivar el Administrador
+        // Prevenir desactivar el Administrador.
         if ($role->rol === 'Administrador' && $request->estado == 0) {
             return response()->json(['success' => false, 'message' => 'No puedes desactivar al Administrador.']);
         }

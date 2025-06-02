@@ -18,7 +18,7 @@ class RegistroDiagnosticoController extends Controller
         $this->middleware('auth');
     }
 
-    // Mostrar listado
+    // Mostrar listado.
     public function index()
     {
         $registros = RegistroDiagnostico::paginate(10);
@@ -46,9 +46,28 @@ class RegistroDiagnosticoController extends Controller
             return '';
         })
         ->addColumn('acciones', function($registro) {
+             // Botones de acción
             $ver = '<a href="'.route('registrodiagnostico.show', $registro->id).'" class="btn btn-info btn-sm" title="Ver"><i class="fas fa-eye"></i></a>';
             $editar = '<a href="'.route('registrodiagnostico.edit', $registro->id).'" class="btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a>';
- $eliminar = '<button type="button" class="btn btn-danger btn-sm delete-btn" data-id="'.$registro->id.'" title="Eliminar diagnóstico"><i class="fas fa-trash"></i></button>';            return '<div style="display:flex; gap:5px; justify-content:center;">'.$ver.' '.$editar.' '.$eliminar.'</div>';
+            $eliminar = '<button type="button" class="btn btn-danger btn-sm delete-btn" data-id="'.$registro->id.'" title="Eliminar diagnóstico"><i class="fas fa-trash"></i></button>';          
+            
+         // Asunto común
+             $asunto = 'Reporte de Diagnóstico - Equipo: ' . $registro->equipo;
+         // Gmail
+            $gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1'
+        . '&su=' . urlencode($asunto);
+         // Yahoo Mail
+             $yahooUrl = 'http://compose.mail.yahoo.com/?'
+        . '&subj=' . urlencode($asunto);
+        // Outlook (Outlook.com / Office 365 Web)
+            $outlookUrl = 'https://outlook.live.com/mail/deeplink/compose?'
+        . '&subject=' . urlencode($asunto);
+        // Botones de correo
+             $gmailButton = '<a href="'.$gmailUrl.'" class="btn btn-danger btn-sm" target="_blank" title="Enviar por Gmail"><i class="fab fa-google"></i></a>';
+             $yahooButton = '<a href="'.$yahooUrl.'" class="btn btn-primary btn-sm" target="_blank" title="Enviar por Yahoo"><i class="fab fa-yahoo"></i></a>';
+             $outlookButton = '<a href="'.$outlookUrl.'" class="btn btn-info btn-sm" target="_blank" title="Enviar por Outlook"><i class="fab fa-microsoft"></i></a>';
+              // Combina todos los botones
+    return '<div style="display:flex; gap:5px; justify-content:center;">'.$ver.' '.$editar.' '.$eliminar.' '.$gmailButton.' '.$yahooButton.' '.$outlookButton.'</div>';
         })
         ->rawColumns(['acciones']) // permite renderizar el HTML
         ->make(true);
@@ -57,7 +76,7 @@ class RegistroDiagnosticoController extends Controller
 
 
 
-    // Mostrar formulario de creación
+    // Mostrar formulario de creación.
     public function create()
     {
         return view('RegistroDiagnostico.RDCreate');
@@ -112,14 +131,14 @@ public function store(Request $request)
             $imagen->move(public_path('img/post'), $nombre);
             $registro->foto_despues = $nombre;
         }
-    // Actualizar firmas si se envían nuevas
+    // Actualizar firmas si se envían nuevas.
 if ($request->has('firma_realizado')) {
     $firma1 = str_replace('data:image/png;base64,', '', $request->firma_realizado);
     $firma1 = str_replace(' ', '+', $firma1);
     $firma1 = 'firma_realizado_' . time() . '.png';
     Storage::disk('public')->put('firmas/' . $firma1, base64_decode($firma1));
 
-    // Eliminar firma antigua si existe
+    // Eliminar firma antigua si existe.
     if ($registro->firma_realizado && Storage::disk('public')->exists('firmas/' . $registro->firma_realizado)) {
         Storage::disk('public')->delete('firmas/' . $registro->firma_realizado);
     }
@@ -160,14 +179,14 @@ if ($request->has('firma_recibido')) {
 }
 
 
-    // Mostrar formulario de edición
+    // Mostrar formulario de edición.
     public function edit($id)
     {
         $registro = RegistroDiagnostico::findOrFail($id);
         return view('RegistroDiagnostico.RDEdit', compact('registro'));
     }
 
-    // Actualizar diagnóstico
+    // Actualizar diagnóstico.
    public function update(Request $request, $id)
 {
     $request->validate([
@@ -201,9 +220,9 @@ if ($request->has('firma_recibido')) {
     $registro->descripcion = $request->descripcion;
      $registro->estado = $request->estado;
 
-    // Subir y reemplazar foto_antes si se envía una nueva imagen
+    // Subir y reemplazar foto_antes si se envía una nueva imagen.
     if ($request->hasFile('foto_antes')) {
-        // Opcional: eliminar imagen anterior si existe
+        // Opcional: eliminar imagen anterior si existe.
         if ($registro->foto_antes && file_exists(public_path('img/post/' . $registro->foto_antes))) {
             unlink(public_path('img/post/' . $registro->foto_antes));
         }
@@ -212,9 +231,9 @@ if ($request->has('firma_recibido')) {
         $imagen->move(public_path('img/post'), $nombre);
         $registro->foto_antes = $nombre;
     }
-    // Subir y reemplazar foto_despues si se envía una nueva imagen
+    // Subir y reemplazar foto_despues si se envía una nueva imagen.
     if ($request->hasFile('foto_despues')) {
-        // Opcional: eliminar imagen anterior si existe
+        // Opcional: eliminar imagen anterior si existe.
         if ($registro->foto_despues && file_exists(public_path('img/post/' . $registro->foto_despues))) {
             unlink(public_path('img/post/' . $registro->foto_despues));
         }
@@ -223,14 +242,14 @@ if ($request->has('firma_recibido')) {
         $imagen->move(public_path('img/post'), $nombre);
         $registro->foto_despues = $nombre;
     }
-    // Actualizar firmas si se envían nuevas
+    // Actualizar firmas si se envían nuevas.
 if ($request->has('firma_realizado')) {
     $firma1 = str_replace('data:image/png;base64,', '', $request->firma_realizado);
     $firma1 = str_replace(' ', '+', $firma1);
     $firma1 = 'firma_realizado_' . time() . '.png';
     Storage::disk('public')->put('firmas/' . $firma1, base64_decode($firma1));
 
-    // Eliminar firma antigua si existe
+    // Eliminar firma antigua si existe.
     if ($registro->firma_realizado && Storage::disk('public')->exists('firmas/' . $registro->firma_realizado)) {
         Storage::disk('public')->delete('firmas/' . $registro->firma_realizado);
     }
@@ -271,7 +290,7 @@ if ($request->has('firma_recibido')) {
     return redirect()->route('registrodiagnostico.index')->with('success', 'Diagnóstico actualizado correctamente.');
 }
 
-    // Eliminar diagnóstico
+    // Eliminar diagnóstico.
     public function destroy($id)
     {
         try {
@@ -286,7 +305,7 @@ if ($request->has('firma_recibido')) {
         }
     }
 
-    // Mostrar detalles del diagnóstico
+    // Mostrar detalles del diagnóstico.
     public function show($id)
     {
         $registro = RegistroDiagnostico::findOrFail($id);
@@ -296,7 +315,7 @@ if ($request->has('firma_recibido')) {
 {
     $registro = RegistroDiagnostico::findOrFail($id);
 
-    // Función para convertir la firma a base64
+    // Función para convertir la firma a base64.
     function firmaBase64($ruta) {
         $path = public_path('storage/' . $ruta);
         if (file_exists($path)) {
@@ -359,7 +378,7 @@ public function enviarReporte($id)
 
     $correos = ['sandyrodriguezmejia@gmail.com', 'correo2@ejemplo.com'];
 
-    // Crear el mailer temporal con esta configuración
+    // Crear el mailer temporal con esta configuración.
     $mailManager = app()->make(MailManager::class);
     $customMailer = $mailManager->mailer('custom', fn () => $smtpConfig);
 
@@ -386,11 +405,11 @@ public function guardarFirma(Request $request, $id)
         return back()->with('error','No se pudo guardar la firma.');
     }
 
-    // quitar cabecera data URI y espacios
+    // Quitar cabecera data URI y espacios.
     $base64 = preg_replace('/^data:image\/\w+;base64,/', '', $base64);
     $base64 = str_replace(' ', '+', $base64);
 
-    $nombre = 'firma_'.$tipo.'_'.'.png';   // punto antes de png
+    $nombre = 'firma_'.$tipo.'_'.'.png';   // Punto antes de png.
     Storage::disk('public')->put('firmas/'.$nombre, base64_decode($base64));
     \Log::info('Guardé firma: '.$nombre);
 

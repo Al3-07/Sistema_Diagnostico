@@ -109,8 +109,8 @@
     }
 
     .btn-info:hover {
-        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
-        border-color: #16a34a;
+        background-color: #2563eb;
+        border-color: #2563eb;
     }
 
     .btn-group {

@@ -210,7 +210,7 @@
         }
         setInterval(changeBackground, 4000);
 
-        // 👉 Toggle Sidebar con animación (menu desplegable con animación).
+        //  Toggle Sidebar con animación (menu desplegable con animación).
         const sidebar = document.querySelector('.sidebar');
         const toggleBtn = document.getElementById('toggleSidebar');
         const content = document.querySelector('.content');
@@ -222,7 +222,7 @@
                 toggleBtn.classList.toggle('hidden');
 
                 if (!isHidden) {
-                    // 💡 Reinicia animación cuando se vuelve a mostrar.
+                    //  Reinicia animación cuando se vuelve a mostrar.
                     sidebar.classList.remove('slide-animation'); 
                     void sidebar.offsetWidth; 
                     sidebar.classList.add('slide-animation');

@@ -535,9 +535,6 @@
 <a href="#" id="sidebarLogout" class="modern-nav-link text-start">
     <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
 </a>
-
-
-            
             <!-- Formulario oculto para logout -->
             <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
                 @csrf
@@ -591,7 +588,7 @@
                 const content = document.querySelector('.content');
                 const links = document.querySelectorAll('.nav-link');
 
-                // Función para actualizar la visibilidad de los botones de toggle
+                // Función para actualizar la visibilidad de los botones de toggle.
                 function updateToggleVisibility(isSidebarHidden) {
                     if (isSidebarHidden) {
                         toggleBtn.classList.add('hidden');
@@ -602,23 +599,23 @@
                     }
                 }
 
-                // FORZAR MENÚ OCULTO DESPUÉS DE INICIAR SESIÓN
-                // Verificar si venimos directamente del login
+                // Forzar menú oculto después de iniciar sesión.
+                // Verificar si venimos directamente del login.
                 const isPostLogin = sessionStorage.getItem('isPostLogin') === 'true';
                 const pathname = window.location.pathname;
                 
-                // Si acabamos de iniciar sesión O estamos en la página principal después del login
+                // Si acabamos de iniciar sesión O estamos en la página principal después del .
                 if (isPostLogin || pathname === '/home' || pathname === '/' || pathname === '/menu') {
-                    // Forzar menú oculto
+                    // Forzar menú oculto.
                     sidebar.classList.add('hidden');
                     content.classList.add('full-width');
                     localStorage.setItem('sidebarHidden', 'true');
                     updateToggleVisibility(true);
                     
-                    // Limpiar bandera de post-login
+                    // Limpiar bandera de post-login.
                     sessionStorage.removeItem('isPostLogin');
                 } else {
-                    // Para otras navegaciones, usar la preferencia guardada
+                    // Para otras navegaciones, usar la preferencia guardada.
                     const shouldHideSidebar = localStorage.getItem('sidebarHidden') === 'true';
                     
                     if (shouldHideSidebar) {
@@ -632,17 +629,17 @@
                     }
                 }
 
-                // Mostrar u ocultar el menú lateral (y guardar el estado)
+                // Mostrar u ocultar el menú lateral (y guardar el estado).
                 toggleBtn.addEventListener('click', function () {
                     sidebar.classList.add('hidden');
                     content.classList.add('full-width');
                     
-                    // Guardar el estado actual
+                    // Guardar el estado actual.
                     localStorage.setItem('sidebarHidden', 'true');
                     updateToggleVisibility(true);
                 });
                 
-                // Botón flotante para mostrar el menú cuando está oculto
+                // Botón flotante para mostrar el menú cuando está oculto.
                 floatingToggle.addEventListener('click', function() {
                     sidebar.classList.remove('hidden');
                     content.classList.remove('full-width');
@@ -651,7 +648,7 @@
                     updateToggleVisibility(false);
                 });
                 
-                // Botón móvil para mostrar el menú
+                // Botón móvil para mostrar el menú.
                 mobileToggle.addEventListener('click', function() {
                     sidebar.classList.remove('hidden');
                     content.classList.remove('full-width');
@@ -659,7 +656,7 @@
                     updateToggleVisibility(false);
                 });
 
-                // Ocultar el menú cuando se selecciona una opción en pantallas pequeñas
+                // Ocultar el menú cuando se selecciona una opción en pantallas pequeñas.
                /* links.forEach(link => {
                     link.addEventListener('click', function () {
                         if (window.innerWidth <= 768) {
@@ -675,7 +672,7 @@
 
                 links.forEach(link => {
                     link.addEventListener('click', function () {
-                        // Cierra el sidebar en cualquier resolución
+                        // Cierra el sidebar en cualquier resolución.
                         sidebar.classList.add('hidden');
                         content.classList.add('full-width');
                         localStorage.setItem('sidebarHidden', 'true');
@@ -684,7 +681,7 @@
                 });
 
 
-                // Ajustes especiales para móviles
+                // Ajustes especiales para móviles.
                 if (window.innerWidth <= 768) {
                     sidebar.classList.add('hidden');
                     content.classList.add('full-width');
@@ -692,7 +689,7 @@
                     updateToggleVisibility(true);
                 }
                 
-                // Marcar el enlace activo según la URL actual
+                // Marcar el enlace activo según la URL actual.
                 if (typeof $ !== 'undefined') {
                     const currentUrl = window.location.href;
                     $('.nav-link').each(function() {
@@ -702,8 +699,8 @@
                         }
                     });
                     
-                    // Cerrar sesión y resetear preferencias
-                    // Cierre desde el botón del sidebar
+                    // Cerrar sesión y resetear preferencias.
+                    // Cierre desde el botón del sidebar-}.
 $('#sidebarLogout').on('click', function(e) {
     e.preventDefault();
 
