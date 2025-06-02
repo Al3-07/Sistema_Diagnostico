@@ -31,7 +31,7 @@
     }
 
     .btn-nuevo-registro {
-        background-color: #0ea5e9;
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
         border-color: #0ea5e9;
         color: white;
         font-weight: 600;
@@ -44,7 +44,7 @@
     }
 
     .btn-nuevo-registro:hover {
-        background-color: #0284c7;
+        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
         border-color: #0284c7;
         box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
         transform: translateY(-2px);
