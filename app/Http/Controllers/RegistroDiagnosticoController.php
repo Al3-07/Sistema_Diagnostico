@@ -378,41 +378,33 @@ public function enviarReporte($id)
 public function guardarFirma(Request $request, $id)
 {
     $registro = RegistroDiagnostico::findOrFail($id);
-    $mensaje = '';
 
-    $firmaBase64 = $request->input('firma');
-    $tipo = $request->input('tipo_firma'); // recibido desde el formulario
+    $base64 = $request->input('firma');
+    $tipo   = $request->input('tipo_firma');   // realizado / supervisado / recibido
 
-    if ($firmaBase64 && $tipo) {
-        $firmaBase64 = str_replace('data:image/png;base64,', '', $firmaBase64);
-        $firmaBase64 = str_replace(' ', '+', $firmaBase64);
-        $nombre = 'firma_' . $tipo   . 'png';
-
-        Storage::disk('public')->put('firmas/' . $nombre, base64_decode($firmaBase64));
-
-        switch ($tipo) {
-            case 'realizado':
-                $registro->firma_realizado = 'firmas/' . $nombre;
-                $mensaje = 'Firma de realizado guardada correctamente.';
-                break;
-            case 'supervisado':
-                $registro->firma_supervisado = 'firmas/' . $nombre;
-                $mensaje = 'Firma de supervisado guardada correctamente.';
-                break;
-            case 'recibido':
-                $registro->firma_recibido = 'firmas/' . $nombre;
-                $mensaje = 'Firma de recibido guardada correctamente.';
-                break;
-            default:
-                return redirect()->back()->with('error', 'Tipo de firma no válido.');
-        }
-
-        $registro->save();
-        return redirect()->back()->with('success', $mensaje);
+    if (!$base64 || !$tipo) {
+        return back()->with('error','No se pudo guardar la firma.');
     }
 
-    return redirect()->back()->with('error', 'No se pudo guardar la firma.');
+    // quitar cabecera data URI y espacios
+    $base64 = preg_replace('/^data:image\/\w+;base64,/', '', $base64);
+    $base64 = str_replace(' ', '+', $base64);
+
+    $nombre = 'firma_'.$tipo.'_'.'.png';   // punto antes de png
+    Storage::disk('public')->put('firmas/'.$nombre, base64_decode($base64));
+    \Log::info('Guardé firma: '.$nombre);
+
+    switch ($tipo) {
+        case 'realizado':   $registro->firma_realizado  = 'firmas/'.$nombre; break;
+        case 'supervisado': $registro->firma_supervisado = 'firmas/'.$nombre; break;
+        case 'recibido':    $registro->firma_recibido    = 'firmas/'.$nombre; break;
+        default:            return back()->with('error','Tipo de firma no válido.');
+    }
+
+    $registro->save();
+    return back()->with('success','Firma guardada correctamente.');
 }
+
 
 
 

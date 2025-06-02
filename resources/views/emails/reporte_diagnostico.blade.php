@@ -101,21 +101,23 @@
     @else
         <p><strong>Imagen de membrete no encontrada.</strong></p>
     @endif
-    
-    @php
-    function firmaBase64($ruta) {
-        $path = public_path('storage/' . $ruta);
-        if (file_exists($path)) {
-            $type = pathinfo($path, PATHINFO_EXTENSION);
-            $data = file_get_contents($path);
-            return 'data:image/' . $type . ';base64,' . base64_encode($data);
-        }
-        return null;
-    }
 
-    $firmaRealizado = $registro->firma_realizado ? firmaBase64($registro->firma_realizado) : null;
-    $firmaSupervisado = $registro->firma_supervisado ? firmaBase64($registro->firma_supervisado) : null;
-    $firmaRecibido = $registro->firma_recibido ? firmaBase64($registro->firma_recibido) : null;
+      @php
+
+function firmaBase64($ruta){
+    if(!$ruta || !Storage::disk('public')->exists($ruta)) return null;
+    $data = Storage::disk('public')->get($ruta);
+    return 'data:image/png;base64,'.base64_encode($data);
+}
+
+$firmaRealizado  = firmaBase64($registro->firma_realizado);
+$firmaSupervisado= firmaBase64($registro->firma_supervisado);
+$firmaRecibido   = firmaBase64($registro->firma_recibido);
+
+// Agregar logs para verificar las firmas
+\Log::info('Firma Realizado: ' . $firmaRealizado);
+\Log::info('Firma Supervisado: ' . $firmaSupervisado);
+\Log::info('Firma Recibido: ' . $firmaRecibido);
 @endphp
 
 </header>
