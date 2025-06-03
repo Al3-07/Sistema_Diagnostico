@@ -8,8 +8,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Mail\MailManager;
 use Barryvdh\DomPDF\Facade\Pdf; 
-
-
+use Illuminate\Support\Facades\DB;
 
 class RegistroDiagnosticoController extends Controller
 {
@@ -79,7 +78,9 @@ class RegistroDiagnosticoController extends Controller
     // Mostrar formulario de creación.
     public function create()
     {
-        return view('RegistroDiagnostico.RDCreate');
+        $ultimoId = DB::table('Equipo')->max('id') ?? 0;
+        $correlativo = 'REP-' . str_pad($ultimoId + 1, 4, '0', STR_PAD_LEFT);
+        return view('RegistroDiagnostico.RDCreate' , compact('correlativo'));
     }
 
     // Guardar nuevo diagnóstico
@@ -183,7 +184,8 @@ if ($request->has('firma_recibido')) {
     public function edit($id)
     {
         $registro = RegistroDiagnostico::findOrFail($id);
-        return view('RegistroDiagnostico.RDEdit', compact('registro'));
+        $correlativo = 'REP-' . str_pad($registro->id, 4, '0', STR_PAD_LEFT);
+        return view('RegistroDiagnostico.RDEdit', compact('registro', 'correlativo'));
     }
 
     // Actualizar diagnóstico.
@@ -308,8 +310,9 @@ if ($request->has('firma_recibido')) {
     // Mostrar detalles del diagnóstico.
     public function show($id)
     {
-        $registro = RegistroDiagnostico::findOrFail($id);
-        return view('RegistroDiagnostico.RDShow', compact('registro'));
+         $registro = RegistroDiagnostico::findOrFail($id);
+         $correlativo = 'REP-' . str_pad($registro->id, 4, '0', STR_PAD_LEFT);
+        return view('RegistroDiagnostico.RDShow', compact('registro','correlativo'));
     }
     public function generarPDF($id)
 {
@@ -375,8 +378,6 @@ public function enviarReporte($id)
 {
     $registro = \App\Models\RegistroDiagnostico::findOrFail($id);
     $pdf = Pdf::loadView('emails.reporte_diagnostico', compact('registro'));
-
-    $correos = ['sandyrodriguezmejia@gmail.com', 'correo2@ejemplo.com'];
 
     // Crear el mailer temporal con esta configuración.
     $mailManager = app()->make(MailManager::class);

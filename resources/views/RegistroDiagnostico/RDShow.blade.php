@@ -200,6 +200,9 @@
         </div>
         
         <div class="detail-container">
+            <h5 class="text-end mb-4" style="color: #00b894;">
+                 <strong>Correlativo:</strong> {{ $correlativo }}
+                </h5>
             <!-- Campos del dispositivo.  -->
             <div class="row">
                 <div class="col-md-6">

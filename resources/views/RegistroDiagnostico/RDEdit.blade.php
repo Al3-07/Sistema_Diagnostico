@@ -154,7 +154,9 @@
 <!-- Vista de editor . -->
 <div class="container-custom">
     <h3 class="title">Editar Diagnóstico de Equipo</h3>
-
+    <h5 class="text-end mb-4" style="color: #00b894;">
+    <strong>Correlativo:</strong> {{ $correlativo }}
+    </h5>
     <form method="post" action="{{ route('registrodiagnostico.update', $registro->id) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -221,26 +223,69 @@
         </div>
 <!-- Muestra las imagenes tanto iniciales y finales. -->
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+    <!-- Imagen Inicial -->
     <div class="form-group" style="flex: 1; min-width: 200px;">
         <label for="foto_antes">Imagen Inicial</label>
-        <input type="file" name="foto_antes" id="foto_antes" accept="image/*" class="form-control @error('foto_antes') is-invalid @enderror" onchange="previewImage(this, 'previewAntes')">
+        
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <!-- Input normal visible -->
+            <input type="file" name="foto_antes" id="foto_antes" accept="image/*" capture="environment"
+                   class="form-control @error('foto_antes') is-invalid @enderror"
+                   onchange="previewImage(this, 'previewAntes')" style="flex: 1;">
+
+            <!-- Botón para abrir cámara -->
+            <button type="button" class="btn btn-success" onclick="document.getElementById('foto_antes_camera').click()">
+             📷 Tomar Foto
+            </button>
+
+        </div>
+
+        <!-- Input oculto para cámara -->
+        <input type="file" name="foto_antes_camera" id="foto_antes_camera" accept="image/*" capture="environment"
+               onchange="previewImage(this, 'previewAntes')" style="display:none;">
+
         @error('foto_antes') <span class="text-danger">{{ $message }}</span> @enderror
-        <img id="previewAntes" src="{{ $registro->foto_antes ? asset('img/post/' . $registro->foto_antes) : '' }}"
+
+        <!-- Imagen preview -->
+        <img id="previewAntes"
+             src="{{ $registro->foto_antes ? asset('img/post/' . $registro->foto_antes) : '' }}"
              class="img-preview"
              style="{{ $registro->foto_antes ? '' : 'display:none;' }}"
-             onclick="openLightbox('{{ asset('img/post/' . $registro->foto_antes) }}')">
+             onclick="openLightbox(this.src)">
     </div>
 
+    <!-- Imagen Final -->
     <div class="form-group" style="flex: 1; min-width: 200px;">
         <label for="foto_despues">Imagen Final</label>
-        <input type="file" name="foto_despues" id="foto_despues" accept="image/*" class="form-control @error('foto_despues') is-invalid @enderror" onchange="previewImage(this, 'previewDespues')">
+        
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <!-- Input normal visible -->
+            <input type="file" name="foto_despues" id="foto_despues" accept="image/*" capture="environment"
+                   class="form-control @error('foto_despues') is-invalid @enderror"
+                   onchange="previewImage(this, 'previewDespues')" style="flex: 1;">
+
+            <!-- Botón para abrir cámara -->
+            <button type="button" class="btn btn-success" onclick="document.getElementById('foto_despues_camera').click()">
+             📷 Tomar Foto
+            </button>
+
+        </div>
+
+        <!-- Input oculto para cámara -->
+        <input type="file" name="foto_despues_camera" id="foto_despues_camera" accept="image/*" capture="environment"
+               onchange="previewImage(this, 'previewDespues')" style="display:none;">
+
         @error('foto_despues') <span class="text-danger">{{ $message }}</span> @enderror
-        <img id="previewDespues" src="{{ $registro->foto_despues ? asset('img/post/' . $registro->foto_despues) : '' }}"
+
+        <!-- Imagen preview -->
+        <img id="previewDespues"
+             src="{{ $registro->foto_despues ? asset('img/post/' . $registro->foto_despues) : '' }}"
              class="img-preview"
              style="{{ $registro->foto_despues ? '' : 'display:none;' }}"
-             onclick="openLightbox('{{ asset('img/post/' . $registro->foto_despues) }}')">
+             onclick="openLightbox(this.src)">
     </div>
 </div>
+
 <!-- Boton para actualizar. -->
         <div class="btn-group">
             <a href="{{ route('registrodiagnostico.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left me-1"></i> Regresar</a>

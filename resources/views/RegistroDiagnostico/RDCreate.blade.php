@@ -64,6 +64,10 @@
     Informe de Diagnóstico Técnico
     <span style="display: block; width: 60px; height: 3px; background-color: #00b894; margin: 8px auto 0; border-radius: 2px;"></span>
 </h2>
+<h5 class="text-end mb-4" style="color: #00b894;">
+    <strong>Correlativo:</strong> {{ $correlativo }}
+</h5>
+
         <div class="row mb-3">          <!-- Datos de la Vista.-->           
             <div class="col-md-6">                 
                 <label for="empresa" class="form-label">Empresa</label>                 
@@ -142,18 +146,40 @@
             @enderror         
         </div>          
 
-        <!-- Muestra las imagen inicial. -->
-        <div class="mb-3">             
-            <label for="foto_antes" class="form-label">Imagen Inicial</label>             
-            <input type="file" id="foto_antes" name="foto_antes" accept="image/*" class="form-control @error('foto_antes') is-invalid @enderror" onchange="previewImage(this, 'previewAntes')">             
-            @error('foto_antes')                 
-                <span class="text-danger">{{ $message }}</span>             
-            @enderror             
-            <img id="previewAntes" class="img-preview" alt="Vista previa foto antes" onclick="openLightbox(this.src)">
-        </div>  
+      <!-- Muestra la imagen inicial -->
+<div class="form-group" style="flex: 1; min-width: 200px;">
+    <label for="foto_antes" class="form-label">Imagen Inicial</label>
 
+    <div style="display: flex; gap: 10px; align-items: center;">
+        <!-- Input normal visible para seleccionar archivo -->
+        <input type="file" name="foto_antes" id="foto_antes"
+               accept="image/*"
+               class="form-control @error('foto_antes') is-invalid @enderror"
+               onchange="previewImage(this, 'previewAntes')"
+               style="flex: 1;">
+
+        <!-- Botón para abrir cámara -->
+        <button type="button" class="btn" style="background-color:rgb(90, 196, 90); color: white;" onclick="document.getElementById('foto_antes_camera').click()">
+            📷 Tomar Foto
+        </button>
+
+    </div>
+    <!-- Input oculto para abrir cámara -->
+    <input type="file" name="foto_antes_camera" id="foto_antes_camera"
+           accept="image/*"
+           capture="environment"
+           onchange="previewImage(this, 'previewAntes')"
+           style="display:none;">
+
+    @error('foto_antes') <span class="text-danger">{{ $message }}</span> @enderror
+
+    <!-- Imagen preview sin src al inicio -->
+    <img id="previewAntes" 
+         class="img-preview"
+         style="display:none;"
+         onclick="openLightbox(this.src)">
+</div>
         <!-- Botones de Regresar y Guardar.-->
-
         <div class="d-flex justify-content-end gap-3">             
             <a href="{{ route('registrodiagnostico.index') }}" class="btn btn-secondary">                 
                 <i class="fas fa-arrow-left me-1"></i> Regresar             
