@@ -71,7 +71,7 @@
         'TAOSA' => 'membrete_TAOSA.png',
         'TAOPAR' => 'membrete_TAOSA.png',
         'TAOGUALI' => 'membrete_TAOSA.png',
-         'TAOCA' => 'membrete_TAOSA.png',
+        'TAOCA' => 'membrete_TAOSA.png',
         'TAOMOR' => 'membrete_TAOSA.png',
         'Clasificadora y Exportadora de Tabaco' => 'membrete_clasi.png',
         'La Vega' => 'membrete_plasencia.png',
@@ -81,9 +81,16 @@
         'Escogida3' => 'membrete_plasencia.png',
     ];
 
-    $imagen = $membretes[$registro->empresa] ?? 'default.png';
+    // Obtener el nombre de la empresa relacionado
+    $empresaNombre = $registro->empresa ? $registro->empresa->empresa : null;
+
+    // Buscar membrete según el nombre de la empresa o asignar 'default.png'
+    $imagen = $membretes[$empresaNombre] ?? 'default.png';
+
+    // Ruta completa de la imagen
     $rutaImagen = public_path('img/membretes/' . $imagen);
 
+    // Generar base64 si la imagen existe
     if (file_exists($rutaImagen)) {
         $type = pathinfo($rutaImagen, PATHINFO_EXTENSION);
         $data = file_get_contents($rutaImagen);
@@ -91,11 +98,10 @@
     } else {
         $base64 = '';
     }
-
-    $correlativo = 'REP-' . str_pad($registro->id ?? 0, 4, '0', STR_PAD_LEFT);
 @endphp
 
-<header>
+{{-- Luego en el HTML del PDF --}}
+
     @if ($base64)
         <img src="{{ $base64 }}" alt="Membrete {{ $registro->empresa }}">
     @else

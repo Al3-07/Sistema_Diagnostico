@@ -7,6 +7,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegistroRolController;
 use App\Http\Controllers\UserController;
 use App\Models\RegistroDiagnostico;
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\BitacoraController;
+
 
 
 Route::middleware(['auth'])->group(function () {
@@ -18,6 +21,11 @@ Route::middleware(['auth'])->group(function () {
 Route::get('registrodiagnostico/table', [RegistroDiagnosticoController::class, 'getTableData'])->name('registrodiagnostico.table');
     
 Route::resource('registrodiagnostico', RegistroDiagnosticoController::class);
+//RUTA DE EMPRESA
+Route::resource('empresa', EmpresaController::class);
+Route::resource('bitacoras', BitacoraController::class);
+Route::get('bitacora', [BitacoraController::class, 'bitacoraIndex'])->name('bitacora.index');
+
 
 
 /*Route::get('registrodiagnostico/table', [RegistroDiagnosticoController::class, 'getTableData'])->name('registrodiagnostico.table');

@@ -70,24 +70,16 @@
 
         <div class="row mb-3">          <!-- Datos de la Vista.-->           
             <div class="col-md-6">                 
-                <label for="empresa" class="form-label">Empresa</label>                 
-                <select id="empresa" name="empresa" class="form-control @error('empresa') is-invalid @enderror">                     
-                    <option value="">Seleccione una opción</option>                     
-                    <option value="TAOSA">TAOSA</option>                     
-                    <option value="TAOPAR">TAOPAR</option>                     
-                    <option value="Clasificadora y Exportadora de Tabaco">Clasificadora y Exportadora de Tabaco</option>                     
-                    <option value="TAOMOR">TAOMOR</option>                     
-                    <option value="TAOCA">TAOCA</option>                     
-                    <option value="TAOGUALI">TAOGUALI</option>                     
-                    <option value="La Vega">La Vega</option>                     
-                    <option value="Calpule">Calpule</option>                     
-                    <option value="San Luis">San Luis</option>                     
-                    <option value="Azacualpa">Azacualpa</option>                     
-                    <option value="Escogida3">Escogida3</option>                 
-                </select>                 
-                @error('empresa')                     
-                    <span class="text-danger">{{ $message }}</span>                       
-                @enderror             
+                <label for="empresa_id" class="form-label">Empresa</label>
+                    <select id="empresa_id" name="empresa_id" class="form-control @error('empresa_id') is-invalid @enderror">
+                     <option value="">Seleccione una opción</option>
+                     @foreach ($empresas as $empresa)
+                      <option value="{{ $empresa->id }}">{{ $empresa->empresa }}</option>
+                    @endforeach
+                    </select>
+                    @error('empresa_id')
+                     <span class="text-danger">{{ $message }}</span>
+                    @enderror
             </div>             
             <div class="col-md-6">                 
                 <label for="equipo" class="form-label">Hardware</label>                 

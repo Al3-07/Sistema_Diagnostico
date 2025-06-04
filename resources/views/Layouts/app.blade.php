@@ -481,6 +481,7 @@
     color: #22c55e;
 }
 
+
     </style>
 
     @yield('styles')
@@ -510,16 +511,20 @@
                 </div>
             </div>
 
-
-
            <a href="{{ route('menu') }}" class="modern-nav-link {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}">
     <i class="fas fa-home"></i> Inicio
 </a>
 
 <div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
 
+<a href="{{ route('empresa.index') }}" class="modern-nav-link {{ request()->routeIs('empresa.*') ? 'active' : '' }}">
+   <i class="fa-solid fa-building"></i>Registro de Empresa
+</a>
 <a href="{{ route('registrodiagnostico.index') }}" class="modern-nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
     <i class="fas fa-desktop"></i> Registro de Diagnóstico
+</a>
+<a href="{{ route('bitacora.index') }}" class="modern-nav-link {{ request()->routeIs('bitacoras.*') ? 'active' : '' }}">
+   <i class="fa-solid fa-file"></i>Bitácora
 </a>
 
 @if(Auth::user()->role === 'Administrador')

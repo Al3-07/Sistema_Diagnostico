@@ -162,14 +162,18 @@
         @method('PUT')
 <!-- Muestra su select para seleccionar cada una de las empresas. -->
         <div class="form-group">
-            <label for="empresa">Empresa</label>
-            <select id="empresa" name="empresa" class="form-control @error('empresa') is-invalid @enderror">
-                <option value="">Seleccione una opción</option>
-                @foreach (['TAOSA', 'TAOPAR', 'Clasificadora y Exportadora de Tabaco', 'TAOMOR', 'TAOCA', 'TAOGUALI', 'La Vega', 'Calpule', 'San Luis', 'Azacualpa', 'Escogida3'] as $empresa)
-                    <option value="{{ $empresa }}" {{ old('empresa', $registro->empresa) == $empresa ? 'selected' : '' }}>{{ $empresa }}</option>
-                @endforeach
-            </select>
-            @error('empresa') <span class="text-danger">{{ $message }}</span> @enderror
+            <label for="empresa_id" class="form-label">Empresa</label>
+                <select id="empresa_id" name="empresa_id" class="form-control @error('empresa_id') is-invalid @enderror">
+                 <option value="">Seleccione una opción</option>
+                     @foreach ($empresas as $empresa)
+                   <option value="{{ $empresa->id }}" {{ $empresa->id == old('empresa_id', $registro->empresa_id) ? 'selected' : '' }}>
+                     {{ $empresa->empresa }}
+                     </option>
+                     @endforeach
+                </select>
+                     @error('empresa_id')
+                        <span class="text-danger">{{ $message }}</span>
+                      @enderror
         </div>
 <!-- Muestra en texto los datos ya creados.. -->
         <div class="form-row">

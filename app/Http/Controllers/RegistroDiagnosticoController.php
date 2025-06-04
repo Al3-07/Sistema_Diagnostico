@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Mail\MailManager;
 use Barryvdh\DomPDF\Facade\Pdf; 
 use Illuminate\Support\Facades\DB;
+use App\Models\Empresa;
+use Illuminate\Support\Facades\Auth;
+use App\Helpers\BitacoraHelper;
+
 
 class RegistroDiagnosticoController extends Controller
 {
@@ -27,9 +31,11 @@ class RegistroDiagnosticoController extends Controller
     // Obtener datos para datatable
   public function getTableData()
 {
-    $registros = RegistroDiagnostico::select(['id', 'empresa','equipo', 'modelo', 'marca', 'serie', 'descripcion', 'estado', 'foto_antes', 'foto_despues']);
-
+   $registros = RegistroDiagnostico::with('empresa')->select(['id', 'equipo', 'modelo', 'marca', 'serie', 'descripcion', 'estado', 'foto_antes', 'foto_despues', 'empresa_id']);
     return datatables()->of($registros)
+        ->addColumn('empresa', function ($registro) {
+            return $registro->empresa->empresa ?? 'Sin empresa';
+        })
         ->addColumn('foto_antes_img', function($registro) {
             if ($registro->foto_antes) {
                 $url = asset('img/post/' . $registro->foto_antes);
@@ -47,6 +53,8 @@ class RegistroDiagnosticoController extends Controller
         ->addColumn('acciones', function($registro) {
              // Botones de acción
             $ver = '<a href="'.route('registrodiagnostico.show', $registro->id).'" class="btn btn-info btn-sm" title="Ver"><i class="fas fa-eye"></i></a>';
+            // Solo mostrar si NO es 'Visualizador'
+    if (Auth::user()->role !== 'Visualizador') {
             $editar = '<a href="'.route('registrodiagnostico.edit', $registro->id).'" class="btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a>';
             $eliminar = '<button type="button" class="btn btn-danger btn-sm delete-btn" data-id="'.$registro->id.'" title="Eliminar diagnóstico"><i class="fas fa-trash"></i></button>';          
             
@@ -67,7 +75,11 @@ class RegistroDiagnosticoController extends Controller
              $outlookButton = '<a href="'.$outlookUrl.'" class="btn btn-info btn-sm" target="_blank" title="Enviar por Outlook"><i class="fab fa-microsoft"></i></a>';
               // Combina todos los botones
     return '<div style="display:flex; gap:5px; justify-content:center;">'.$ver.' '.$editar.' '.$eliminar.' '.$gmailButton.' '.$yahooButton.' '.$outlookButton.'</div>';
-        })
+        }
+
+    // Si es Visualizador, solo mostrar botón de ver
+    return $ver;
+})
         ->rawColumns(['acciones']) // permite renderizar el HTML
         ->make(true);
 }
@@ -78,16 +90,16 @@ class RegistroDiagnosticoController extends Controller
     // Mostrar formulario de creación.
     public function create()
     {
+        $empresas = Empresa::all(); // Trae todas las empresas
         $ultimoId = DB::table('Equipo')->max('id') ?? 0;
         $correlativo = 'REP-' . str_pad($ultimoId + 1, 4, '0', STR_PAD_LEFT);
-        return view('RegistroDiagnostico.RDCreate' , compact('correlativo'));
+        return view('RegistroDiagnostico.RDCreate' , compact('empresas','correlativo'));
     }
 
     // Guardar nuevo diagnóstico
 public function store(Request $request)
 {
     $request->validate([
-         'empresa' => 'required|string|max:150',
             'equipo' => 'required|string|max:50',
             'modelo' => 'required|string|max:30',
             'marca' => 'required|string|max:30',
@@ -96,6 +108,7 @@ public function store(Request $request)
             'estado' => 'required|string',
             'foto_antes' => 'required|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
             'foto_despues' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
+            'empresa_id' => 'required|exists:empresa,id',
             ], [
         'foto_antes.required' => 'La imagen es obligatoria.',
         'foto_antes.file' => 'La imagen debe ser un archivo válido.',
@@ -109,14 +122,13 @@ public function store(Request $request)
 
         ]);
     $registro = new RegistroDiagnostico;
-    $registro->empresa = $request->empresa;
     $registro->equipo = $request->equipo;
     $registro->modelo = $request->modelo;
     $registro->marca = $request->marca;
     $registro->serie = $request->serie;
     $registro->descripcion = $request->descripcion;
      $registro->estado = $request->estado;
-
+     $registro->empresa_id = $request->empresa_id;
 
     // Subir foto_antes
         if ($request->hasFile('foto_antes')) {
@@ -175,6 +187,8 @@ if ($request->has('firma_recibido')) {
 
 
     $registro->save();
+    // Aquí llamas al helper para registrar la bitácora
+    BitacoraHelper::registrar('Creó diagnóstico',  ' Equipo: ' . $registro->equipo);
 
     return redirect()->route('registrodiagnostico.index')->with('success', 'Diagnóstico guardado correctamente');
 }
@@ -183,16 +197,16 @@ if ($request->has('firma_recibido')) {
     // Mostrar formulario de edición.
     public function edit($id)
     {
+         $empresas = Empresa::all(); // Trae todas las empresas
         $registro = RegistroDiagnostico::findOrFail($id);
         $correlativo = 'REP-' . str_pad($registro->id, 4, '0', STR_PAD_LEFT);
-        return view('RegistroDiagnostico.RDEdit', compact('registro', 'correlativo'));
+        return view('RegistroDiagnostico.RDEdit', compact('registro', 'correlativo','empresas'));
     }
 
     // Actualizar diagnóstico.
    public function update(Request $request, $id)
 {
     $request->validate([
-        'empresa' => 'required|string|max:150',
         'equipo' => 'required|string|max:50',
         'modelo' => 'required|string|max:30',
         'marca' => 'required|string|max:30',
@@ -214,7 +228,6 @@ if ($request->has('firma_recibido')) {
     ]);
 
     $registro = RegistroDiagnostico::findOrFail($id);
-     $registro->empresa = $request->empresa;
     $registro->equipo = $request->equipo;
     $registro->modelo = $request->modelo;
     $registro->marca = $request->marca;
@@ -288,6 +301,8 @@ if ($request->has('firma_recibido')) {
 
 
     $registro->save();
+    // Registro en bitácora
+    BitacoraHelper::registrar('Editó diagnóstico','Equipo: ' . $registro->equipo);
 
     return redirect()->route('registrodiagnostico.index')->with('success', 'Diagnóstico actualizado correctamente.');
 }
@@ -299,6 +314,8 @@ if ($request->has('firma_recibido')) {
             $registro = RegistroDiagnostico::findOrFail($id);
 
             $registro->delete();
+              // Registro en bitácora
+    BitacoraHelper::registrar('Eliminó diagnóstico','Equipo: ' . $registro->equipo);
 
             return response()->json(['success' => true, 'message' => 'Registro eliminado correctamente']);
         } catch (\Exception $e) {
@@ -310,7 +327,7 @@ if ($request->has('firma_recibido')) {
     // Mostrar detalles del diagnóstico.
     public function show($id)
     {
-         $registro = RegistroDiagnostico::findOrFail($id);
+        $registro = RegistroDiagnostico::with('empresa')->findOrFail($id);
          $correlativo = 'REP-' . str_pad($registro->id, 4, '0', STR_PAD_LEFT);
         return view('RegistroDiagnostico.RDShow', compact('registro','correlativo'));
     }
@@ -347,7 +364,10 @@ if ($request->has('firma_recibido')) {
 
 public function descargarPDF($id)
 {
-    $registro = RegistroDiagnostico::findOrFail($id);
+   // Cargar registro con la relación empresa
+    $registro = RegistroDiagnostico::with('empresa')->findOrFail($id);
+    // Generar correlativo para este registro
+    $correlativo = 'REP-' . str_pad($registro->id, 4, '0', STR_PAD_LEFT);
 
     function firmaBase64($ruta) {
         $path = public_path('storage/' . $ruta);
@@ -365,6 +385,7 @@ public function descargarPDF($id)
 
     $pdf = Pdf::loadView('emails.reporte_diagnostico', [
         'registro' => $registro,
+        'correlativo' => $correlativo, 
         'firmaRealizado' => $firmaRealizado,
         'firmaSupervisado' => $firmaSupervisado,
         'firmaRecibido' => $firmaRecibido,

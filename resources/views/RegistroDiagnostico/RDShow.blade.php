@@ -207,9 +207,11 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="detail-item">
-                        <span class="detail-label text-uppercase text-muted small">Empresa:</span>
-                        <span class="detail-value font-weight-medium">{{ $registro->empresa }}</span>
-                    </div>
+                    <span class="detail-label text-uppercase text-muted small">Empresa:</span>
+                    <span class="detail-value font-weight-medium">
+                    {{ $registro->empresa ? $registro->empresa->empresa : 'Sin empresa' }}
+                    </span>
+                </div>
                     <div class="detail-item">
                         <span class="detail-label text-uppercase text-muted small">Equipo:</span>
                         <span class="detail-value font-weight-medium">{{ $registro->equipo }}</span>
@@ -276,6 +278,7 @@
             
             <!-- Apartado de las Firmas. -->
             <div class="action-buttons">
+                 @if(Auth::user()->role !== 'Visualizador')  <!--Solo usuarios que no son 'Visualizador' pueden ver el botón  -->
                 <button onclick="abrirModalFirma('realizado')" class="btn btn-primary btn-action">
                     <i class="fas fa-check-circle"></i>Firmar Realizado
                 </button>
@@ -287,7 +290,7 @@
                 <button onclick="abrirModalFirma('recibido')" class="btn btn-success btn-action">
                     <i class="fas fa-user-check"></i>Firmar Recibido
                 </button>
-                
+                @endif
                 <!-- Boton de PDF. -->
                 <a href="{{ route('diagnostico.descargar', $registro->id) }}" class="btn btn-info btn-action" target="_blank">
                     <i class="fas fa-file-pdf"></i>Descargar PDF
