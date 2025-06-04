@@ -57,44 +57,34 @@
         }
 
         /* Estilo del sidebar */
-        .sidebar {
-            width: 280px;
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            background: white;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
-            padding: 0 0 20px 0;
-            color: #344767;
-            transition: all 0.3s;
-            z-index: 1000;
-        }
+       /* Sidebar fijo y negro */
+    .sidebar {
+        width: 280px;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background: black;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+        padding: 0 0 20px 0;
+        color: white;
+        z-index: 1000;
+    }
 
-        .sidebar .brand-container {
-            padding: 15px;
-            margin-bottom: 20px;
-            background-color: transparent;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
+    /* Marca o título */
+    .sidebar .brand-container {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-        .sidebar .brand {
-            color: #344767;
-            font-weight: 900;
-            font-size: 1.4rem;
-            text-align: center;
-            display: block;
-            width: 100%;
-            transition: all 0.3s ease;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 0 15px;
-            margin-left: -1px; /* Igual que el activo */
-            text-decoration: none;
-        }
+    .sidebar .brand {
+        color: white;
+        font-weight: 900;
+        font-size: 1.4rem;
+        display: block;
+        text-decoration: none;
+    }
 
         .sidebar .brand.active {
             background: #0ea5e9;
@@ -104,17 +94,19 @@
         }
 
         /* Estilos generales para todos los enlaces del menú (como estaban antes) */
-        .sidebar .nav-link {
-            color: #333;
-            background: transparent;
-            font-weight: 600;
-            border-radius: 5px;
-            margin-bottom: 5px;
-            padding: 10px 15px;
-            display: block;
-            transition: all 0.3s ease;
-        }
-
+        /* Botones del menú */
+    .sidebar .nav-link {
+        color: white;
+        background-color:rgb(0, 0, 0); /* tono gris oscuro por defecto */
+        padding: 12px 20px;
+        margin: 10px 15px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+    }
         /* Solo para el enlace del menú principal */
         .sidebar .nav-link.menu-principal {
             background: #0ea5e9;
@@ -128,7 +120,7 @@
 
         .sidebar .user-info {
             padding: 15px;
-            background-color: #f8f9fa;
+            background-color:rgb(0, 0, 0);
             margin: 0 15px 20px 15px;
             border-radius: 10px;
             display: flex;
@@ -164,35 +156,23 @@
             margin-left: auto;
         }
 
-        .sidebar .nav-link {
-            color: #64748b;
-            font-weight: 500;
-            padding: 12px 15px;
-            margin: 0 15px 5px 15px;
-            display: flex;
-            align-items: center;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
         .sidebar .nav-link i {
-            margin-right: 12px;
-            width: 20px;
-            text-align: center;
-        }
+        margin-right: 12px;
+        width: 20px;
+        text-align: center;
+    }
 
-        .sidebar .nav-link:hover {
-            background: #f1f5f9;
-            color: #0ea5e9;
-            transform: translateX(5px);
-        }
+    /* Hover: un poco más claro */
+    .sidebar .nav-link:hover {
+        background-color:rgb(141, 129, 129);
+    }
 
-        .sidebar .nav-link.active {
-            background: #0ea5e9;
-            color: white;
-            font-weight: 600;
-        }
+    /* Solo el botón activo (seleccionado): blanco con texto negro */
+    .sidebar .nav-link.active {
+        background-color: white;
+        color: black;
+        font-weight: bold;
+    }
 
         /* Contenido principal */
         .content {
@@ -205,7 +185,7 @@
         #toggleSidebar {
             cursor: pointer;
             font-size: 2.2rem; 
-           color: #22c55e; /* Verde moderno */ 
+           color:rgb(0, 0, 0); /* Verde moderno */ 
             font-weight: 700;
             background-color: #f8fafc;
             width: 50px;
@@ -224,7 +204,7 @@
 
         #toggleSidebar:hover {
             transform: scale(1.1);
-            color: #16a34a; /* Verde un poco más oscuro al hacer hover */
+            color:rgb(25, 192, 226); /* Verde un poco más oscuro al hacer hover */
         }
 
         /* Estilos para el botón cuando el sidebar está oculto */
@@ -284,7 +264,7 @@
             bottom: 20px;
             right: 20px;
             z-index: 1002;
-            color: #16a34a; /* Verde un poco más oscuro al hacer hover */
+            color:rgb(0, 0, 0); /* Verde un poco más oscuro al hacer hover */
              color: white;
             width: 50px;
             height: 50px;
@@ -307,7 +287,7 @@
             position: fixed;
             top: 20px;
             left: 20px;
-            background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
+            background-color:rgb(0, 0, 0); /* Verde un poco más oscuro al hacer hover */;
             color: white;
             width: 50px;
             height: 50px;
@@ -381,14 +361,14 @@
 
 .avatar-icon {
     font-size: 28px;
-    color: #22c55e; /* Verde moderno */
+    color: #ffffff; /* Verde moderno */
 }
 
 .user-details .username {
     margin: 0;
     font-size: 16px;
     font-weight: 600;
-    color:rgb(126, 117, 117);
+    color: #ffffff;
 }
 
 .user-details .user-role {
@@ -438,7 +418,7 @@
 }
 
 .modern-nav-link.active {
-    background: rgba(255, 255, 255, 0.2); /* un poco más sólido */
+    background: rgba(182, 163, 163, 0.2); /* un poco más sólido */
     color: rgb(70, 70, 70); /* texto oscuro y visible */
     font-weight: 600;
     border-left: 4px solid #22c55e;
@@ -456,11 +436,11 @@
     flex-direction: column;
     align-items: center;
     padding: 16px;
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(183, 170, 170, 0.08);
     border-radius: 12px;
     margin: 40px 0 20px 0; /* ↑ esto lo baja */
-    color: rgb(90, 90, 90);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    color: white;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
     text-align: center;
     transition: transform 0.2s ease;
 }
@@ -473,12 +453,12 @@
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 6px;
-    color: rgb(60, 60, 60);
+    color: rgb(249, 245, 245);
 }
 
 .brand-modern-title .icon-below {
     font-size: 24px;
-    color: #22c55e;
+    color: #ffffff;
 }
 
 
@@ -511,15 +491,14 @@
                 </div>
             </div>
 
+
+
            <a href="{{ route('menu') }}" class="modern-nav-link {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}">
     <i class="fas fa-home"></i> Inicio
 </a>
 
 <div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
 
-<a href="{{ route('empresa.index') }}" class="modern-nav-link {{ request()->routeIs('empresa.*') ? 'active' : '' }}">
-   <i class="fa-solid fa-building"></i>Registro de Empresa
-</a>
 <a href="{{ route('registrodiagnostico.index') }}" class="modern-nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
     <i class="fas fa-desktop"></i> Registro de Diagnóstico
 </a>
@@ -529,15 +508,15 @@
 
 @if(Auth::user()->role === 'Administrador')
 <div class="sidebar-section-title">ADMINISTRACIÓN DE USUARIO</div>
-<a href="{{ route('user.index') }}" class="modern-nav-link {{ request()->routeIs('user.*') ? 'active' : '' }}">
+<a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user.*') ? 'active' : '' }}">
     <i class="fas fa-user"></i> Registro de Usuario
 </a>
-<a href="{{ route('registrorol.table') }}" class="modern-nav-link {{ request()->routeIs('registrorol.*') ? 'active' : '' }}">
+<a href="{{ route('registrorol.table') }}" class="nav-link {{ request()->routeIs('registrorol.*') ? 'active' : '' }}">
     <i class="fas fa-users"></i> Gestor de Roles
 </a>
 @endif
 
-<a href="#" id="sidebarLogout" class="modern-nav-link text-start">
+<a href="#" id="sidebarLogout" class="nav-link text-start">
     <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
 </a>
             <!-- Formulario oculto para logout -->
