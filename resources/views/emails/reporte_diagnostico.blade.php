@@ -67,25 +67,19 @@
 </head>
 <body>
 @php
-    $membretes = [
-        'TAOSA' => 'membrete_TAOSA.png',
-        'TAOPAR' => 'membrete_TAOSA.png',
-        'TAOGUALI' => 'membrete_TAOSA.png',
-        'TAOCA' => 'membrete_TAOSA.png',
-        'TAOMOR' => 'membrete_TAOSA.png',
-        'Clasificadora y Exportadora de Tabaco' => 'membrete_clasi.png',
-        'La Vega' => 'membrete_plasencia.png',
-        'Calpule' => 'membrete_plasencia.png',
-        'San Luis' => 'membrete_plasencia.png',
-        'Azacualpa' => 'membrete_plasencia.png',
-        'Escogida3' => 'membrete_plasencia.png',
-    ];
-
     // Obtener el nombre de la empresa relacionado
-    $empresaNombre = $registro->empresa ? $registro->empresa->empresa : null;
+    $empresaNombre = $registro->empresa ? $registro->empresa->empresa : '';
 
-    // Buscar membrete según el nombre de la empresa o asignar 'default.png'
-    $imagen = $membretes[$empresaNombre] ?? 'default.png';
+    // Determinar la imagen del membrete según el inicio del nombre
+    if (Str::startsWith($empresaNombre, 'TAO')) {
+        $imagen = 'membrete_TAOSA.png';
+    } elseif (Str::startsWith($empresaNombre, 'Clasi')) {
+        $imagen = 'membrete_clasi.png';
+    } elseif (Str::startsWith($empresaNombre, 'Plasen')) {
+        $imagen = 'membrete_plasencia.png';
+    } else {
+        $imagen = 'default.png';
+    }
 
     // Ruta completa de la imagen
     $rutaImagen = public_path('img/membretes/' . $imagen);
@@ -99,6 +93,7 @@
         $base64 = '';
     }
 @endphp
+
 
 {{-- Luego en el HTML del PDF --}}
 

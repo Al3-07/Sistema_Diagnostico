@@ -498,7 +498,9 @@
 </a>
 
 <div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
-
+<a href="{{ route('empresa.index') }}" class="modern-nav-link {{ request()->routeIs('empresa.*') ? 'active' : '' }}">
+   <i class="fa-solid fa-building"></i>Registro de Empresa
+</a>
 <a href="{{ route('registrodiagnostico.index') }}" class="modern-nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
     <i class="fas fa-desktop"></i> Registro de Diagnóstico
 </a>

@@ -234,6 +234,7 @@ if ($request->has('firma_recibido')) {
     $registro->serie = $request->serie;
     $registro->descripcion = $request->descripcion;
      $registro->estado = $request->estado;
+     $registro->empresa_id = $request->empresa_id;
 
     // Subir y reemplazar foto_antes si se envía una nueva imagen.
     if ($request->hasFile('foto_antes')) {
@@ -297,9 +298,6 @@ if ($request->has('firma_recibido')) {
 
     $registro->firma_recibido = $firma3;
 }
-
-
-
     $registro->save();
     // Registro en bitácora
     BitacoraHelper::registrar('Editó diagnóstico','Equipo: ' . $registro->equipo);
