@@ -292,6 +292,9 @@
                 </button>
                 @endif
                 <!-- Boton de PDF. -->
+                  <a href="{{ route('registro_diagnostico.pdf', $registro->id) }}" target="_blank" class="btn btn-primary">
+                 <i class="fas fa-file-pdf"></i>Vista previa PDF
+                 </a>
                 <a href="{{ route('diagnostico.descargar', $registro->id) }}" class="btn btn-info btn-action" target="_blank">
                     <i class="fas fa-file-pdf"></i>Descargar PDF
                 </a>

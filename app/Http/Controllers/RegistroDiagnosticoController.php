@@ -348,14 +348,16 @@ if ($request->has('firma_recibido')) {
     $firmaSupervisado = $registro->firma_supervisado ? firmaBase64($registro->firma_supervisado) : null;
     $firmaRecibido = $registro->firma_recibido ? firmaBase64($registro->firma_recibido) : null;
 
-    $pdf = PDF::loadView('diagnostico.pdf', [
+    $pdf = PDF::loadView('emails.reporte_diagnostico', [
         'registro' => $registro,
         'firmaRealizado' => $firmaRealizado,
         'firmaSupervisado' => $firmaSupervisado,
         'firmaRecibido' => $firmaRecibido,
+        'correlativo' => 'PREV-' . $id
     ]);
 
-    return $pdf->download('diagnostico.pdf');
+   return $pdf->stream('diagnostico.pdf');
+
 }
 
 
@@ -443,9 +445,6 @@ public function guardarFirma(Request $request, $id)
     $registro->save();
     return back()->with('success','Firma guardada correctamente.');
 }
-
-
-
 
 
 }

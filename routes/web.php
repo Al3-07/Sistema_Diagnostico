@@ -23,9 +23,9 @@ Route::get('registrodiagnostico/table', [RegistroDiagnosticoController::class, '
 Route::resource('registrodiagnostico', RegistroDiagnosticoController::class);
 //RUTA DE EMPRESA
 Route::resource('empresa', EmpresaController::class);
+//RUTA PARA BITACORA
 Route::resource('bitacoras', BitacoraController::class);
 Route::get('bitacora', [BitacoraController::class, 'bitacoraIndex'])->name('bitacora.index');
-
 
 
 /*Route::get('registrodiagnostico/table', [RegistroDiagnosticoController::class, 'getTableData'])->name('registrodiagnostico.table');
@@ -52,6 +52,8 @@ Route::delete('/registrodiagnostico/{id}', [RegistroDiagnosticoController::class
 Route::get('registrodiagnostico/{id}', [RegistroDiagnosticoController::class, 'show'])->name('registrodiagnostico.show');
 Route::resource('registrodiagnostico', RegistroDiagnosticoController::class);
 */
+
+//RUTAS PDF
 Route::get('/registro-diagnostico/{id}/pdf', [App\Http\Controllers\RegistroDiagnosticoController::class, 'generarPDF'])->name('registro_diagnostico.pdf');
 Route::get('/diagnostico/{id}/vista-previa', function ($id) {
     $registro = RegistroDiagnostico::findOrFail($id);
