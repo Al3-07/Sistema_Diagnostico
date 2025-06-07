@@ -133,28 +133,47 @@
         font-size: 13px;
         max-width: 200px;
     }
-    table.dataTable th.acciones-columna {
-    width: 400px !important;
-    max-width: 400px !important;
-    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    table.dataTable th.acciones-columna,
+table.dataTable td.acciones-columna {
+    width: 200px !important;
+    max-width: 200px !important;
+    min-width: 200px;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle;
 }
+
+@media (max-width: 768px) {
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card-header .btn-nuevo-registro {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+    }
+}
+
 
 </style>
 
     <!-- Vista los datos del Index. -->
 <div class="container mt-5">
-    <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-    <h2 class="card-title mb-0">
-        <b>Diagnósticos de Equipos</b>
-    </h2>
-    <!-- Muestra nombre del usuario y boton de nuevo registro. -->
-    @if(Auth::user()->role !== 'Visualizador')
-        <a href="{{ route('registrodiagnostico.create') }}" class="btn btn-info btn-sm btn-nuevo-registro">
-            <i class="fas fa-plus"></i> Nuevo Diagnóstico
-        </a>
-    @endif
+   <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+        <h2 class="card-title mb-2 mb-md-0">
+            <b>Diagnósticos de Equipos</b>
+        </h2>
+        @if(Auth::user()->role !== 'Visualizador')
+            <a href="{{ route('registrodiagnostico.create') }}" class="btn btn-info btn-sm btn-nuevo-registro">
+                <i class="fas fa-plus"></i> Nuevo Diagnóstico
+            </a>
+        @endif
+    </div>
 </div>
+
             <!-- Campos de la tabla. -->
         <div class="card-body p-4">
             <div class="table-responsive mt-3">

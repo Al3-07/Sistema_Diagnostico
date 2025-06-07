@@ -69,7 +69,26 @@
         padding: 0 0 20px 0;
         color: white;
         z-index: 1000;
+        overflow-y: auto; /* Habilita scroll vertical */
+        overflow-x: hidden; /* Evita scroll horizontal */
+        scrollbar-width: thin; /* Scroll fino (para Firefox) */
+        scrollbar-color: #888 #2d2d2d; /* Color del scroll */
     }
+
+
+    /* Scroll personalizado para navegadores Webkit (Chrome, Edge, Safari) */
+     .sidebar::-webkit-scrollbar {
+            width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+            background-color: #16a34a; /* Color verde del scroll */
+            border-radius: 10px;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
 
     /* Marca o título */
     .sidebar .brand-container {
@@ -493,18 +512,18 @@
 
 
 
-           <a href="{{ route('menu') }}" class="modern-nav-link {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}">
+           <a href="{{ route('menu') }}" class="nav-link {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}">
     <i class="fas fa-home"></i> Inicio
 </a>
 
 <div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
-<a href="{{ route('empresa.index') }}" class="modern-nav-link {{ request()->routeIs('empresa.*') ? 'active' : '' }}">
+<a href="{{ route('empresa.index') }}" class="nav-link {{ request()->routeIs('empresa.*') ? 'active' : '' }}">
    <i class="fa-solid fa-building"></i>Registro de Empresa
 </a>
-<a href="{{ route('registrodiagnostico.index') }}" class="modern-nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
-    <i class="fas fa-desktop"></i> Registro de Diagnóstico
+<a href="{{ route('registrodiagnostico.index') }}" class="nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
+    <i class="fas fa-desktop"></i>Registro Diagnóstico
 </a>
-<a href="{{ route('bitacora.index') }}" class="modern-nav-link {{ request()->routeIs('bitacoras.*') ? 'active' : '' }}">
+<a href="{{ route('bitacora.index') }}" class="nav-link {{ request()->routeIs('bitacoras.*') ? 'active' : '' }}">
    <i class="fa-solid fa-file"></i>Bitácora
 </a>
 
