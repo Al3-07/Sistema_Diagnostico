@@ -368,7 +368,8 @@ if ($request->has('firma_recibido')) {
         'firmaRealizado' => $firmaRealizado,
         'firmaSupervisado' => $firmaSupervisado,
         'firmaRecibido' => $firmaRecibido,
-        'correlativo' => 'PREV-' . $id
+        'correlativo' => 'REP-' . str_pad($id, 4, '0', STR_PAD_LEFT)
+
     ]);
 
    return $pdf->stream('diagnostico.pdf');
