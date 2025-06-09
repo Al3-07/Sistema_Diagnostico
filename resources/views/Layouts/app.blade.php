@@ -68,8 +68,16 @@
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
         padding: 0 0 20px 0;
         color: white;
-        z-index: 1000;
     }
+
+    .sidebar::-webkit-scrollbar-thumb {
+            background-color: #16a34a; /* Color verde del scroll */
+            border-radius: 10px;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
 
     /* Marca o título */
     .sidebar .brand-container {
@@ -438,7 +446,7 @@
     padding: 16px;
     background-color: rgba(183, 170, 170, 0.08);
     border-radius: 12px;
-    margin: 40px 0 20px 0; /* ↑ esto lo baja */
+    margin: 2px 0 2px 0; /* ↑ esto lo baja */
     color: white;
     box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
     text-align: center;
@@ -460,6 +468,11 @@
     font-size: 24px;
     color: #ffffff;
 }
+
+/*#main-content {
+    flex-grow: 1;
+    width: 100%;
+}*/
 
 
     </style>
@@ -493,18 +506,22 @@
 
 
 
-           <a href="{{ route('menu') }}" class="modern-nav-link {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}">
+           <a href="{{ route('menu') }}" class="nav-link {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}">
     <i class="fas fa-home"></i> Inicio
 </a>
 
+  <a href="{{ route('reportes.index') }}" class="nav-link {{ request()->routeIs('reportes.*') ? 'active' : '' }}">
+    <i class="fas fa-chart-bar"></i> Reportes
+  </a>
+
 <div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
-<a href="{{ route('empresa.index') }}" class="modern-nav-link {{ request()->routeIs('empresa.*') ? 'active' : '' }}">
+<a href="{{ route('empresa.index') }}" class="nav-link {{ request()->routeIs('empresa.*') ? 'active' : '' }}">
    <i class="fa-solid fa-building"></i>Registro de Empresa
 </a>
-<a href="{{ route('registrodiagnostico.index') }}" class="modern-nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
-    <i class="fas fa-desktop"></i> Registro de Diagnóstico
+<a href="{{ route('registrodiagnostico.index') }}" class="nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
+    <i class="fas fa-desktop"></i>Registro Diagnóstico
 </a>
-<a href="{{ route('bitacora.index') }}" class="modern-nav-link {{ request()->routeIs('bitacoras.*') ? 'active' : '' }}">
+<a href="{{ route('bitacora.index') }}" class="nav-link {{ request()->routeIs('bitacoras.*') ? 'active' : '' }}">
    <i class="fa-solid fa-file"></i>Bitácora
 </a>
 

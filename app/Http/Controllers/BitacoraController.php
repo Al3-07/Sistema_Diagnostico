@@ -12,7 +12,7 @@ class BitacoraController extends Controller
 }
 public function bitacoraIndex()
 {
-    $bitacoras = Bitacora::with('user')->orderBy('created_at', 'desc')->paginate(20);
+    $bitacoras = Bitacora::with('user')->orderBy('created_at', 'desc')->paginate(10);
     return view('bitacora.index', compact('bitacoras'));
 }
 }

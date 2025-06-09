@@ -200,6 +200,9 @@
         </div>
         
         <div class="detail-container">
+            <h6 class="text-end mb-4 text-muted">
+    <strong>Fecha del Diagnóstico:</strong> {{ $registro->created_at->format('d/m/Y H:i') }}
+</h6>
             <h5 class="text-end mb-4" style="color: #00b894;">
                  <strong>Correlativo:</strong> {{ $correlativo }}
                 </h5>

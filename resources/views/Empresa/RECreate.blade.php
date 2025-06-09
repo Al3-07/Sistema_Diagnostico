@@ -41,9 +41,15 @@
             <input type="text" name="empresa" id="empresa" class="form-control @error('empresa') is-invalid @enderror" required>
             @error('empresa') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
-        <div class="d-flex justify-content-end">
-            <button type="submit" class="btn btn-custom">Guardar</button>
+        <div class="d-flex justify-content-end gap-2">
+            <a href="{{ route('empresa.index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Regresar
+            </a>
+            <button type="submit" class="btn btn-custom">
+                <i class="fas fa-save me-1"></i> Guardar
+            </button>
         </div>
+
     </form>
 </div>
 @endsection

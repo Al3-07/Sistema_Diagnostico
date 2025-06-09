@@ -9,21 +9,23 @@ use App\Http\Controllers\UserController;
 use App\Models\RegistroDiagnostico;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\BitacoraController;
+use App\Http\Controllers\ReporteController;
 
 
-
+ /* Obtener datos para tabla (si lo necesitas para DataTables u otra tabla AJAX).
+   Esa línea Route::resource automatiza 7 rutas esenciales del CRUD (crear, listar, editar, actualizar, borrar, etc.).*/
 Route::middleware(['auth'])->group(function () {
-    // RUTAS DE Diagnostico
-   /* Obtener datos para tabla (si lo necesitas para DataTables u otra tabla AJAX)
-   Esa línea Route::resource automatiza 7 rutas esenciales del CRUD (crear, listar, editar, actualizar, borrar, etc.).
-   */
-
-Route::get('registrodiagnostico/table', [RegistroDiagnosticoController::class, 'getTableData'])->name('registrodiagnostico.table');
     
+    // R U T A S     D E      D I A G N Ó S T  I C O. 
+Route::get('registrodiagnostico/table', [RegistroDiagnosticoController::class, 'getTableData'])->name('registrodiagnostico.table');
 Route::resource('registrodiagnostico', RegistroDiagnosticoController::class);
-//RUTA DE EMPRESA
+
+
+//R U T A     D E     E M P R E S A. 
 Route::resource('empresa', EmpresaController::class);
-//RUTA PARA BITACORA
+
+
+//R U T A     P A R A    B I T Á C O R A.
 Route::resource('bitacoras', BitacoraController::class);
 Route::get('bitacora', [BitacoraController::class, 'bitacoraIndex'])->name('bitacora.index');
 
@@ -54,7 +56,7 @@ Route::resource('registrodiagnostico', RegistroDiagnosticoController::class);
 */
 
 //RUTAS PDF
-Route::get('/registro-diagnostico/{id}/pdf', [RegistroDiagnosticoController::class, 'generarPDF'])->name('registro_diagnostico.pdf');
+Route::get('/registro-diagnostico/{id}/pdf', [App\Http\Controllers\RegistroDiagnosticoController::class, 'generarPDF'])->name('registro_diagnostico.pdf');
 Route::get('/diagnostico/{id}/vista-previa', function ($id) {
     $registro = RegistroDiagnostico::findOrFail($id);
     $pdf = Pdf::loadView('emails.reporte_diagnostico', compact('registro'));
@@ -68,7 +70,7 @@ Route::get('/diagnostico/{id}/pdf', [RegistroDiagnosticoController::class, 'desc
 Route::post('/diagnostico/{id}/guardar-firma', [RegistroDiagnosticoController::class, 'guardarFirma'])->name('guardar.firma');
 
    
-    // RUTAS DE ROL
+    // R U T A S     D  E    R O L. 
     Route::get('rol_table', [RegistroRolController::class, 'getData'])->name('registrorol.table');
     Route::get('/roles/{id}/editar', [RegistroRolController::class, 'edit'])->name('roles.edit');
     Route::post('/roles/{id}/editar', [RegistroRolController::class, 'update'])->name('roles.update');
@@ -76,10 +78,11 @@ Route::post('/diagnostico/{id}/guardar-firma', [RegistroDiagnosticoController::c
     Route::get('/roles/data', [RegistroRolController::class, 'getData'])->name('registrorol.table');
     Route::post('/roles/toggleEstado', [RegistroRolController::class, 'toggleEstado'])->name('roles.toggleEstado');
 
-    //Rutas de user
+
+    //R U T A S   D E    U S E R.
     Route::get('/user_table', [UserController::class, 'getTableData'])->name('user.table');
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
-    Route::get('/user/create', [UserController::class, 'create'])->name('user.create'); // Nueva ruta para formulario de creación
+    Route::get('/user/create', [UserController::class, 'create'])->name('user.create'); // Nueva ruta para formulario de creación.
     Route::post('/user', [UserController::class, 'store'])->name('user.store');
     Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/user/{id}/update', [UserController::class, 'update'])->name('user.update');
@@ -87,7 +90,7 @@ Route::post('/diagnostico/{id}/guardar-firma', [RegistroDiagnosticoController::c
 
    
 
-    // MENÚ
+    // R U T A S       D E L      M E N Ú.
     Route::get('/menu', function () {
         return view('menu');
     })->name('menu');
@@ -95,23 +98,36 @@ Route::post('/diagnostico/{id}/guardar-firma', [RegistroDiagnosticoController::c
    
 });
 
-//INICIO DE SESION Y REGISTRO
+//R U T A S     D E      I N I C I O    D E     S E S I Ó N    Y     R E G I S T R O.
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
-// Rutas de registro (solo para administradores)
+
+// R U T A S    D E    R E G I S T R O    (s o l o   p a r a   a d mi n i s t r a d o r e s).
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register']);
 });
 
-// Cerrar sesión
+
+// R U T A S       D E     C E R R A R       S E S I Ó  N.
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Redirección para cualquier ruta no definida
+
+// R E D I R E C C I Ó N     P A R A    C U A L Q U I E R    R U T A     N O      D E F I N I D A.
 Route::fallback(function () {
     if (auth()->check()) {
-        return redirect()->route('menu');  // Redirecciona a menú si está autenticado
+        return redirect()->route('menu');  // Redirecciona a menú si está autenticado.
     }
-    return redirect()->route('login');  // Redirecciona a login si no está autenticado
+    return redirect()->route('login');  // Redirecciona a login si no está autenticado.
 });
+
+// R U T A S    P A R A     G E N E R A R    P D F     D E      R E P O R T E S .
+Route::get('reportes', [ReporteController::class, 'index'])->name('reportes.index');
+Route::get('reportes/pdf', [ReporteController::class, 'downloadPdf'])->name('reportes.pdf');
+
+// PDF de un solo registro.
+Route::get('/reportes/{id}/pdf', [ReporteController::class, 'descargarPDFIndividual'])->name('reportes.pdf.individual');
+
+// PDF de todos los registros por empresa.
+Route::get('/reportes/empresa/{empresa}/pdf', [ReporteController::class, 'descargarPDFPorEmpresa'])->name('reportes.pdf.empresa');

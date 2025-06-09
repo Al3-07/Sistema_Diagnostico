@@ -98,57 +98,154 @@
         max-width: 200px !important;
         white-space: nowrap; /* Evita que el texto se divida en varias líneas */
     }
+
+    /* Ajuste del contenedor de controles (buscador y length menu) */
+    div.dataTables_wrapper div.dataTables_length,
+    div.dataTables_wrapper div.dataTables_filter {
+        margin-bottom: 20px;
+    }
+
+    div.dataTables_wrapper div.dataTables_filter {
+        text-align: right !important;
+    }
+
+    div.dataTables_wrapper div.dataTables_length {
+        text-align: left !important;
+    }
+
+    /* Opcional: Espaciado entre controles y tabla */
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_length {
+        padding: 0 10px;
+    }
+
+    /* Alinea bien los controles en pantallas pequeñas también */
+    @media (max-width: 768px) {
+        div.dataTables_wrapper div.dataTables_length,
+        div.dataTables_wrapper div.dataTables_filter {
+            text-align: center !important;
+        }
+    }
+
+    @media (max-width: 768px) {
+    .card-header .btn-nuevo-registro {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* POR AQUI ME QUEDE DE MUJER :)*/
+}
+    
 </style>
 
 <div class="container mt-5">
     <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h2 class="card-title mb-0">
-                <b>Listado de Empresas</b>
-            </h2>
-            @if(Auth::user()->role !== 'Visualizador')  <!--Solo usuarios que no son 'Visualizador' pueden ver el botón  -->
-            <a href="{{ route('empresa.create') }}" class="btn btn-info btn-sm btn-nuevo-registro">
-                <i class="fas fa-plus"></i> Agregar Empresa
-            </a>
-            @endif
+                <div class="card-header">
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+                <h2 class="card-title mb-2 mb-md-0">
+                    <b>Listado de Empresas</b>
+                </h2>
+                @if(Auth::user()->role !== 'Visualizador')
+                <a href="{{ route('empresa.create') }}" class="btn btn-info btn-sm btn-nuevo-registro mt-2 mt-md-0">
+                    <i class="fas fa-plus"></i> Agregar Empresa
+                </a>
+                @endif
+            </div>
         </div>
+
         <div class="card-body p-4">
             @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
+                <div class="alert alert-success" id="mensaje-exito">
+        {{ session('success') }}
+    </div>
             @endif
 
             <div class="table-responsive mt-3">
                 <table class="table table-bordered table-striped w-100" id="empresas-table">
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre de la Empresa</th>
-                            <th class="acciones-columna text-center">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($empresas as $empresa)
-                            <tr>
-                                <td>{{ $empresa->id }}</td>
-                                <td>{{ $empresa->empresa }}</td>
-                                <td class="text-center">
-                                 @if(Auth::user()->role !== 'Visualizador')  <!--Solo usuarios que no son 'Visualizador' pueden ver el botón  -->
-                                    <a href="{{ route('empresa.edit', $empresa->id) }}" class="btn btn-sm btn-warning">Editar</a>
-                                    <form action="{{ route('empresa.destroy', $empresa->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('¿Estás seguro de eliminar esta empresa?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        
-                                        <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
-                                    </form>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
+    <tr>
+        <th>Nombre de la Empresa</th>
+        <th class="acciones-columna text-center">Acciones</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach($empresas as $empresa)
+        <tr>
+            <td>{{ $empresa->empresa }}</td>
+            <td class="text-center">
+                @if(Auth::user()->role !== 'Visualizador')
+                    <a href="{{ route('empresa.edit', $empresa->id) }}" class="btn btn-sm btn-warning" title="Editar">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <form id="form-eliminar-{{ $empresa->id }}" action="{{ route('empresa.destroy', $empresa->id) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-sm btn-danger" title="Eliminar" onclick="confirmarEliminacion({{ $empresa->id }})">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+
+                @endif
+            </td>
+        </tr>
+    @endforeach
+</tbody>
+
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function confirmarEliminacion(id) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Esta acción eliminará la empresa del sistema.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('form-eliminar-' + id).submit();
+            }
+        });
+    }
+
+
+// Activar DataTable con búsqueda, selector de cantidad y paginación
+    $(document).ready(function () {
+        $('#empresas-table').DataTable({
+            language: {
+                search: "Buscar:",
+                lengthMenu: "Mostrar _MENU_ registros",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ empresas",
+                paginate: {
+                    first: "Primero",
+                    last: "Último",
+                    next: "Siguiente",
+                    previous: "Anterior"
+                },
+                zeroRecords: "No se encontraron resultados",
+                infoEmpty: "Mostrando 0 de 0 empresas",
+                infoFiltered: "(filtrado de _MAX_ empresas en total)",
+            },
+            columnDefs: [
+                { orderable: false, targets: 1 } // desactiva ordenamiento en columna de acciones
+            ]
+        });
+    });
+
+setTimeout(function() {
+            let mensaje = document.getElementById('mensaje-exito');
+            if (mensaje) {
+                mensaje.style.transition = 'opacity 0.5s ease';
+                mensaje.style.opacity = '0';
+                setTimeout(() => mensaje.remove(), 500);
+            }
+        }, 3000); // 3000 milisegundos = 3 segundos</script>
 
 @endsection

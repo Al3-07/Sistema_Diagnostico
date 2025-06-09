@@ -161,6 +161,11 @@
         @csrf
         @method('PUT')
 <!-- Muestra su select para seleccionar cada una de las empresas. -->
+ <div class="mb-3">
+    <label for="fecha" class="form-label">Fecha</label>
+<input type="date" name="fecha" class="form-control" value="{{ old('fecha', $registro->fecha) }}">
+</div>
+
         <div class="form-group">
             <label for="empresa_id" class="form-label">Empresa</label>
                 <select id="empresa_id" name="empresa_id" class="form-control @error('empresa_id') is-invalid @enderror">
