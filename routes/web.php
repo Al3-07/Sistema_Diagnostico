@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Models\RegistroDiagnostico;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\BitacoraController;
+use App\Http\Controllers\ReporteController;
 
 
  /* Obtener datos para tabla (si lo necesitas para DataTables u otra tabla AJAX).
@@ -97,3 +98,13 @@ Route::fallback(function () {
     }
     return redirect()->route('login');  // Redirecciona a login si no está autenticado.
 });
+
+// R U T A S    P A R A     G E N E R A R    P D F     D E      R E P O R T E S .
+Route::get('reportes', [ReporteController::class, 'index'])->name('reportes.index');
+Route::get('reportes/pdf', [ReporteController::class, 'downloadPdf'])->name('reportes.pdf');
+
+// PDF de un solo registro.
+Route::get('/reportes/{id}/pdf', [ReporteController::class, 'descargarPDFIndividual'])->name('reportes.pdf.individual');
+
+// PDF de todos los registros por empresa.
+Route::get('/reportes/empresa/{empresa}/pdf', [ReporteController::class, 'descargarPDFPorEmpresa'])->name('reportes.pdf.empresa');

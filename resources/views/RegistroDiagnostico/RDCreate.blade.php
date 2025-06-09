@@ -68,7 +68,11 @@
     <strong>Correlativo:</strong> {{ $correlativo }}
 </h5>
 
-        <div class="row mb-3">          <!-- Datos de la Vista.-->           
+        <div class="row mb-3">          <!-- Datos de la Vista.--> 
+            <div class="mb-3">
+                <label for="fecha" class="form-label">Fecha</label>
+                <input type="date" name="fecha" class="form-control" value="{{ old('fecha') }}">
+            </div> 
             <div class="col-md-6">                 
                 <label for="empresa_id" class="form-label">Empresa</label>
                     <select id="empresa_id" name="empresa_id" class="form-control @error('empresa_id') is-invalid @enderror">

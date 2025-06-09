@@ -107,9 +107,11 @@
     }
 
     .table-responsive {
-        overflow-x: auto;
-        padding: 0 5px;
-    }
+        display: block;
+    overflow-x: auto;
+    width: 100%;
+}
+
 
     .table {
     width: 100%;
@@ -157,10 +159,17 @@ table.dataTable td.acciones-columna {
 }
 
 
+table.dataTable th.fecha-columna,
+table.dataTable td.fecha-columna {
+    min-width: 78px;
+    white-space: nowrap;
+}
+
+
 </style>
 
     <!-- Vista los datos del Index. -->
-<div class="container mt-5">
+<div class="container-fluid mt-5 px-4">
    <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
         <h2 class="card-title mb-2 mb-md-0">
@@ -180,6 +189,7 @@ table.dataTable td.acciones-columna {
                 <table class="table table-bordered table-striped w-100" id="equipos-table">
                     <thead>
                         <tr>
+<th class="fecha-columna">Fecha</th>
                              <th>Empresa</th>
                             <th>Hardware</th>
                             <th>Modelo</th>
@@ -207,6 +217,7 @@ table.dataTable td.acciones-columna {
             serverSide: true,
             ajax: '{{ route('registrodiagnostico.table') }}',
             columns: [
+             { data: 'fecha', name: 'fecha' },
                  { data: 'empresa', name: 'empresa'},
                 { data: 'equipo', name: 'equipo' },
                 { data: 'modelo', name: 'modelo' },

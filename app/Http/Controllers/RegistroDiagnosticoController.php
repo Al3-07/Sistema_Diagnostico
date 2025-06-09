@@ -31,10 +31,21 @@ class RegistroDiagnosticoController extends Controller
     // Obtener datos para datatable
   public function getTableData()
 {
-   $registros = RegistroDiagnostico::with('empresa')->select(['id', 'equipo', 'modelo', 'marca', 'serie', 'descripcion', 'estado', 'foto_antes', 'foto_despues', 'empresa_id']);
+   $registros = RegistroDiagnostico::with('empresa')->select(['id', 'fecha', 'equipo', 'modelo', 'marca', 'serie', 'descripcion', 'estado', 'foto_antes', 'foto_despues', 'empresa_id']);
     return datatables()->of($registros)
+        ->filterColumn('empresa', function ($query, $keyword) {
+        $query->whereHas('empresa', function ($q) use ($keyword) {
+            $q->where('empresa', 'like', "%{$keyword}%");
+        });
+        })
+        ->filterColumn('fecha', function ($query, $keyword) {
+            $query->where('fecha', 'like', "%{$keyword}%");
+        })
         ->addColumn('empresa', function ($registro) {
             return $registro->empresa->empresa ?? 'Sin empresa';
+        })
+         ->addColumn('fecha', function ($registro) {
+            return $registro->fecha ? \Carbon\Carbon::parse($registro->fecha)->format('d/m/Y') : 'Sin fecha';
         })
         ->addColumn('foto_antes_img', function($registro) {
             if ($registro->foto_antes) {
@@ -100,6 +111,7 @@ class RegistroDiagnosticoController extends Controller
 public function store(Request $request)
 {
     $request->validate([
+        'fecha' => 'nullable|date', // Acepta una fecha o vacío
             'equipo' => 'required|string|max:50',
             'modelo' => 'required|string|max:30',
             'marca' => 'required|string|max:30',
@@ -122,6 +134,7 @@ public function store(Request $request)
 
         ]);
     $registro = new RegistroDiagnostico;
+    $registro->fecha = $request->fecha;  // Aquí asignas la fecha enviada
     $registro->equipo = $request->equipo;
     $registro->modelo = $request->modelo;
     $registro->marca = $request->marca;
@@ -207,6 +220,7 @@ if ($request->has('firma_recibido')) {
    public function update(Request $request, $id)
 {
     $request->validate([
+        'fecha' => 'nullable|date', // Acepta una fecha o vacío
         'equipo' => 'required|string|max:50',
         'modelo' => 'required|string|max:30',
         'marca' => 'required|string|max:30',
@@ -228,6 +242,7 @@ if ($request->has('firma_recibido')) {
     ]);
 
     $registro = RegistroDiagnostico::findOrFail($id);
+    $registro->fecha = $request->fecha;  // También asignas la fecha para la actualización
     $registro->equipo = $request->equipo;
     $registro->modelo = $request->modelo;
     $registro->marca = $request->marca;

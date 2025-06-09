@@ -68,17 +68,6 @@
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
         padding: 0 0 20px 0;
         color: white;
-        z-index: 1000;
-        overflow-y: auto; /* Habilita scroll vertical */
-        overflow-x: hidden; /* Evita scroll horizontal */
-        scrollbar-width: thin; /* Scroll fino (para Firefox) */
-        scrollbar-color: #888 #2d2d2d; /* Color del scroll */
-    }
-
-
-    /* Scroll personalizado para navegadores Webkit (Chrome, Edge, Safari) */
-     .sidebar::-webkit-scrollbar {
-            width: 6px;
     }
 
     .sidebar::-webkit-scrollbar-thumb {
@@ -457,7 +446,7 @@
     padding: 16px;
     background-color: rgba(183, 170, 170, 0.08);
     border-radius: 12px;
-    margin: 40px 0 20px 0; /* ↑ esto lo baja */
+    margin: 2px 0 2px 0; /* ↑ esto lo baja */
     color: white;
     box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
     text-align: center;
@@ -479,6 +468,11 @@
     font-size: 24px;
     color: #ffffff;
 }
+
+/*#main-content {
+    flex-grow: 1;
+    width: 100%;
+}*/
 
 
     </style>
@@ -515,6 +509,10 @@
            <a href="{{ route('menu') }}" class="nav-link {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}">
     <i class="fas fa-home"></i> Inicio
 </a>
+
+  <a href="{{ route('reportes.index') }}" class="nav-link {{ request()->routeIs('reportes.*') ? 'active' : '' }}">
+    <i class="fas fa-chart-bar"></i> Reportes
+  </a>
 
 <div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
 <a href="{{ route('empresa.index') }}" class="nav-link {{ request()->routeIs('empresa.*') ? 'active' : '' }}">
