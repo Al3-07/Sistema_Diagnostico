@@ -54,12 +54,10 @@ Route::resource('registrodiagnostico', RegistroDiagnosticoController::class);
 */
 
 //RUTAS PDF
-Route::get('/registro-diagnostico/{id}/pdf', [App\Http\Controllers\RegistroDiagnosticoController::class, 'generarPDF'])->name('registro_diagnostico.pdf');
+Route::get('/registro-diagnostico/{id}/pdf', [RegistroDiagnosticoController::class, 'generarPDF'])->name('registro_diagnostico.pdf');
 Route::get('/diagnostico/{id}/vista-previa', function ($id) {
     $registro = RegistroDiagnostico::findOrFail($id);
-
     $pdf = Pdf::loadView('emails.reporte_diagnostico', compact('registro'));
-
     return $pdf->stream('reporte_diagnostico.pdf');
 });
 
