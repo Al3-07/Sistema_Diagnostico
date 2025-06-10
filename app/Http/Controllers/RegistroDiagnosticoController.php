@@ -118,7 +118,7 @@ public function store(Request $request)
             'serie' => 'required|string|max:40',
             'descripcion' => 'nullable|string|max:1000',
             'estado' => 'required|string',
-            'foto_antes' => 'required|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
+            'foto_antes' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
             'foto_despues' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
             'empresa_id' => 'required|exists:empresa,id',
             ], [
@@ -134,7 +134,7 @@ public function store(Request $request)
 
         ]);
     $registro = new RegistroDiagnostico;
-    $registro->fecha = $request->fecha;  // Aquí asignas la fecha enviada
+    $registro->fecha = $request->fecha;  
     $registro->equipo = $request->equipo;
     $registro->modelo = $request->modelo;
     $registro->marca = $request->marca;
@@ -242,7 +242,7 @@ if ($request->has('firma_recibido')) {
     ]);
 
     $registro = RegistroDiagnostico::findOrFail($id);
-    $registro->fecha = $request->fecha;  // También asignas la fecha para la actualización
+    $registro->fecha = $request->fecha;  
     $registro->equipo = $request->equipo;
     $registro->modelo = $request->modelo;
     $registro->marca = $request->marca;
