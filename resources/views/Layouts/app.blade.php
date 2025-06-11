@@ -6,10 +6,11 @@
     <title>Sistema de Diagnostico</title>
     <link rel="icon" href="{{ asset('img/icono.PNG') }}" type="image/PNG">
     
-    <!-- Otros estilos y scripts -->
+    <!-- Otros estilos y scripts que ya tenías en el head -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
+
     <!-- Agregado el meta CSRF -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
@@ -51,60 +52,230 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: rgb(248, 249, 250);
-            overflow-x: hidden;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            background-color:rgb(248, 249, 250);
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 280px;
-            height: 100vh;
-            position: fixed;
-            left: -280px;
-            top: 0;
-            background: black;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
-            padding: 0 0 20px 0;
+        /* Estilo del sidebar */
+       /* Sidebar fijo y negro */
+    .sidebar {
+        width: 280px;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background: black;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+        padding: 0 0 20px 0;
+        color: white;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+            background-color: #16a34a; /* Color verde del scroll */
+            border-radius: 10px;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+    /* Marca o título */
+    .sidebar .brand-container {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar .brand {
+        color: white;
+        font-weight: 900;
+        font-size: 1.4rem;
+        display: block;
+        text-decoration: none;
+    }
+
+        .sidebar .brand.active {
+            background: #0ea5e9;
             color: white;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            overflow-y: auto;
+            font-weight: 900;
+            margin-left: -1px;
         }
 
-        /* Sidebar visible */
-        .sidebar.active {
-            left: 0;
+        /* Estilos generales para todos los enlaces del menú (como estaban antes) */
+        /* Botones del menú */
+    .sidebar .nav-link {
+        color: white;
+        background-color:rgb(0, 0, 0); /* tono gris oscuro por defecto */
+        padding: 12px 20px;
+        margin: 10px 15px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+    }
+        /* Solo para el enlace del menú principal */
+        .sidebar .nav-link.menu-principal {
+            background: #0ea5e9;
+            color: white;
         }
+
+        /* Movimiento al pasar el mouse solo en el enlace del menú principal */
+        .sidebar .nav-link.menu-principal:hover {
+            transform: translateX(5px);
+        }
+
+        .sidebar .user-info {
+            padding: 15px;
+            background-color:rgb(0, 0, 0);
+            margin: 0 15px 20px 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .user-info:hover {
+            background-color: #e2e8f0;
+        }
+
+        .sidebar .user-info i.user-icon {
+            background-color: #0ea5e9;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .sidebar .user-info .user-details {
+            flex: 1;
+        }
+
+        .sidebar .user-info h5 {
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .sidebar .user-info .logout-icon {
+            color: #ef4444;
+            margin-left: auto;
+        }
+
+        .sidebar .nav-link i {
+        margin-right: 12px;
+        width: 20px;
+        text-align: center;
+    }
+
+    /* Hover: un poco más claro */
+    .sidebar .nav-link:hover {
+        background-color:rgb(141, 129, 129);
+    }
+
+    /* Solo el botón activo (seleccionado): blanco con texto negro */
+    .sidebar .nav-link.active {
+        background-color: white;
+        color: black;
+        font-weight: bold;
+    }
 
         /* Contenido principal */
         .content {
-            flex: 1;
-            width: 100%;
+            margin-left: 280px;
             padding: 30px;
-            transition: padding-left 0.3s;
-            position: relative;
-            z-index: 1;
+            transition: margin-left 0.3s;
         }
 
-        /* Contenido cuando sidebar está visible (solo en desktop) */
-        @media (min-width: 769px) {
-            .content.with-sidebar {
-                padding-left: 300px;
-            }
-        }
-
-        /* Botón flotante del menú */
-        .floating-toggle {
+        /* Botón para toggle del sidebar */
+        #toggleSidebar {
+            cursor: pointer;
+            font-size: 2.2rem; 
+           color:rgb(0, 0, 0); /* Verde moderno */ 
+            font-weight: 700;
+            background-color: #f8fafc;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 30px;
+            right: -24px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        #toggleSidebar:hover {
+            transform: scale(1.1);
+            color:rgb(25, 192, 226); /* Verde un poco más oscuro al hacer hover */
+        }
+
+        /* Estilos para el botón cuando el sidebar está oculto */
+        #toggleSidebar.hidden {
+            right: auto;
+            left: 20px;
+            color: #16a34a; /* Verde un poco más oscuro al hacer hover */            
+            color: white;
+        }
+
+        /* Estilos cuando el menú está oculto */
+        .sidebar.hidden {
+            left: -380px;
+        }
+
+        .content.full-width {
+            margin-left: 0;
+        }
+
+        /* Divider */
+        .sidebar-divider {
+            border-top: 1px solid #e2e8f0;
+            margin: 15px;
+        }
+
+        /* Estilos para secciones */
+        .sidebar-section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+            padding: 0 15px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* Botón flotante para mostrar menú en móviles */
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 300px;
+            z-index: 1002;
+            color:rgb(0, 0, 0); /* Verde un poco más oscuro al hacer hover */
+             color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+            border: none;
+        }
+
+       
+
+        /* Estilos adicionales para el botón flotante */
+        .floating-toggle {
+            display: none;
             position: fixed;
             top: 20px;
             left: 20px;
-            background-color: black;
+            background-color:rgb(0, 0, 0); /* Verde un poco más oscuro al hacer hover */;
             color: white;
             width: 50px;
             height: 50px;
@@ -113,130 +284,38 @@
             align-items: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             cursor: pointer;
-            z-index: 1001;
+            z-index: 1100;
             font-weight: 700;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
+            font-size: 2.2rem;
+            transition: transform 0.3s ease;
         }
         
         .floating-toggle:hover {
             transform: scale(1.1);
-            background-color: #333;
         }
 
-        /* Estilos para la marca/título */
-        .brand-modern-title {
+        /* Sticky footer que permanece abajo aunque no haya contenido suficiente */
+        html {
+            height: 100%;
+        }
+
+        body {
+            min-height: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 16px;
-            background-color: rgba(183, 170, 170, 0.08);
-            border-radius: 12px;
-            margin: 20px 15px 15px;
-            color: white;
-            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
-            text-align: center;
         }
 
-        .brand-modern-title #brandLink {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: rgb(249, 245, 245);
+        .content-wrapper {
+            flex: 1 0 auto;
         }
 
-        .brand-modern-title .icon-below {
-            font-size: 24px;
-            color: #ffffff;
-        }
-
-        /* Estilos para el usuario */
-        .modern-user-card {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin: 0 15px 15px;
-        }
-
-        .modern-user-card:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .avatar-icon {
-            font-size: 28px;
-            color: #ffffff;
-        }
-
-        .user-details .username {
-            margin: 0;
-            font-size: 16px;
-            font-weight: 600;
-            color: #ffffff;
-        }
-
-        .user-details .user-role {
-            font-size: 13px;
-            color: #a0aec0;
-        }
-
-        /* Estilos para los enlaces del menú */
-        .modern-nav-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            color: white;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            margin: 5px 15px;
-        }
-
-        .modern-nav-link i {
-            color: #ffffff;
-            min-width: 20px;
-            text-align: center;
-        }
-
-        .modern-nav-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .modern-nav-link.active {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            font-weight: 600;
-        }
-
-        /* Títulos de sección */
-        .sidebar-section-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-            padding: 15px 15px 5px;
-            margin-top: 10px;
-        }
-
-        /* Footer */
         .footer {
+            flex-shrink: 0;
             background-color: #f8f9fa;
             text-align: center;
             padding: 0.10rem 0;
             border-top: 1px solid #e2e8f0;
             width: 100%;
-            position: relative;
-            z-index: 2;
         }
 
         .footer-content {
@@ -245,233 +324,385 @@
             color: #718096;
         }
 
-        /* Overlay para móviles */
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            display: none;
-        }
+        .modern-user-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
 
-        /* Media queries para responsive */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 280px;
-            }
-            
-            .sidebar.active {
-                left: 0;
-            }
-            
-            .floating-toggle {
-                display: flex;
-            }
-        }
+.modern-user-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+}
 
-        @media (min-width: 769px) {
-            .sidebar-overlay {
-                display: none !important;
-            }
-        }
+.avatar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-icon {
+    font-size: 28px;
+    color: #ffffff; /* Verde moderno */
+}
+
+.user-details .username {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.user-details .user-role {
+    font-size: 13px;
+    color: #a0aec0;
+}
+
+.arrow-icon {
+    margin-left: auto;
+    color: #a0aec0;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.modern-user-card:hover .arrow-icon {
+    transform: translateX(4px);
+}
+
+
+.modern-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05); /* translúcido claro */
+    border-radius: 12px;
+    color: rgb(126, 117, 117); /* texto por defecto */
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s, color 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 8px;
+    min-height: 44px;
+}
+
+.modern-nav-link i {
+    color: #22c55e; /* verde moderno */
+    min-width: 20px;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.modern-nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+    color: rgb(90, 90, 90); /* más visible al pasar el mouse */
+}
+
+.modern-nav-link.active {
+    background: rgba(182, 163, 163, 0.2); /* un poco más sólido */
+    color: rgb(70, 70, 70); /* texto oscuro y visible */
+    font-weight: 600;
+    border-left: 4px solid #22c55e;
+    padding-left: 12px;
+}
+
+.modern-nav-link.active i {
+    color: #22c55e; /* mantiene ícono verde */
+}
+
+
+
+.brand-modern-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    background-color: rgba(183, 170, 170, 0.08);
+    border-radius: 12px;
+    margin: 2px 0 2px 0; /* ↑ esto lo baja */
+    color: white;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.brand-modern-title:hover {
+    transform: scale(1.02);
+}
+
+.brand-modern-title #brandLink {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: rgb(249, 245, 245);
+}
+
+.brand-modern-title .icon-below {
+    font-size: 24px;
+    color: #ffffff;
+}
+
     </style>
 
     @yield('styles')
-</head>
-<body>
-    <!-- Overlay para móviles -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-    
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="brand-modern-title">
-            <span id="brandLink">Sistema de Diagnósticos</span>
-            <i class="fas fa-laptop-code icon-below"></i>
-        </div>
+    </head>
+    <body>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Botón para mostrar/ocultar el menú -->
+            <div id="toggleSidebar">≡</div>
 
-        <!-- Usuario con función de logout -->
-        @if(Auth::check())
-        <div class="modern-user-card" id="user-profile">
-            <div class="avatar-container">
-                <i class="fas fa-user-circle avatar-icon"></i>
+            <div class="brand-modern-title">
+                <span id="brandLink">Sistema de Diagnóstico</span>
+                <i class="fas fa-laptop-code icon-below"></i>
             </div>
-            <div class="user-details">
-                <h5 class="username">{{ Auth::user()->name }}</h5>
-                <small class="user-role">{{ Auth::user()->role }}</small>
+
+
+
+            <!-- Usuario con función de logout -->
+            @if(Auth::check())
+            <div class="user-info modern-user-card" id="user-profile">
+                <div class="avatar-container">
+                    <i class="fas fa-user-circle avatar-icon"></i>
+                </div>
+                <div class="user-details">
+                    <h5 class="username">{{ Auth::user()->name }}</h5>
+                    <small class="user-role">{{ Auth::user()->role }}</small>
+                </div>
             </div>
-        </div>
 
-        <a href="{{ route('menu') }}" class="modern-nav-link {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}">
-            <i class="fas fa-home"></i> Inicio
-        </a>
 
-        <a href="{{ route('reportes.index') }}" class="modern-nav-link {{ request()->routeIs('reportes.*') ? 'active' : '' }}">
-            <i class="fas fa-chart-bar"></i> Reportes
-        </a>
 
-        <div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
-        <a href="{{ route('empresa.index') }}" class="modern-nav-link {{ request()->routeIs('empresa.*') ? 'active' : '' }}">
-            <i class="fa-solid fa-building"></i> Registro de Empresa
-        </a>
-        <a href="{{ route('registrodiagnostico.index') }}" class="modern-nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
-            <i class="fas fa-desktop"></i> Registro Diagnóstico
-        </a>
-        <a href="{{ route('bitacora.index') }}" class="modern-nav-link {{ request()->routeIs('bitacoras.*') ? 'active' : '' }}">
-            <i class="fa-solid fa-file"></i> Bitácora
-        </a>
+           <a href="{{ route('menu') }}" class="nav-link {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}">
+    <i class="fas fa-home"></i> Inicio
+</a>
 
-        @if(Auth::user()->role === 'Administrador')
-        <div class="sidebar-section-title">ADMINISTRACIÓN DE USUARIO</div>
-        <a href="{{ route('user.index') }}" class="modern-nav-link {{ request()->routeIs('user.*') ? 'active' : '' }}">
-            <i class="fas fa-user"></i> Registro de Usuario
-        </a>
-        <a href="{{ route('registrorol.table') }}" class="modern-nav-link {{ request()->routeIs('registrorol.*') ? 'active' : '' }}">
-            <i class="fas fa-users"></i> Gestor de Roles
-        </a>
-        @endif
+  <a href="{{ route('reportes.index') }}" class="nav-link {{ request()->routeIs('reportes.*') ? 'active' : '' }}">
+    <i class="fas fa-chart-bar"></i> Reportes
+  </a>
 
-        <a href="#" id="sidebarLogout" class="modern-nav-link">
-            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-        </a>
+<div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
+<a href="{{ route('empresa.index') }}" class="nav-link {{ request()->routeIs('empresa.*') ? 'active' : '' }}">
+   <i class="fa-solid fa-building"></i>Registro de Empresa
+</a>
+<a href="{{ route('registrodiagnostico.index') }}" class="nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
+    <i class="fas fa-desktop"></i>Registro Diagnóstico
+</a>
+<a href="{{ route('bitacora.index') }}" class="nav-link {{ request()->routeIs('bitacoras.*') ? 'active' : '' }}">
+   <i class="fa-solid fa-file"></i>Bitácora
+</a>
 
-        <!-- Formulario oculto para logout -->
-        <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
-            @csrf
-        </form>
-        @else
-        <!-- Mostrar opción de login para usuarios no autenticados -->
-        <div class="modern-user-card" onclick="window.location.href='{{ route('login') }}'">
-            <i class="fas fa-sign-in-alt avatar-icon"></i>
-            <div class="user-details">
-                <h5 class="username">Iniciar Sesión</h5>
+@if(Auth::user()->role === 'Administrador')
+<div class="sidebar-section-title">ADMINISTRACIÓN DE USUARIO</div>
+<a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user.*') ? 'active' : '' }}">
+    <i class="fas fa-user"></i> Registro de Usuario
+</a>
+<a href="{{ route('registrorol.table') }}" class="nav-link {{ request()->routeIs('registrorol.*') ? 'active' : '' }}">
+    <i class="fas fa-users"></i> Gestor de Roles
+</a>
+@endif
+
+<a href="#" id="sidebarLogout" class="nav-link text-start">
+    <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+</a>
+            <!-- Formulario oculto para logout -->
+            <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
+                @csrf
+            </form>
+            @else
+            <!-- Mostrar opción de login para usuarios no autenticados -->
+            <div class="user-info" onclick="window.location.href='{{ route('login') }}'">
+                <i class="fas fa-sign-in-alt user-icon"></i>
+                <div class="user-details">
+                    <h5>Iniciar Sesión</h5>
+                </div>
             </div>
+            @endif
         </div>
-        @endif
-    </div>
 
-    <!-- Botón flotante para mostrar el menú -->
-    <div class="floating-toggle" id="floatingToggle">≡</div>
+        <!-- Botón P flotante cuando el sidebar está oculto -->
+        <div id="floatingToggle" class="floating-toggle">≡</div>
 
-    <!-- Contenido principal -->
-    <div class="content" id="mainContent">
-        <div class="container mt-4">
-            @yield('contenido')
-        </div>
-    </div>
 
-    <div class="content-wrapper">
-        @yield('content')
-    </div>
-    
-    <!-- Footer ahora está siempre al pie de página -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                © 2025 Todos los derechos reservados. Grupo Plasencia (Sistema de Diagnóstico) - Clasificadora y Exportadora de Tabaco S.A. 
+        <!-- Contenido principal -->
+        <div class="content">
+            <div class="container mt-4">
+                @yield('contenido')
             </div>
         </div>
-    </footer>
 
-    <!-- Scripts -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const sidebar = document.getElementById('sidebar');
-            const floatingToggle = document.getElementById('floatingToggle');
-            const content = document.getElementById('mainContent');
-            const sidebarOverlay = document.getElementById('sidebarOverlay');
-            const navLinks = document.querySelectorAll('.modern-nav-link');
-            
-            // Función para mostrar/ocultar el sidebar
-            function toggleSidebar() {
-                const isActive = sidebar.classList.toggle('active');
-                
-                if (isActive) {
-                    if (window.innerWidth <= 768) {
-                        sidebarOverlay.style.display = 'block';
+        <div class="content-wrapper">
+            <!-- Todo el contenido de tus vistas irá aquí -->
+            @yield('content')
+        </div>
+        
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    © 2025 Todos los derechos reservados. Grupo Plasencia (Sistema de Diagnóstico) - Clasificadora y Exportadora de Tabaco S.A. 
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const sidebar = document.querySelector('.sidebar');
+                const toggleBtn = document.getElementById('toggleSidebar');
+                const floatingToggle = document.getElementById('floatingToggle');
+                const mobileToggle = document.getElementById('mobileToggle');
+                const content = document.querySelector('.content');
+                const links = document.querySelectorAll('.nav-link');
+
+                // Función para actualizar la visibilidad de los botones de toggle.
+                function updateToggleVisibility(isSidebarHidden) {
+                    if (isSidebarHidden) {
+                        toggleBtn.classList.add('hidden');
+                        floatingToggle.style.display = 'flex';
                     } else {
-                        content.classList.add('with-sidebar');
+                        toggleBtn.classList.remove('hidden');
+                        floatingToggle.style.display = 'none';
                     }
-                } else {
-                    sidebarOverlay.style.display = 'none';
-                    content.classList.remove('with-sidebar');
                 }
-            }
-            
-            // Evento para el botón flotante
-            floatingToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                toggleSidebar();
-            });
-            
-            // Evento para el overlay en móviles
-            sidebarOverlay.addEventListener('click', function() {
-                toggleSidebar();
-            });
-            
-            // Evento para los enlaces del menú
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    if (this.id !== 'sidebarLogout' && window.innerWidth <= 768) {
-                        toggleSidebar();
-                    }
-                });
-            });
-            
-            // Evento para el logout
-            document.getElementById('sidebarLogout')?.addEventListener('click', function(e) {
-                e.preventDefault();
+
+                // Forzar menú oculto después de iniciar sesión.
+                // Verificar si venimos directamente del login.
+                const isPostLogin = sessionStorage.getItem('isPostLogin') === 'true';
+                const pathname = window.location.pathname;
                 
-                if (typeof Swal !== 'undefined') {
-                    Swal.fire({
-                        title: '¿Cerrar sesión?',
-                        text: '¿Estás seguro que deseas cerrar tu sesión?',
-                        icon: 'question',
-                        showCancelButton: true,
-                        confirmButtonColor: '#ef4444',
-                        cancelButtonColor: '#0ea5e9',
-                        confirmButtonText: 'Sí, cerrar sesión',
-                        cancelButtonText: 'Cancelar'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            document.getElementById('logout-form').submit();
+                // Si acabamos de iniciar sesión O estamos en la página principal después del .
+                if (isPostLogin || pathname === '/home' || pathname === '/' || pathname === '/menu') {
+                    // Forzar menú oculto.
+                    sidebar.classList.add('hidden');
+                    content.classList.add('full-width');
+                    localStorage.setItem('sidebarHidden', 'true');
+                    updateToggleVisibility(true);
+                    
+                    // Limpiar bandera de post-login.
+                    sessionStorage.removeItem('isPostLogin');
+                } else {
+                    // Para otras navegaciones, usar la preferencia guardada.
+                    const shouldHideSidebar = localStorage.getItem('sidebarHidden') === 'true';
+                    
+                    if (shouldHideSidebar) {
+                        sidebar.classList.add('hidden');
+                        content.classList.add('full-width');
+                        updateToggleVisibility(true);
+                    } else {
+                        sidebar.classList.remove('hidden');
+                        content.classList.remove('full-width');
+                        updateToggleVisibility(false);
+                    }
+                }
+
+                // Mostrar u ocultar el menú lateral (y guardar el estado).
+                toggleBtn.addEventListener('click', function () {
+                    sidebar.classList.add('hidden');
+                    content.classList.add('full-width');
+                    
+                    // Guardar el estado actual.
+                    localStorage.setItem('sidebarHidden', 'true');
+                    updateToggleVisibility(true);
+                });
+                
+                // Botón flotante para mostrar el menú cuando está oculto.
+                floatingToggle.addEventListener('click', function() {
+                    sidebar.classList.remove('hidden');
+                    content.classList.remove('full-width');
+                    
+                    localStorage.setItem('sidebarHidden', 'false');
+                    updateToggleVisibility(false);
+                });
+                
+                // Botón móvil para mostrar el menú.
+                mobileToggle.addEventListener('click', function() {
+                    sidebar.classList.remove('hidden');
+                    content.classList.remove('full-width');
+                    localStorage.setItem('sidebarHidden', 'false');
+                    updateToggleVisibility(false);
+                });
+
+                // Ocultar el menú cuando se selecciona una opción en pantallas pequeñas.
+               /* links.forEach(link => {
+                    link.addEventListener('click', function () {
+                        if (window.innerWidth <= 768) {
+                            sidebar.classList.add('hidden');
+                            content.classList.add('full-width');
+                            localStorage.setItem('sidebarHidden', 'true');
+                            updateToggleVisibility(true);
                         }
                     });
-                } else {
-                    if (confirm('¿Estás seguro que deseas cerrar tu sesión?')) {
-                        document.getElementById('logout-form').submit();
-                    }
+                });*/
+
+
+
+                links.forEach(link => {
+                    link.addEventListener('click', function () {
+                        // Cierra el sidebar en cualquier resolución.
+                        sidebar.classList.add('hidden');
+                        content.classList.add('full-width');
+                        localStorage.setItem('sidebarHidden', 'true');
+                        updateToggleVisibility(true);
+                    });
+                });
+
+
+                // Ajustes especiales para móviles.
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.add('hidden');
+                    content.classList.add('full-width');
+                    localStorage.setItem('sidebarHidden', 'true');
+                    updateToggleVisibility(true);
                 }
-            });
-            
-            // Cerrar el menú al hacer clic fuera en móviles
-            document.addEventListener('click', function(e) {
-                if (window.innerWidth <= 768 && sidebar.classList.contains('active') && 
-                    !sidebar.contains(e.target) && e.target !== floatingToggle) {
-                    toggleSidebar();
-                }
-            });
-            
-            // Ajustar en redimensionamiento de pantalla
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768) {
-                    sidebarOverlay.style.display = 'none';
+                
+                // Marcar el enlace activo según la URL actual.
+                if (typeof $ !== 'undefined') {
+                    const currentUrl = window.location.href;
+                    $('.nav-link').each(function() {
+                        const linkUrl = $(this).attr('href');
+                        if (currentUrl.includes(linkUrl) && linkUrl !== '{{ route("menu") }}') {
+                            $(this).addClass('active');
+                        }
+                    });
                     
-                    if (sidebar.classList.contains('active')) {
-                        content.classList.add('with-sidebar');
-                    }
-                } else {
-                    if (sidebar.classList.contains('active')) {
-                        sidebarOverlay.style.display = 'block';
-                    }
-                    content.classList.remove('with-sidebar');
+                    // Cerrar sesión y resetear preferencias.
+                    // Cierre desde el botón del sidebar-}.
+$('#sidebarLogout').on('click', function(e) {
+    e.preventDefault();
+
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: '¿Cerrar sesión?',
+            text: '¿Estás seguro que deseas cerrar tu sesión?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444',
+            cancelButtonColor: '#0ea5e9',
+            confirmButtonText: 'Sí, cerrar sesión',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem('sidebarHidden');
+                document.getElementById('logout-form').submit();
+            }
+        });
+    } else {
+        if (confirm('¿Estás seguro que deseas cerrar tu sesión?')) {
+            localStorage.removeItem('sidebarHidden');
+            document.getElementById('logout-form').submit();
+        }
+    }
+});
+
                 }
             });
-        });
-    </script>
-    
-    @yield('scripts')
-</body>
+        </script>
+    </body>
 </html>
