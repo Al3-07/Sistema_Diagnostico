@@ -170,9 +170,9 @@
         }
 
         /* Ajuste para móviles. */
-        @media (max-width: 768px) {
+        @media (max-width: 700px) {
             .sidebar {
-                left: -250px;
+                left: -200px;
             }
 
             .content {
