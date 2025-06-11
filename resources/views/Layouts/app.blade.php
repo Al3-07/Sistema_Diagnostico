@@ -288,7 +288,7 @@
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="brand-modern-title">
-            <span id="brandLink">Sistema de Diagnóstico</span>
+            <span id="brandLink">Sistema de Diagnósticos</span>
             <i class="fas fa-laptop-code icon-below"></i>
         </div>
 
