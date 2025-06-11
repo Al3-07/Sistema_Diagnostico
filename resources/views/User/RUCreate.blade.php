@@ -5,134 +5,154 @@
 @section('contenido')
 
 <style>  
-    /* Estilos base de la vista, implementados, titulos, textos, botones y colores. */
+    :root {
+        --primary: #4361ee;
+        --primary-light: #3f37c9;
+        --secondary: #3a0ca3;
+        --accent: #f72585;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --gray: #6c757d;
+        --light-gray: #e9ecef;
+        --success: #4cc9f0;
+        --warning: #f8961e;
+        --danger: #ef233c;
+        --border-radius: 12px;
+        --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
     body {
         font-family: 'Poppins', sans-serif;
-        background-color: #f8f9fa;
-        color: #000;
+        background-color: var(--light);
+        color: var(--dark);
         font-size: 15px;
     }
 
-    .card {
-        border-radius: 12px;
-        border: none;
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
-        overflow: hidden;
-        margin: 50px auto;
-        max-width: 550px;
-    }
-    
-    .card-body {
+    .edit-container {
+        max-width: 900px;
+        margin: 1rem auto;
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
         padding: 1.5rem;
-        background-color: #fff;
-        margin-top: -10px;
+        border: none;
+        position: relative;
+        overflow: hidden;
+        transition: var(--transition);
     }
 
-    /* Form layout */
+    .edit-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: rgb(165, 165, 165);
+    }
+
+    .edit-header {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .edit-title {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--dark);
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin: 0;
+    }
+
+    .edit-title::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: var(--primary);
+        border-radius: 2px;
+    }
+
+    .form-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--light-gray);
+    }
+
     .form-row {
         display: flex;
-        flex-wrap: wrap;
-        margin: -8px;
-        margin-bottom: 0.25rem;
+        flex-direction: column;
+        gap: 1rem;
     }
 
     .form-group {
-        flex: 1 1 100%;
-        min-width: 250px;
-        padding: 8px;
-        margin-bottom: 0.25rem;
+        margin-bottom: 1rem;
     }
 
-    /* LABELS de texto. */
-    .form-label {
-        display: block;
-        margin-bottom: 4px;
+    label {
         font-weight: 600;
-        color: #344767;
-        font-size: 0.95rem !important;
-        letter-spacing: 0.3px;
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
+        color: var(--dark);
+        display: block;
     }
 
-    /* INPUTS para escribir dentro de ellos. */
     .form-control, .form-select {
-        width: 100%;
-        padding: 8px 12px;
-        border: 1px solid #e2e8f0;
         border-radius: 8px;
-        font-size: 0.9rem;
-        transition: all 0.3s ease;
-        color: #344767;
+        border: 1px solid var(--light-gray);
+        padding: 0.65rem 0.9rem;
+        font-size: 0.95rem;
+        color: var(--dark);
+        transition: var(--transition);
+        background-color: white;
+        width: 100%;
     }
-    
+
     .form-control:focus, .form-select:focus {
-        border-color: #0ea5e9;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
         outline: none;
-        box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25);
     }
-    
+
     .form-control.is-invalid {
-        border-color: #dc3545;
+        border-color: var(--danger);
     }
-    
+
+    .invalid-feedback {
+        font-size: 0.8rem;
+        color: var(--danger);
+        margin-top: 0.3rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
     .text-danger {
-        color: #dc3545;
+        color: var(--danger);
         font-size: 0.75rem;
         margin-top: 2px;
         display: block;
     }
-    
-    /* Botones. */
-    .btn {
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 0.9rem;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-    }
 
-    .btn-secondary {
-        background-color: #f1f5f9;
-        color: #344767;
-        border: none;
-    }
-
-    .btn-secondary:hover {
-        background-color: #e2e8f0;
-        transform: translateY(-2px);
-    }
-
-    .btn-custom {
-        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
-        border-color: #0ea5e9;
-        color: #344767;  /* Color de texto igual al botón Regresar */
-    }
-
-    .btn-custom:hover {
-        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
-        border-color: #0284c7;
-        color: white;  /* Cambia a blanco cuando se pasa el cursor */
-        box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
-        transform: translateY(-2px);
-    }
-    
-    /* Footer para botones, pie de página. */
-    .d-flex {
-        display: flex;
-    }
-    
-    .justify-content-end {
-        justify-content: flex-end;
-    }
-    
-    .gap-3 {
-        gap: 0.75rem;
-    }
-    
-    /* Estilos específicos para el campo de contraseña. */
+    /* Password toggle */
     .input-group {
         position: relative;
         display: flex;
@@ -157,28 +177,149 @@
         padding: 0 0.75rem;
         background-color: transparent;
         border: none;
-        color: #344767;
+        color: var(--gray);
     }
-    
-    @media (max-width: 768px) {
-        .form-group {
-            flex: 1 1 100%;
-        }
+
+    /* Buttons */
+.btn {
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 120px;
+    text-align: center;
+}
+
+.btn-secondary {
+    background-color: var(--light-gray);
+    color: var(--dark);
+    border: 1px solid #d1d5db;
+}
+
+.btn-secondary:hover {
+    background-color: #d1d5db;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-success {
+    background-color:var(--primary);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color:rgb(74, 141, 236);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer Actions */
+.footer-actions {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--light-gray);
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+/* Utility Classes */
+.d-flex {
+    display: flex;
+}
+
+.justify-content-end {
+    justify-content: flex-end;
+}
+
+.gap-3 {
+    gap: 1rem;
+}
+
+/* Responsive adjustments */
+@media (min-width: 576px) {
+    .footer-actions {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.5rem;
     }
+
+    .action-buttons {
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 1.5rem;
+        width: auto;
+    }
+
+    .btn {
+        padding: 0.6rem 1.25rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .footer-actions {
+        gap: 2rem;
+    }
+
+    .action-buttons {
+        gap: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.95rem;
+        min-width: 140px;
+    }
+}
 </style>
 
-<div class="card p-4">
+<div class="edit-container">
+    <div class="edit-header">
+        <h3 class="edit-title">
+            <i class="fas fa-user-plus"></i>
+            Registro de Usuario
+        </h3>
+    </div>
+
     <form id="formCrearUsuario">
         @csrf
 
-        <!-- Título centrado con fondo gris claro -->
-        <div class="text-center mb-5" style="background-color: #f0f0f0; color: #344767; padding: 15px; border-radius: 8px;">
-            <h3 class="m-0">Registro de Usuario</h3>
-        </div>
+        <div class="form-section">
+            <h4 class="section-title">
+                <i class="fas fa-info-circle"></i>
+                Información Básica
+            </h4>
 
-        <div class="card-body">
-            <!-- Campo Nombre. -->
             <div class="form-row">
+                <!-- Campo Nombre. -->
                 <div class="form-group">
                     <label class="form-label" for="nombreUsuario">Nombre:</label>
                     <input type="text" id="nombreUsuario" name="nombre" class="form-control" 
@@ -186,10 +327,8 @@
                     title="Solo se permiten letras y espacios"
                     maxlength="15">
                 </div>
-            </div>
 
-            <!-- Campo Rol. -->
-            <div class="form-row">
+                <!-- Campo Rol. -->
                 <div class="form-group">
                     <label class="form-label" for="rolUsuario">Rol:</label>
                     <select id="rolUsuario" name="rol" class="form-select" required>
@@ -200,9 +339,16 @@
                     </select>
                 </div>
             </div>
+        </div>
 
-            <!-- Campo Contraseña. -->
+        <div class="form-section">
+            <h4 class="section-title">
+                <i class="fas fa-lock"></i>
+                Credenciales de Acceso
+            </h4>
+
             <div class="form-row">
+                <!-- Campo Contraseña. -->
                 <div class="form-group">
                     <label class="form-label" for="passwordUsuario">Contraseña:</label>
                     <div class="input-group">
@@ -212,10 +358,8 @@
                         </button>
                     </div>
                 </div>
-            </div>
 
-            <!-- Campo Confirmar Contraseña. -->
-            <div class="form-row">
+                <!-- Campo Confirmar Contraseña. -->
                 <div class="form-group">
                     <label class="form-label" for="passwordConfirmUsuario">Confirmar contraseña:</label>
                     <div class="input-group">
@@ -228,19 +372,21 @@
             </div>
         </div>
 
-        <!-- Botones para guardar y regresar, alineados a la derecha. -->
-        <div class="d-flex justify-content-end gap-3">
-            <a href="{{ route('user.index') }}" class="btn btn-secondary">
-                <i class="fas fa-arrow-left me-1"></i> Regresar
-            </a>
-            <button type="button" id="btnGuardarUsuario" class="btn btn-custom">
-                <i class="fas fa-save me-1"></i> Guardar
-            </button>
+        <!-- Botones para guardar y regresar -->
+        <div class="footer-actions">
+            <div class="action-buttons">
+                <a href="{{ route('user.index') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-1"></i> Regresar
+                </a>
+                <button type="button" id="btnGuardarUsuario" class="btn btn-success">
+                    <i class="fas fa-save me-1"></i> Guardar
+                </button>
+            </div>
         </div>
     </form>
 </div>
 
-<script> //Funcion crear la contraseña.
+<script>
 document.addEventListener('DOMContentLoaded', function() {
     // Mostrar/ocultar contraseña
     document.querySelectorAll(".toggle-password").forEach(button => {
@@ -275,42 +421,42 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
     //Funcion para enviar el formulario.
     function enviarFormulario() {
-    let formData = new FormData(document.getElementById("formCrearUsuario"));
+        let formData = new FormData(document.getElementById("formCrearUsuario"));
 
-    fetch("{{ route('user.store') }}", {
-        method: "POST",
-        body: formData,
-        headers: {
-            "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
-        }
-    })// mensaje de confirmacion y exito.
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            Swal.fire({
-                title: "Éxito",
-                text: data.message || "Usuario creado correctamente",
-                icon: "success",
-                confirmButtonText: "Aceptar"
-            }).then(() => {
-                window.location.href = "{{ route('user.index') }}"; // Redirige a la lista de usuarios
-            });
-        } else {
-            let mensaje = "No se pudo crear el usuario";
-            if (data.errors) {
-                mensaje = Object.values(data.errors).flat().join("\n"); // Muestra errores correctamente
+        fetch("{{ route('user.store') }}", {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
             }
-            Swal.fire("Error", mensaje, "error");
-        }
-    })//Mensaje de error.
-    .catch(error => {
-        console.error("Error:", error);
-        Swal.fire("Error", "Ocurrió un error al procesar la solicitud", "error");
-    });
-}
-
+        })// mensaje de confirmacion y exito.
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    title: "Éxito",
+                    text: data.message || "Usuario creado correctamente",
+                    icon: "success",
+                    confirmButtonText: "Aceptar"
+                }).then(() => {
+                    window.location.href = "{{ route('user.index') }}"; // Redirige a la lista de usuarios
+                });
+            } else {
+                let mensaje = "No se pudo crear el usuario";
+                if (data.errors) {
+                    mensaje = Object.values(data.errors).flat().join("\n"); // Muestra errores correctamente
+                }
+                Swal.fire("Error", mensaje, "error");
+            }
+        })//Mensaje de error.
+        .catch(error => {
+            console.error("Error:", error);
+            Swal.fire("Error", "Ocurrió un error al procesar la solicitud", "error");
+        });
+    }
 });
 </script>
 

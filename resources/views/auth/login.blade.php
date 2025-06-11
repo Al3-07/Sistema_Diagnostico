@@ -67,7 +67,7 @@
             font-family: 'Cinzel', serif;
             font-size: 24px;
             font-weight: 700;
-            color: #16a34a; /* Verde un poco más oscuro al hacer hover */            
+            color:rgb(60, 70, 84); /* Verde un poco más oscuro al hacer hover */            
             margin-bottom: 5px;
         }
 
@@ -125,7 +125,7 @@
         }
 
         .btn-primary {
-            background-color: #16a34a; /* Verde un poco más oscuro al hacer hover */ /* verde */
+            background-color: rgb(27, 119, 211); /* Verde un poco más oscuro al hacer hover */ /* verde */
             border: none;
             color: white;
             font-weight: 600;
@@ -136,7 +136,7 @@
         }
 
         .btn-primary:hover {
-            background-color:rgb(57, 218, 116); /* Verde un poco más oscuro al hacer hover */ /* verde más oscuro */
+            background-color:rgb(68, 150, 232); /* Verde un poco más oscuro al hacer hover */ /* verde más oscuro */
             box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
         }
 
@@ -196,14 +196,6 @@
                 </div>
             </div>
 
-
-            <div class="form-check mt-2">
-                <input type="checkbox" class="form-check-input" id="recordarUsuario">
-                <label class="form-check-label" for="recordarUsuario" style="font-weight: bold;">Recuérdame</label>
-            </div>
-
-
-
             <div class="mb-3">
                 <label for="password" class="form-label">Contraseña</label>
                 <div class="input-group">
@@ -214,6 +206,13 @@
                     </span>
                 </div>
             </div>
+
+             <div class="form-check mt-2">
+                <input type="checkbox" class="form-check-input" id="recordarUsuario">
+                <label class="form-check-label" for="recordarUsuario" style="font-style: italic;">Recuérdame</label>
+            </div>
+
+
 
             <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
         </form>

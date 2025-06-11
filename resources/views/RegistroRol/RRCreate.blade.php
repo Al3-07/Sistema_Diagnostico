@@ -42,12 +42,12 @@
     }
 
     .card-title {
-        color: #344767;
+        color:  #ffffff;;
         font-weight: 600;
     }
 
     .card-header {
-        background-color: rgb(226, 228, 230);
+        background-color: rgb(27, 119, 211);
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         padding: 1.5rem;
     }
@@ -59,12 +59,12 @@
     }
 
     .table thead th {
-        color: #64748b;
+        color:rgb(0, 0, 0);
         font-weight: 600;
         font-size: 0.875rem;
         padding: 12px;
         border-bottom: 1px solid #e2e8f0;
-        background-color: #f8fafc;
+        background-color: rgb(172, 215, 255);
     }
 
     .table tbody td {
@@ -76,7 +76,7 @@
     }
 
     .table tbody tr:hover {
-        background-color: #f1f5f9;
+        background-color: rgb(218, 221, 224);
     }
 
     .acciones-columna {
@@ -147,7 +147,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h2 class="card-title mb-0">
-                <b>Registro de Roles</b>
+                <b>Gestor de Roles</b>
             </h2>
         </div>
         <div class="card-body p-4">

@@ -4,214 +4,351 @@
 
 @section('contenido')
 
-<style>  
-    /* Estilos base */
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #f8f9fa;
-        color: #000;
-        font-size: 15px;
-    }
-
-    .card {
-        border-radius: 12px;
-        border: none;
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
-        overflow: hidden;
-        margin: 50px auto;
-        max-width: 550px;
+<style>
+    :root {
+        --primary: #4361ee;
+        --primary-light: #3f37c9;
+        --secondary: #3a0ca3;
+        --accent: #f72585;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --gray: #6c757d;
+        --light-gray: #e9ecef;
+        --success: #4cc9f0;
+        --warning: #f8961e;
+        --danger: #ef233c;
+        --border-radius: 12px;
+        --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
     
-    .card-body {
+    .edit-container {
+        max-width: 900px;
+        margin: 1rem auto;
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
         padding: 1.5rem;
-        background-color: #fff;
-        margin-top: -10px;
+        border: none;
+        position: relative;
+        overflow: hidden;
+        transition: var(--transition);
     }
 
-    /* Form layout */
+    .edit-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background:rgb(165, 165, 165);
+    }
+
+    @media (min-width: 768px) {
+        .edit-container {
+            padding: 2rem;
+            margin: 2rem auto;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .edit-container {
+            margin-top: 60px;
+            margin-left: 220px;
+            margin-right: 20px;
+        }
+    }
+
+    .edit-container:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+    }
+
+    .edit-header {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 576px) {
+        .edit-header {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    .edit-title {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--dark);
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin: 0;
+    }
+
+    @media (min-width: 768px) {
+        .edit-title {
+            font-size: 1.8rem;
+        }
+    }
+
+    .edit-title::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: var(--primary);
+        border-radius: 2px;
+    }
+
+    .form-section {
+        margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .form-section {
+            margin-bottom: 2rem;
+        }
+    }
+
+    .section-title {
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--light-gray);
+    }
+
+    @media (min-width: 768px) {
+        .section-title {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+        }
+    }
+
+    label {
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
+        color: var(--dark);
+        display: block;
+    }
+
+    @media (min-width: 768px) {
+        label {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .form-control {
+        border-radius: 8px;
+        border: 1px solid var(--light-gray);
+        padding: 0.65rem 0.9rem;
+        font-size: 0.95rem;
+        color: var(--dark);
+        transition: var(--transition);
+        background-color: white;
+        width: 100%;
+    }
+
+    @media (min-width: 768px) {
+        .form-control {
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+        }
+    }
+
+    .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        outline: none;
+    }
+
+    .form-control.is-invalid {
+        border-color: var(--danger);
+    }
+
+    .invalid-feedback {
+        font-size: 0.8rem;
+        color: var(--danger);
+        margin-top: 0.3rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
     .form-row {
         display: flex;
-        flex-wrap: wrap;
-        margin: -8px;
-        margin-bottom: 0.25rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    @media (min-width: 576px) {
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
     }
 
     .form-group {
-        flex: 1 1 100%;
-        min-width: 250px;
-        padding: 8px;
-        margin-bottom: 0.25rem;
+        margin-bottom: 1rem;
     }
 
-    /* LABELS */
-    .form-label {
-        display: block;
-        margin-bottom: 4px;
-        font-weight: 600;
-        color: #344767;
-        font-size: 0.95rem !important;
-        letter-spacing: 0.3px;
+    @media (min-width: 768px) {
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
     }
 
-    /* INPUTS */
-    .form-control, .form-select {
-        width: 100%;
-        padding: 8px 12px;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        transition: all 0.3s ease;
-        color: #344767;
-    }
-    
-    .form-control:focus, .form-select:focus {
-        border-color: #0ea5e9;
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25);
-    }
-    
-    .form-control.is-invalid {
-        border-color: #dc3545;
-    }
-    
-    .text-danger {
-        color: #dc3545;
-        font-size: 0.75rem;
-        margin-top: 2px;
-        display: block;
-    }
-    
-    /* Botones */
-    .btn {
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 0.9rem;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-    }
-
-    .btn-secondary {
-        background-color: #f1f5f9;
-        color: #344767;
-        border: none;
-    }
-
-    .btn-secondary:hover {
-        background-color: #e2e8f0;
-        transform: translateY(-2px);
-    }
-
-    .btn-custom {
-        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
-        border-color: #16a34a;
-        color: #344767;  /* Color de texto igual al botón Regresar */
-    }
-
-    .btn-custom:hover {
-        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
-        border-color: #0284c7;
-        color: white;  /* Cambia a blanco cuando se pasa el cursor */
-        box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
-        transform: translateY(-2px);
-    }
-
-    /* Estilo para botón btn-custom cuando está deshabilitado */
-    .btn-custom:disabled {
-        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
-        border-color: #0ea5e9 !important;
-        color: #344767 !important; /* Mismo color de texto */
-        opacity: 1 !important;
-        cursor: not-allowed;
-        pointer-events: none;
-    }
-    
-    /* Footer para botones */
-    .d-flex {
-        display: flex;
-    }
-    
-    .justify-content-end {
-        justify-content: flex-end;
-    }
-    
-    .gap-3 {
-        gap: 0.75rem;
-    }
-    
-    /* Estilos específicos para el campo de contraseña */
     .input-group {
         position: relative;
         display: flex;
-        flex-wrap: wrap;
-        align-items: stretch;
-        width: 100%;
+        align-items: center;
     }
-    
+
     .input-group .form-control {
-        position: relative;
-        flex: 1 1 auto;
-        width: 1%;
-        min-width: 0;
+        padding-right: 2.5rem;
     }
-    
+
     .input-group .btn {
         position: absolute;
         right: 0;
-        top: 0;
-        bottom: 0;
-        z-index: 4;
-        padding: 0 0.75rem;
-        background-color: transparent;
+        background: transparent;
         border: none;
-        color: #344767;
+        color: var(--gray);
+        padding: 0 0.75rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-    
-    @media (max-width: 768px) {
-        .form-group {
-            flex: 1 1 100%;
+
+    .input-group .btn:hover {
+        color: var(--primary);
+        background: transparent;
+    }
+
+    .footer-actions {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 1.5rem;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--light-gray);
+    }
+
+    @media (min-width: 576px) {
+        .footer-actions {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
         }
+    }
+
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        width: 100%;
+    }
+
+    @media (min-width: 576px) {
+        .action-buttons {
+            flex-direction: row;
+            justify-content: flex-end;
+            gap: 1rem;
+            width: auto;
+        }
+    }
+
+    .btn-secondary, .btn-primary {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.875rem;
+        border-radius: 0.375rem;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .btn-secondary {
+        background-color: var(--light-gray);
+        color: var(--dark);
+    }
+
+    .btn-secondary:hover {
+        background-color: #d1d5db;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-primary {
+        background-color: var(--primary);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: var(--primary-light);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }
 </style>
 
-<div class="card p-4">
+<div class="edit-container">
     <form id="formEditarUsuario" method="POST" action="{{ route('user.update', $usuario->id) }}">
         @csrf
         @method('PUT')
 
-        <!-- Título centrado con fondo gris claro -->
-        <div class="text-center mb-5" style="background-color: #f0f0f0; color: #344767; padding: 15px; border-radius: 8px;">
-            <h3 class="m-0">Editar usuario</h3>
+        <div class="edit-header">
+            <h1 class="edit-title">Editar usuario</h1>
         </div>
 
-        <div class="card-body">
-            <!-- Campo Nombre -->
+        <div class="form-section">
+            <h3 class="section-title">
+                <i class="fas fa-user-edit"></i> Información del usuario
+            </h3>
+            
             <div class="form-row">
+                <!-- Campo Nombre -->
                 <div class="form-group">
-                    <label class="form-label" for="nombreUsuario">Nombre:</label>
+                    <label for="nombreUsuario">Nombre:</label>
                     <input type="text" id="nombreUsuario" name="nombre" class="form-control" value="{{ $usuario->name }}" required>
                 </div>
-            </div>
-
-            <!-- Campo Rol -->
-            <div class="form-row">
+                
+                <!-- Campo Rol -->
                 <div class="form-group">
-                    <label class="form-label" for="rolUsuario">Rol:</label>
-                    <select id="rolUsuario" name="rol" class="form-select" required>
+                    <label for="rolUsuario">Rol:</label>
+                    <select id="rolUsuario" name="rol" class="form-control" required>
                         <option value="Administrador" {{ $usuario->role == 'Administrador' ? 'selected' : '' }}>Administrador</option>
                         <option value="Usuario" {{ $usuario->role == 'Usuario' ? 'selected' : '' }}>Usuario</option>
                         <option value="Visualizador" {{ $usuario->role == 'Visualizador' ? 'selected' : '' }}>Visualizador</option>
                     </select>
                 </div>
             </div>
-
-            <!-- Campo Nueva Contraseña -->
+            
             <div class="form-row">
+                <!-- Campo Nueva Contraseña -->
                 <div class="form-group">
-                    <label class="form-label" for="passwordUsuario">Nueva contraseña (opcional):</label>
+                    <label for="passwordUsuario">Nueva contraseña (opcional):</label>
                     <div class="input-group">
                         <input type="password" id="passwordUsuario" name="password" class="form-control">
                         <button type="button" class="btn toggle-password" data-target="passwordUsuario">
@@ -219,12 +356,10 @@
                         </button>
                     </div>
                 </div>
-            </div>
-
-            <!-- Campo Confirmar Contraseña -->
-            <div class="form-row">
+                
+                <!-- Campo Confirmar Contraseña -->
                 <div class="form-group">
-                    <label class="form-label" for="passwordConfirmUsuario">Confirmar contraseña:</label>
+                    <label for="passwordConfirmUsuario">Confirmar contraseña:</label>
                     <div class="input-group">
                         <input type="password" id="passwordConfirmUsuario" name="password_confirmation" class="form-control">
                         <button type="button" class="btn toggle-password" data-target="passwordConfirmUsuario">
@@ -235,14 +370,15 @@
             </div>
         </div>
 
-        <!-- Botones alineados a la derecha -->
-        <div class="d-flex justify-content-end gap-3">
-            <a href="{{ route('user.index') }}" class="btn btn-secondary">
-                <i class="fas fa-arrow-left me-1"></i> Regresar
-            </a>
-            <button type="submit" id="btnActualizarUsuario" class="btn btn-custom">
-                <i class="fas fa-sync-alt me-1"></i> Actualizar
-            </button>
+        <div class="footer-actions">
+            <div class="action-buttons">
+                <a href="{{ route('user.index') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-1"></i> Regresar
+                </a>
+                <button type="submit" id="btnActualizarUsuario" class="btn btn-primary">
+                    <i class="fas fa-sync-alt me-1"></i> Actualizar
+                </button>
+            </div>
         </div>
     </form>
 </div>

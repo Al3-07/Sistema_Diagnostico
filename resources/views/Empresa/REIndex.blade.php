@@ -20,20 +20,19 @@
     }
 
     .card-header {
-        background-color: rgb(226, 228, 230); 
+        background-color: rgb(27, 119, 211); 
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         padding: 1.5rem;
     }
 
     .card-title {
-        color: #344767;
+        color: #ffffff;
         font-weight: 600;
     }
 
     .btn-nuevo-registro {
-        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
-        border-color: #0ea5e9;
-        color: white;
+        background-color: #ffc107; /* Verde un poco más oscuro al hacer hover */;
+        color: black;
         font-weight: 600;
         transition: all 0.3s ease;
         padding: 0.75rem 1rem;
@@ -43,8 +42,7 @@
     }
 
     .btn-nuevo-registro:hover {
-        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
-        border-color: #0284c7;
+        background-color:rgb(255, 222, 122); /* Verde un poco más oscuro al hacer hover */;
         box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
         transform: translateY(-2px);
     }
@@ -55,7 +53,7 @@
     }
 
     table.dataTable tbody tr:hover {
-        background-color: #f1f5f9;
+        background-color:rgb(218, 221, 224);
     }
 
     table.dataTable tbody td {
@@ -65,7 +63,7 @@
     }
 
     table.dataTable thead th {
-        background-color: #e2e8f0;
+        background-color:rgb(172, 215, 255);
         color: #1f2937;
         font-weight: 700;
         font-size: 14px;
