@@ -6,200 +6,222 @@
 
 @include('sweetalert::alert')
 
-<style> /*CSS estilo del titulo, texto, tabla y botones.*/
+<style>
+    /* Estilos base */
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #f8f9fa;
     }
 
-    .card {
+    .diagnosticos-container {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    .diagnosticos-card {
         border-radius: 12px;
         border: none;
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
         overflow: hidden;
+        margin-bottom: 30px;
     }
 
-    .card-header {
-        background-color: rgb(226, 228, 230); 
+    /* Header de la tarjeta */
+    .card-header-diagnosticos {
+        background-color: rgb(27, 119, 211);
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
     }
 
-    .card-title {
-        color: #344767;
+    .card-title-diagnosticos {
+        color: #ffffff;
         font-weight: 600;
+        margin: 0;
+        font-size: 1.5rem;
     }
 
-    .btn-nuevo-registro {
-        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
-        border-color: #0ea5e9;
-        color: white;
+    .btn-nuevo-diagnostico {
+        background-color: #ffc107;
+        color: #212529;
         font-weight: 600;
         transition: all 0.3s ease;
-        padding: 0.75rem 1rem;
-        font-size: 0.80rem;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.85rem;
         min-width: 160px;
+        border: none;
+        border-radius: 6px;
+    }
+
+    .btn-nuevo-diagnostico:hover {
+        background-color: rgb(255, 222, 122);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estructura de la tabla - Versión escritorio */
+    .table-container {
+        padding: 1.5rem;
+        width: 100%;
+    }
+
+    #equipos-table {
+        width: 100% !important;
+        margin: 0 auto;
+        border-collapse: collapse;
+    }
+
+    #equipos-table thead th {
+        background-color: rgb(172, 215, 255);
+        color: #1f2937;
+        font-weight: 700;
+        font-size: 0.85rem;
+        padding: 0.75rem 0.5rem;
         text-align: center;
+        vertical-align: middle;
+        position: sticky;
+        top: 0;
+    }
+
+    #equipos-table tbody td {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.85rem;
+        vertical-align: middle;
+        border-top: 1px solid #e9ecef;
+        text-align: center;
+        word-break: break-word; /* Ajuste de texto importante */
+    }
+
+    #equipos-table tbody tr:hover {
+        background-color: rgba(218, 221, 224, 0.5);
+    }
+
+    /* Imágenes */
+    .img-table {
+        width: 60px;
+        height: 45px;
+        border-radius: 4px;
+        object-fit: cover;
+        box-shadow: 0 0 3px rgba(0,0,0,0.1);
+        max-width: 100%;
+    }
+
+    /* Controles DataTables */
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+        padding: 0.5rem 1rem;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        margin-left: 0.5em;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        padding: 0.25rem 0.5rem;
+    }
+
+    /* Versión móvil - Solo aquí activamos scroll horizontal */
+    @media (max-width: 768px) {
+        .table-container {
+            padding: 1rem 0;
+            overflow-x: auto; /* Scroll solo en móviles */
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .card-header-diagnosticos {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .btn-nuevo-diagnostico {
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        #equipos-table {
+            width: max-content !important; /* Fuerza el ancho según contenido */
+            min-width: 100%;
+        }
+        
+        #equipos-table thead th,
+        #equipos-table tbody td {
+            padding: 0.5rem 0.3rem;
+            font-size: 0.8rem;
+            white-space: nowrap; /* Evita saltos de línea */
+        }
+        
+        .img-table {
+            width: 50px;
+            height: 40px;
+        }
         
     }
 
-    .btn-nuevo-registro:hover {
-        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
-        border-color: #0284c7;
-        box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
-        transform: translateY(-2px);
+     /* Ajustes para las columnas específicas */
+    #equipos-table th:nth-child(1), /* Fecha - primera columna */
+    #equipos-table td:nth-child(1) {
+        width: 85px; /* Más ancha */
+        min-width: 85px;
+        max-width: 85px;
     }
-
-    /* Muestra el diseño de la tabla.*/
-    .img-table {
-        max-width: 60px;
-        max-height: 50px;
-        border-radius: 6px;
-        object-fit: cover;
-        box-shadow: 0 0 3px rgba(0,0,0,0.15);
+    
+    #equipos-table th:nth-child(2), /* Empresa - segunda columna */
+    #equipos-table td:nth-child(2) {
+        width: 120px; /* Más angosta */
+        min-width: 120px;
+        max-width: 120px;
     }
-
-    table.dataTable tbody tr {
-    border-radius: 8px;
-    transition: background 0.2s ease;
+    
+    /* Versión móvil */
+    @media (max-width: 768px) {
+        #equipos-table th:nth-child(1),
+        #equipos-table td:nth-child(1) {
+            width: 150px; /* Fecha sigue siendo más ancha */
+            min-width: 150px;
+            max-width: 150px;
+        }
+        
+        #equipos-table th:nth-child(2),
+        #equipos-table td:nth-child(2) {
+            width: 100px; /* Empresa más angosta */
+            min-width: 100px;
+            max-width: 100px;
+        }
     }
-
-    table.dataTable tbody tr:hover {
-        background-color: #f1f5f9;
-    }
-
-
-    table.dataTable tbody td {
-    padding: 12px 14px;
-    font-size: 14px;
-    vertical-align: middle;
-    }
-
-
-    .dataTables_wrapper .dataTables_length,
-    .dataTables_wrapper .dataTables_filter {
-        padding: 10px;
-        margin-bottom: 20px;
-    }
-
-    .datatable-controls {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-        padding: 0 10px;
-    }
-
-    .datatable-controls .dataTables_length,
-    .datatable-controls .dataTables_filter {
-        margin-bottom: 10px;
-    }
-
-    table.dataTable thead th {
-    background-color: #e2e8f0;
-    color: #1f2937;
-    font-weight: 700;
-    font-size: 14px;
-    padding: 12px 14px;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-    }
-
-    .table-responsive {
-        display: block;
-    overflow-x: auto;
-    width: 100%;
-}
-
-
-    .table {
-    width: 100%;
-    table-layout: auto;
-    word-wrap: break-word;
-    }
-
-    td,
-    th {
-        white-space: normal;
-        word-break: break-word;
-        max-width: 150px;
-    }
-
-    .descripcion-celda {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 13px;
-        max-width: 200px;
-    }
-    table.dataTable th.acciones-columna,
-table.dataTable td.acciones-columna {
-    width: 200px !important;
-    max-width: 200px !important;
-    min-width: 200px;
-    white-space: nowrap;
-    text-align: center;
-    vertical-align: middle;
-}
-
-@media (max-width: 768px) {
-    .card-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .card-header .btn-nuevo-registro {
-        width: 100%;
-        margin-top: 10px;
-        text-align: center;
-    }
-}
-
-
-table.dataTable th.fecha-columna,
-table.dataTable td.fecha-columna {
-    min-width: 78px;
-    white-space: nowrap;
-}
-
-
+    
 </style>
 
-    <!-- Vista los datos del Index. -->
-<div class="container-fluid mt-5 px-4">
-   <div class="card">
-    <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
-        <h2 class="card-title mb-2 mb-md-0">
-            <b>Diagnósticos de Equipos</b>
-        </h2>
-        @if(Auth::user()->role !== 'Visualizador')
-            <a href="{{ route('registrodiagnostico.create') }}" class="btn btn-info btn-sm btn-nuevo-registro">
-                <i class="fas fa-plus"></i> Nuevo Diagnóstico
-            </a>
-        @endif
-    </div>
-</div>
-
-            <!-- Campos de la tabla. -->
-        <div class="card-body p-4">
-            <div class="table-responsive mt-3">
-                <table class="table table-bordered table-striped w-100" id="equipos-table">
+<div class="diagnosticos-container">
+    <div class="diagnosticos-card">
+        <div class="card-header-diagnosticos">
+            <h2 class="card-title-diagnosticos">
+                <b>Diagnósticos de Equipos</b>
+            </h2>
+            @if(Auth::user()->role !== 'Visualizador')
+                <a href="{{ route('registrodiagnostico.create') }}" class="btn btn-nuevo-diagnostico">
+                    <i class="fas fa-plus"></i> Nuevo Diagnóstico
+                </a>
+            @endif
+        </div>
+        
+        <div class="table-container">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="equipos-table">
                     <thead>
                         <tr>
-<th class="fecha-columna">Fecha</th>
-                             <th>Empresa</th>
-                            <th>Hardware</th>
-                            <th>Modelo</th>
-                            <th>Marca</th>
-                            <th>Serie</th>
-                            <th>Descripción</th>
-                             <th>Estado</th>
-                            <th>Imagen Inicial</th>
-                            <th>Imagen Final</th>
-                            <th class="acciones-columna text-center">Acciones</th>
+                            <th class="columna-fecha">Fecha</th>
+                            <th class="columna-empresa">Empresa</th>
+                            <th class="columna-hardware">Hardware</th>
+                            <th class="columna-modelo">Modelo</th>
+                            <th class="columna-marca">Marca</th>
+                            <th class="columna-serie">Serie</th>
+                            <th class="columna-descripcion">Descripción</th>
+                            <th class="columna-estado">Estado</th>
+                            <th class="columna-imagen">Inicial</th>
+                            <th class="columna-imagen">Final</th>
+                            <th class="columna-acciones">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -209,7 +231,7 @@ table.dataTable td.fecha-columna {
         </div>
     </div>
 </div>
-    <!-- Funcionalidad de la tabla con sus campos. -->
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#equipos-table').DataTable({
@@ -217,58 +239,84 @@ table.dataTable td.fecha-columna {
             serverSide: true,
             ajax: '{{ route('registrodiagnostico.table') }}',
             columns: [
-             { data: 'fecha', name: 'fecha' },
-                 { data: 'empresa', name: 'empresa'},
-                { data: 'equipo', name: 'equipo' },
-                { data: 'modelo', name: 'modelo' },
-                { data: 'marca', name: 'marca' },
-                { data: 'serie', name: 'serie' },
-{
-    data: 'descripcion',
-    name: 'descripcion',
-    render: function(data) {
-        if (!data) return '';
-        return `<div class="descripcion-celda" title="${data}">${data}</div>`;
-    }
-},
-                 { data: 'estado', name: 'estado' },
+                { 
+                    data: 'fecha', 
+                    name: 'fecha',
+                    className: 'columna-fecha'
+                },
+                { 
+                    data: 'empresa', 
+                    name: 'empresa',
+                    className: 'columna-empresa'
+                },
+                { 
+                    data: 'equipo', 
+                    name: 'equipo',
+                    className: 'columna-hardware'
+                },
+                { 
+                    data: 'modelo', 
+                    name: 'modelo',
+                    className: 'columna-modelo'
+                },
+                { 
+                    data: 'marca', 
+                    name: 'marca',
+                    className: 'columna-marca'
+                },
+                { 
+                    data: 'serie', 
+                    name: 'serie',
+                    className: 'columna-serie'
+                },
+                {
+                    data: 'descripcion',
+                    name: 'descripcion',
+                    className: 'columna-descripcion',
+                    render: function(data) {
+                        return data ? `<div class="descripcion-celda" title="${data}">${data}</div>` : '';
+                    }
+                },
+                { 
+                    data: 'estado', 
+                    name: 'estado',
+                    className: 'columna-estado'
+                },
                 {
                     data: 'foto_antes',
                     name: 'foto_antes',
+                    className: 'columna-imagen',
                     orderable: false,
                     searchable: false,
                     render: function(data) {
-                        if(data) {
-                            return '<img src="{{ asset("img/post") }}/' + data + '" class="img-table" alt="Foto Antes">';
-                        }
-                        return '';
+                        return data ? `<img src="{{ asset('img/post') }}/${data}" class="img-table" alt="Foto Antes">` : '';
                     }
                 },
                 {
                     data: 'foto_despues',
                     name: 'foto_despues',
+                    className: 'columna-imagen',
                     orderable: false,
                     searchable: false,
                     render: function(data) {
-                        if(data) {
-                            return '<img src="{{ asset("img/post") }}/' + data + '" class="img-table" alt="Foto Después">';
-                        }
-                        return '';
+                        return data ? `<img src="{{ asset('img/post') }}/${data}" class="img-table" alt="Foto Después">` : '';
                     }
                 },
                 {
                     data: 'acciones',
                     name: 'acciones',
+                    className: 'columna-acciones',
                     orderable: false,
-                    searchable: false,
-                    className: 'acciones-columna'
+                    searchable: false
                 }
-            ],//Muestra de traductor de idioma en los campos.
+            ],
             language: {
                 "processing": "Procesando...",
                 "lengthMenu": "Mostrar _MENU_ registros",
                 "zeroRecords": "No se encontraron resultados",
-                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
                 "search": "Buscar:",
                 "paginate": {
                     "first": "Primero",
@@ -276,14 +324,15 @@ table.dataTable td.fecha-columna {
                     "next": "Siguiente",
                     "previous": "Anterior"
                 }
-            }
+            },
+            autoWidth: false,
+            scrollX: false,
+            responsive: true
         });
     });
 </script>
 
-</script>
 <script>
-    // Delegamos evento a los botones con clase .delete-btn mensaje de error.
     $(document).on('click', '.delete-btn', function () {
         var id = $(this).data('id');
         var url = "{{ url('registrodiagnostico') }}/" + id;
@@ -316,6 +365,5 @@ table.dataTable td.fecha-columna {
         });
     });
 </script>
-
 
 @endsection
