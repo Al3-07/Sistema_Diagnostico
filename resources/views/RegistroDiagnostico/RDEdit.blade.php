@@ -93,23 +93,23 @@
     }
 
     .btn-secondary {
-        background-color: #e5e7eb;
+        background-color: #95a5a6;
         color: #1f2937;
         border: none;
     }
 
     .btn-secondary:hover {
-        background-color: #d1d5db;
+        background-color: #7f8c8d;
     }
 
     .btn-info {
-        background-color:  #16a34a; /* Verde un poco más oscuro al hacer hover */;
+        background-color:  rgb(71, 154, 255); /* Verde un poco más oscuro al hacer hover */;
         border-color: #3b82f6;
         color: white;
     }
 
     .btn-info:hover {
-        background-color: #2563eb;
+        background-color: rgb(60, 140, 235);
         border-color: #2563eb;
     }
 
@@ -308,15 +308,19 @@
       <!-- Vista previa de la imagen -->
       <img id="previewDespues" class="img-preview mt-3" onclick="openLightbox(this.src)">
     </div>
+    <div class="d-flex justify-content-end mt-auto pt-3">
+            <a href="{{ route('registrodiagnostico.index') }}" class="btn btn-secondary me-2">
+                <i class="fas fa-arrow-left me-1"></i> Regresar
+            </a>
+            <button type="submit" class="btn btn-info">
+                <i class="fas fa-sync-alt me-1"></i> Actualizar
+            </button>
+        </div>
   </div>
 </div>
 
 
 <!-- Boton para actualizar. -->
-        <div class="btn-group">
-            <a href="{{ route('registrodiagnostico.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left me-1"></i> Regresar</a>
-            <button type="submit" class="btn btn-info"><i class="fas fa-sync-alt me-1"></i> Actualizar</button>
-        </div>
     </form>
 </div>
 
