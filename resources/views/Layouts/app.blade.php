@@ -540,11 +540,12 @@
 <a href="{{ route('registrodiagnostico.index') }}" class="nav-link {{ request()->routeIs('registrodiagnostico.*') ? 'active' : '' }}">
     <i class="fas fa-desktop"></i>Registro Diagnóstico
 </a>
+
+@if(Auth::user()->role === 'Administrador')
 <a href="{{ route('bitacora.index') }}" class="nav-link {{ request()->routeIs('bitacoras.*') ? 'active' : '' }}">
    <i class="fa-solid fa-file"></i>Bitácora
 </a>
 
-@if(Auth::user()->role === 'Administrador')
 <div class="sidebar-section-title">ADMINISTRACIÓN DE USUARIO</div>
 <a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user.*') ? 'active' : '' }}">
     <i class="fas fa-user"></i> Registro de Usuario
