@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
 {
     Schema::table('equipo', function (Blueprint $table) {
-        $table->date('fecha')->nullable()->after('id'); // Puedes cambiar 'id' por el campo que desees
+        $table->date('fecha')->nullable()->after('id'); 
     });
 }
 

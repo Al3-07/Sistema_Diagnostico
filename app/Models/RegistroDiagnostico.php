@@ -9,7 +9,7 @@ class RegistroDiagnostico extends Model
     protected $table = 'equipo';
 
     protected $fillable = [
-     'fecha', 'equipo', 'modelo', 'marca', 'serie', 'descripcion','foto_antes','foto_despues','firma_realizado','firma_supervisado','firma_recibido','empresa_id'
+     'fecha', 'equipo', 'modelo', 'marca', 'serie', 'descripcion','foto_antes', 'foto_antes_camara', 'foto_despues', 'foto_despues_camara','firma_realizado','firma_supervisado','firma_recibido','empresa_id'
     ];
     public function empresa()
 {

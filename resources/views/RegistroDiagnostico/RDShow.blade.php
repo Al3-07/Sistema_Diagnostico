@@ -397,52 +397,56 @@
                 </div>
             </div>
             
-            <!-- Sección de imágenes -->
-            <h5 class="section-title">
-                <i class="fas fa-images me-2"></i>Imágenes del Equipo
-            </h5>
-            
-            <div class="photo-grid">
-                <!-- Imagen inicial -->
-                <div class="photo-card">
-                    <div class="photo-header">
-                        <i class="fas fa-camera me-2"></i>Imagen Inicial
-                    </div>
-                    <div class="photo-body">
-                        @if($registro->foto_antes)
-                            <img src="{{ asset('img/post/' . $registro->foto_antes) }}" 
-                                alt="Foto Antes" 
-                                class="photo-img"
-                                onclick="mostrarLightbox(this, 'Imagen Inicial del Equipo')">
-                        @else
-                            <div class="no-photo">
-                                <i class="far fa-image mb-1"></i>
-                                <p>No hay imagen inicial</p>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-                
-                <!-- Imagen final -->
-                <div class="photo-card">
-                    <div class="photo-header">
-                        <i class="fas fa-camera-retro me-2"></i>Imagen Final
-                    </div>
-                    <div class="photo-body">
-                        @if($registro->foto_despues)
-                            <img src="{{ asset('img/post/' . $registro->foto_despues) }}" 
-                                 alt="Foto Después" 
-                                 class="photo-img"
-                                 onclick="mostrarLightbox(this, 'Imagen Final del Equipo')">
-                        @else
-                            <div class="no-photo">
-                                <i class="far fa-image mb-1"></i>
-                                <p>No hay imagen final</p>
-                            </div>
-                        @endif
-                    </div>
-                </div>
+            <!-- Imagen inicial -->
+<div class="photo-card">
+    <div class="photo-header">
+        <i class="fas fa-camera me-2"></i>Imagen Inicial
+    </div>
+    <div class="photo-body">
+        @if($registro->foto_antes)
+            <img src="{{ asset('img/post/' . $registro->foto_antes) }}" 
+                 alt="Foto Antes" 
+                 class="photo-img"
+                 onclick="mostrarLightbox(this, 'Imagen Inicial del Equipo')">
+        @elseif($registro->foto_antes_camara)
+            <img src="{{ asset('img/post/' . $registro->foto_antes_camara) }}" 
+                 alt="Foto Antes (Cámara)" 
+                 class="photo-img"
+                 onclick="mostrarLightbox(this, 'Imagen Inicial del Equipo')">
+        @else
+            <div class="no-photo">
+                <i class="far fa-image mb-1"></i>
+                <p>No hay imagen inicial</p>
             </div>
+        @endif
+    </div>
+</div>
+
+<!-- Imagen final -->
+<div class="photo-card">
+    <div class="photo-header">
+        <i class="fas fa-camera-retro me-2"></i>Imagen Final
+    </div>
+    <div class="photo-body">
+        @if($registro->foto_despues)
+            <img src="{{ asset('img/post/' . $registro->foto_despues) }}" 
+                 alt="Foto Después" 
+                 class="photo-img"
+                 onclick="mostrarLightbox(this, 'Imagen Final del Equipo')">
+        @elseif($registro->foto_despues_camara)
+            <img src="{{ asset('img/post/' . $registro->foto_despues_camara) }}" 
+                 alt="Foto Después (Cámara)" 
+                 class="photo-img"
+                 onclick="mostrarLightbox(this, 'Imagen Final del Equipo')">
+        @else
+            <div class="no-photo">
+                <i class="far fa-image mb-1"></i>
+                <p>No hay imagen final</p>
+            </div>
+        @endif
+    </div>
+</div>
+
             
             <!-- Botones de acción -->
             <div class="action-buttons">

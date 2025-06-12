@@ -283,24 +283,24 @@
                     className: 'columna-estado'
                 },
                 {
-                    data: 'foto_antes',
-                    name: 'foto_antes',
-                    className: 'columna-imagen',
-                    orderable: false,
-                    searchable: false,
-                    render: function(data) {
-                        return data ? `<img src="{{ asset('img/post') }}/${data}" class="img-table" alt="Foto Antes">` : '';
-                    }
-                },
-                {
-                    data: 'foto_despues',
-                    name: 'foto_despues',
-                    className: 'columna-imagen',
-                    orderable: false,
-                    searchable: false,
-                    render: function(data) {
-                        return data ? `<img src="{{ asset('img/post') }}/${data}" class="img-table" alt="Foto Después">` : '';
-                    }
+    data: 'foto_antes_img',
+    name: 'foto_antes_img',
+    className: 'columna-imagen',
+    orderable: false,
+    searchable: false,
+    render: function(data) {
+        return data ?? ''; // ya viene con el <img> desde el servidor
+    }
+},
+{
+    data: 'foto_despues_img',
+    name: 'foto_despues_img',
+    className: 'columna-imagen',
+    orderable: false,
+    searchable: false,
+    render: function(data) {
+        return data ?? '';
+    }
                 },
                 {
                     data: 'acciones',

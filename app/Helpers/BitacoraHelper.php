@@ -16,7 +16,7 @@ class BitacoraHelper
         Log::info('ID:', ['id' => Auth::id()]);
 
         Bitacora::create([
-            'user_id' =>  Auth::id(),
+            'user_id' => auth()->user()->id,
             'accion' => $accion,
             'descripcion' => $descripcion,
             'ip' => Request::ip(),

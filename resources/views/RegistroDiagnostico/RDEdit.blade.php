@@ -231,77 +231,86 @@
             @error('estado') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 <!-- Muestra las imagenes tanto iniciales y finales. -->
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-    <div class="mb-4">
-                <label class="form-label">Imagen del Equipo</label>
-                <div class="image-upload-container">
-                    <div class="d-flex flex-column align-items-center">
-                        <i class="fas fa-camera fa-3x mb-2" style="color: var(--primary-color);"></i>
-                        <p class="mb-3 text-muted">Suba una imagen o tome una foto del equipo</p>
-                        
-                        <div class="d-flex gap-2 justify-content-center w-100 flex-wrap">
-                            <!-- Input normal para seleccionar archivo -->
-                            <label for="foto_antes" class="btn btn-outline-primary flex-grow-1 flex-md-grow-0">
-                                <i class="fas fa-upload me-2"></i>Seleccionar
-                                <input type="file" name="foto_antes" id="foto_antes" 
-                                       accept="image/*" class="d-none" 
-                                       onchange="previewImage(this, 'previewAntes')">
-                            </label>
-                            
-                            <!-- Botón para abrir cámara -->
-                            <label for="foto_antes_camera" class="btn btn-primary flex-grow-1 flex-md-grow-0">
-                                <i class="fas fa-camera me-2"></i>Tomar Foto
-                                <input type="file" name="foto_antes_camera" id="foto_antes_camera" 
-                                       accept="image/*" capture="environment" class="d-none" 
-                                       onchange="previewImage(this, 'previewAntes')">
-                            </label>
-                        </div>
-                        
-                        @error('foto_antes')
-                            <div class="text-danger mt-2 small">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    
-                    <!-- Vista previa de la imagen -->
-                    <img id="previewAntes" class="img-preview mt-3" onclick="openLightbox(this.src)">
-                </div>
-            </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+  <!-- Imagen Antes -->
+  <div class="mb-4">
+    <label class="form-label">Imagen del Equipo</label>
+    <div class="image-upload-container">
+      <div class="d-flex flex-column align-items-center">
+        <i class="fas fa-camera fa-3x mb-2" style="color: var(--primary-color);"></i>
+        <p class="mb-3 text-muted">Suba una imagen o tome una foto del equipo</p>
 
-    <!-- Imagen Final -->
-     <div class="mb-4">
-                <label class="form-label">Imagen del Equipo</label>
-                <div class="image-upload-container">
-                    <div class="d-flex flex-column align-items-center">
-                        <i class="fas fa-camera fa-3x mb-2" style="color: var(--primary-color);"></i>
-                        <p class="mb-3 text-muted">Suba una imagen o tome una foto del equipo</p>
-                        
-                        <div class="d-flex gap-2 justify-content-center w-100 flex-wrap">
-                            <!-- Input normal para seleccionar archivo -->
-                            <label for="foto_despues" class="btn btn-outline-primary flex-grow-1 flex-md-grow-0">
-                                <i class="fas fa-upload me-2"></i>Seleccionar
-                                <input type="file" name="foto_despues" id="foto_despues" 
-                                       accept="image/*" class="d-none" 
-                                       onchange="previewImage(this, 'previewDespues')">
-                            </label>
-                            
-                            <!-- Botón para abrir cámara -->
-                            <label for="foto_despues_camera" class="btn btn-primary flex-grow-1 flex-md-grow-0">
-                                <i class="fas fa-camera me-2"></i>Tomar Foto
-                                <input type="file" name="foto_despues_camera" id="foto_despues_camera" 
-                                       accept="image/*" capture="environment" class="d-none" 
-                                       onchange="previewImage(this, 'previewDespuess')">
-                            </label>
-                        </div>
-                        
-                        @error('foto_despues')
-                            <div class="text-danger mt-2 small">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    
-                    <!-- Vista previa de la imagen -->
-                    <img id="previewDespues" class="img-preview mt-3" onclick="openLightbox(this.src)">
-                </div>
-            </div>
+        <div class="d-flex gap-2 justify-content-center w-100 flex-wrap">
+          <!-- Input normal para seleccionar archivo -->
+          <label for="foto_antes" class="btn btn-outline-primary flex-grow-1 flex-md-grow-0">
+            <i class="fas fa-upload me-2"></i>Seleccionar
+            <input type="file" name="foto_antes" id="foto_antes" 
+                   accept="image/*" class="d-none" 
+                   onchange="previewImage(this, 'previewAntes')">
+          </label>
+
+          <!-- Botón para abrir cámara -->
+          <label for="foto_antes_camera_file" class="btn btn-primary flex-grow-1 flex-md-grow-0">
+            <i class="fas fa-camera me-2"></i>Tomar Foto
+            <input type="file" name="foto_antes_camera_file" id="foto_antes_camera_file" 
+                   accept="image/*" capture="environment" class="d-none" 
+                   onchange="handleCameraFile(this, 'foto_antes_camera', 'previewAntes')">
+          </label>
+
+          <!-- Input oculto para enviar Base64 -->
+          <input type="hidden" name="foto_antes_camera" id="foto_antes_camera">
+        </div>
+
+        @error('foto_antes')
+          <div class="text-danger mt-2 small">{{ $message }}</div>
+        @enderror
+      </div>
+
+      <!-- Vista previa de la imagen -->
+      <img id="previewAntes" class="img-preview mt-3" onclick="openLightbox(this.src)">
+    </div>
+  </div>
+
+  <!-- Imagen Después -->
+  <div class="mb-4">
+    <label class="form-label">Imagen del Equipo</label>
+    <div class="image-upload-container">
+      <div class="d-flex flex-column align-items-center">
+        <i class="fas fa-camera fa-3x mb-2" style="color: var(--primary-color);"></i>
+        <p class="mb-3 text-muted">Suba una imagen o tome una foto del equipo</p>
+
+        <div class="d-flex gap-2 justify-content-center w-100 flex-wrap">
+          <!-- Input normal para seleccionar archivo -->
+          <label for="foto_despues" class="btn btn-outline-primary flex-grow-1 flex-md-grow-0">
+            <i class="fas fa-upload me-2"></i>Seleccionar
+            <input type="file" name="foto_despues" id="foto_despues" 
+                   accept="image/*" class="d-none" 
+                   onchange="previewImage(this, 'previewDespues')">
+          </label>
+
+          <!-- Botón para abrir cámara -->
+          <label for="foto_despues_camera_file" class="btn btn-primary flex-grow-1 flex-md-grow-0">
+            <i class="fas fa-camera me-2"></i>Tomar Foto
+            <input type="file" name="foto_despues_camera_file" id="foto_despues_camera_file" 
+                   accept="image/*" capture="environment" class="d-none" 
+                   onchange="handleCameraFile(this, 'foto_despues_camera', 'previewDespues')">
+          </label>
+
+          <!-- Input oculto para enviar Base64 -->
+          <input type="hidden" name="foto_despues_camera" id="foto_despues_camera">
+        </div>
+
+        @error('foto_despues')
+          <div class="text-danger mt-2 small">{{ $message }}</div>
+        @enderror
+      </div>
+
+      <!-- Vista previa de la imagen -->
+      <img id="previewDespues" class="img-preview mt-3" onclick="openLightbox(this.src)">
+    </div>
+  </div>
+</div>
+
 
 <!-- Boton para actualizar. -->
         <div class="btn-group">
@@ -340,6 +349,41 @@
         const lightbox = document.getElementById('globalLightbox');
         lightbox.classList.remove('show');
     }
+     // Función para preview de archivos normales (antes o después)
+  function previewImage(input, previewId) {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById(previewId).src = e.target.result;
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  // Convierte archivo de input file a base64, actualiza input hidden y vista previa
+function handleCameraFile(inputFile, hiddenInputId, previewImgId) {
+    const file = inputFile.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        // e.target.result = base64
+        document.getElementById(hiddenInputId).value = e.target.result;
+
+        // Actualizar vista previa
+        document.getElementById(previewImgId).src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+// Vista previa simple para inputs tipo file normales
+function previewImage(inputFile, previewImgId) {
+    const file = inputFile.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    document.getElementById(previewImgId).src = url;
+}
+
 </script>
 
 @endsection

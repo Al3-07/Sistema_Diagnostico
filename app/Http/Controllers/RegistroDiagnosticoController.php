@@ -31,7 +31,7 @@ class RegistroDiagnosticoController extends Controller
     // Obtener datos para datatable
   public function getTableData()
 {
-   $registros = RegistroDiagnostico::with('empresa')->select(['id', 'fecha', 'equipo', 'modelo', 'marca', 'serie', 'descripcion', 'estado', 'foto_antes', 'foto_despues', 'empresa_id']);
+   $registros = RegistroDiagnostico::with('empresa')->select(['id', 'fecha', 'equipo', 'modelo', 'marca', 'serie', 'descripcion', 'estado', 'foto_antes', 'foto_antes_camara', 'foto_despues', 'foto_despues_camara', 'empresa_id']);
     return datatables()->of($registros)
         ->filterColumn('empresa', function ($query, $keyword) {
         $query->whereHas('empresa', function ($q) use ($keyword) {
@@ -47,20 +47,24 @@ class RegistroDiagnosticoController extends Controller
          ->addColumn('fecha', function ($registro) {
             return $registro->fecha ? \Carbon\Carbon::parse($registro->fecha)->format('d/m/Y') : 'Sin fecha';
         })
-        ->addColumn('foto_antes_img', function($registro) {
-            if ($registro->foto_antes) {
-                $url = asset('img/post/' . $registro->foto_antes);
-                return '<img src="'.$url.'" alt="Foto Antes" style="max-width:80px; max-height:60px; border-radius:6px;">';
-            }
-            return '';
-        })
-        ->addColumn('foto_despues_img', function($registro) {
-            if ($registro->foto_despues) {
-                $url = asset('img/post/' . $registro->foto_despues);
-                return '<img src="'.$url.'" alt="Foto Después" style="max-width:80px; max-height:60px; border-radius:6px;">';
-            }
-            return '';
-        })
+  ->addColumn('foto_antes_img', function($registro) {
+    $foto = $registro->foto_antes_camara ?: $registro->foto_antes;
+    if ($foto) {
+        $url = asset('img/post/' . $foto) . '?v=' . time(); // 👈 parámetro dinámico
+        return '<img src="'.$url.'" alt="Foto Antes" style="max-width:80px; max-height:60px; border-radius:6px;">';
+    }
+    return '';
+})
+
+->addColumn('foto_despues_img', function($registro) {
+    $foto = $registro->foto_despues_camara ?: $registro->foto_despues;
+    if ($foto) {
+        $url = asset('img/post/' . $foto) . '?v=' . time(); // 👈 parámetro dinámico
+        return '<img src="'.$url.'" alt="Foto Después" style="max-width:80px; max-height:60px; border-radius:6px;">';
+    }
+    return '';
+})
+
         ->addColumn('acciones', function($registro) {
              // Botones de acción
             $ver = '<a href="'.route('registrodiagnostico.show', $registro->id).'" class="btn btn-info btn-sm" title="Ver"><i class="fas fa-eye"></i></a>';
@@ -91,8 +95,8 @@ class RegistroDiagnosticoController extends Controller
     // Si es Visualizador, solo mostrar botón de ver
     return $ver;
 })
-        ->rawColumns(['acciones']) // permite renderizar el HTML
-        ->make(true);
+         ->rawColumns(['foto_antes_img', 'foto_despues_img', 'acciones']) // 👈 Incluye también 'acciones' si usas HTML allí
+    ->make(true);
 }
 
 
@@ -121,6 +125,9 @@ public function store(Request $request)
             'foto_antes' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
             'foto_despues' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
             'empresa_id' => 'required|exists:empresa,id',
+            'foto_antes_camara' => 'nullable|string',
+            'foto_despues_camara' => 'nullable|string',
+
             ], [
         'foto_antes.required' => 'La imagen es obligatoria.',
         'foto_antes.file' => 'La imagen debe ser un archivo válido.',
@@ -144,12 +151,21 @@ public function store(Request $request)
      $registro->empresa_id = $request->empresa_id;
 
     // Subir foto_antes
-        if ($request->hasFile('foto_antes')) {
-            $imagen = $request->file('foto_antes');
-            $nombre = $imagen->getClientOriginalName();
-            $imagen->move(public_path('img/post'), $nombre);
-            $registro->foto_antes = $nombre;
-        }
+       // Imagen desde cámara (prioridad)
+    if ($request->hasFile('foto_antes_camera')) {
+        $archivo = $request->file('foto_antes_camera');
+        $nombreArchivo = time() . '_camara_' . $archivo->getClientOriginalName();
+        $archivo->move(public_path('img/post'), $nombreArchivo);
+        $registro->foto_antes_camara = $nombreArchivo;
+    }
+
+    // Imagen desde archivo
+    if ($request->hasFile('foto_antes')) {
+        $archivo = $request->file('foto_antes');
+        $nombreArchivo = time() . '_archivo_' . $archivo->getClientOriginalName();
+        $archivo->move(public_path('img/post'), $nombreArchivo);
+        $registro->foto_antes = $nombreArchivo;
+    }
         // Subir foto_despues
         if ($request->hasFile('foto_despues')) {
             $imagen = $request->file('foto_despues');
@@ -157,6 +173,26 @@ public function store(Request $request)
             $imagen->move(public_path('img/post'), $nombre);
             $registro->foto_despues = $nombre;
         }
+        // Procesar imagen de cámara: foto_antes_camara
+if ($request->filled('foto_antes_camara')) {
+    $data = $request->input('foto_antes_camara');
+    $nombre = 'cam_antes_' . time() . '.png'; // Puedes usar otro formato si deseas
+    $ruta = public_path('img/post/' . $nombre);
+    file_put_contents($ruta, base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data)));
+    $registro->foto_antes_camara = $nombre;
+}
+
+// Procesar imagen de cámara: foto_despues_camara
+if ($request->filled('foto_despues_camara')) {
+    $data = $request->input('foto_despues_camara');
+    $nombre = 'cam_despues_' . time() . '.png';
+    $ruta = public_path('img/post/' . $nombre);
+    file_put_contents($ruta, base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data)));
+    $registro->foto_despues_camara = $nombre;
+}
+
+
+
     // Actualizar firmas si se envían nuevas.
 if ($request->has('firma_realizado')) {
     $firma1 = str_replace('data:image/png;base64,', '', $request->firma_realizado);
@@ -228,7 +264,10 @@ if ($request->has('firma_recibido')) {
         'descripcion' => 'nullable|string|max:1000',
          'estado' => 'required|string',
         'foto_antes' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
-            'foto_despues' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
+        'foto_despues' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:2048',
+        'foto_antes_camara' => 'nullable|string',
+        'foto_despues_camara' => 'nullable|string',
+
 
          ],   [
         'foto_despues.nullable' => 'La imagen es obligatoria.',
@@ -250,29 +289,52 @@ if ($request->has('firma_recibido')) {
     $registro->descripcion = $request->descripcion;
      $registro->estado = $request->estado;
      $registro->empresa_id = $request->empresa_id;
-
-    // Subir y reemplazar foto_antes si se envía una nueva imagen.
+ // Subir foto_antes archivo normal
     if ($request->hasFile('foto_antes')) {
-        // Opcional: eliminar imagen anterior si existe.
         if ($registro->foto_antes && file_exists(public_path('img/post/' . $registro->foto_antes))) {
             unlink(public_path('img/post/' . $registro->foto_antes));
         }
-        $imagen = $request->file('foto_antes');
-        $nombre = $imagen->getClientOriginalName();
-        $imagen->move(public_path('img/post'), $nombre);
+        $archivo = $request->file('foto_antes');
+        $nombre = time() . '_antes_' . $archivo->getClientOriginalName();
+        $archivo->move(public_path('img/post'), $nombre);
         $registro->foto_antes = $nombre;
     }
-    // Subir y reemplazar foto_despues si se envía una nueva imagen.
+
+    // Subir foto_despues archivo normal
     if ($request->hasFile('foto_despues')) {
-        // Opcional: eliminar imagen anterior si existe.
         if ($registro->foto_despues && file_exists(public_path('img/post/' . $registro->foto_despues))) {
             unlink(public_path('img/post/' . $registro->foto_despues));
         }
-        $imagen = $request->file('foto_despues');
-        $nombre = $imagen->getClientOriginalName();
-        $imagen->move(public_path('img/post'), $nombre);
+        $archivo = $request->file('foto_despues');
+        $nombre = time() . '_despues_' . $archivo->getClientOriginalName();
+        $archivo->move(public_path('img/post'), $nombre);
         $registro->foto_despues = $nombre;
     }
+
+    // Subir foto_antes_camara (base64)
+    if ($request->filled('foto_antes_camera')) {
+        if ($registro->foto_antes_camara && file_exists(public_path('img/post/' . $registro->foto_antes_camara))) {
+            unlink(public_path('img/post/' . $registro->foto_antes_camara));
+        }
+        $data = $request->input('foto_antes_camera');
+        $base64_str = preg_replace('#^data:image/\w+;base64,#i', '', $data);
+        $nombre = 'cam_antes_' . time() . '.png';
+        file_put_contents(public_path('img/post/' . $nombre), base64_decode($base64_str));
+        $registro->foto_antes_camara = $nombre;
+    }
+
+    // Subir foto_despues_camara (base64)
+    if ($request->filled('foto_despues_camera')) {
+        if ($registro->foto_despues_camara && file_exists(public_path('img/post/' . $registro->foto_despues_camara))) {
+            unlink(public_path('img/post/' . $registro->foto_despues_camara));
+        }
+        $data = $request->input('foto_despues_camera');
+        $base64_str = preg_replace('#^data:image/\w+;base64,#i', '', $data);
+        $nombre = 'cam_despues_' . time() . '.png';
+        file_put_contents(public_path('img/post/' . $nombre), base64_decode($base64_str));
+        $registro->foto_despues_camara = $nombre;
+    }
+
     // Actualizar firmas si se envían nuevas.
 if ($request->has('firma_realizado')) {
     $firma1 = str_replace('data:image/png;base64,', '', $request->firma_realizado);
