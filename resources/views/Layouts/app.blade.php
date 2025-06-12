@@ -202,8 +202,8 @@
             justify-content: center;
             align-items: center;
             position: absolute;
-            top: 30px;
-            right: -24px;
+            top: 50px;
+            right: -1px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             z-index: 1001;
@@ -448,7 +448,52 @@
     font-size: 24px;
     color: #ffffff;
 }
+.sidebar {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    /* Eliminamos margin-right y position absolute que causaban el espacio */
+}
 
+/* Scrollbar personalizada */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+/* Botón toggle - posición absoluta SIN afectar el flujo */
+#toggleSidebar {
+    position: absolute;
+    top: 50px;
+    right: -1px;
+    z-index: 1001;
+    /* Mantiene todos tus estilos originales */
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1); /* Borde para mejor visibilidad */
+}
+
+/* Responsive ajustado */
+@media (max-width: 768px) {
+    .sidebar {
+        scrollbar-width: none;
+    }
+    
+    .sidebar::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .sidebar.active {
+        scrollbar-width: thin;
+    }
+    
+    #toggleSidebar {
+        right: 20px;
+    }
+}
     </style>
 
     @yield('styles')
@@ -674,7 +719,11 @@
                     
                     // Cerrar sesión y resetear preferencias.
                     // Cierre desde el botón del sidebar-}.
-$('#sidebarLogout').on('click', function(e) {
+
+                }
+            });
+
+            $('#sidebarLogout').on('click', function(e) {
     e.preventDefault();
 
     if (typeof Swal !== 'undefined') {
@@ -700,9 +749,6 @@ $('#sidebarLogout').on('click', function(e) {
         }
     }
 });
-
-                }
-            });
         </script>
     </body>
 </html>
