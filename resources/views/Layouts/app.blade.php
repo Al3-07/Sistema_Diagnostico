@@ -6,30 +6,30 @@
     <title>Sistema de Diagnostico</title>
     <link rel="icon" href="{{ asset('img/icono.PNG') }}" type="image/PNG">
     
-    <!-- Otros estilos y scripts que ya tenías en el head -->
+    <!-- Otros estilos y scripts que ya tenías en el head. -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
 
-    <!-- Agregado el meta CSRF -->
+    <!-- Agregado el meta CSRF. -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <!-- CSS de SweetAlert2 -->
+    <!-- CSS de SweetAlert2. -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
     <!-- JavaScript de SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
     <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
 
-    <!-- jQuery -->
+    <!-- jQuery. -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
-    <!-- CSS de DataTables -->
+    <!-- CSS de DataTables. -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-    <!-- JavaScript de DataTables -->
+    <!-- JavaScript de DataTables. -->
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     
-    <!-- JavaScript de Bootstrap 5 (incluye Popper) -->
+    <!-- JavaScript de Bootstrap 5 (incluye Popper). -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -55,37 +55,37 @@
             background-color:rgb(248, 249, 250);
         }
 
-        /* Estilo del sidebar */
-       /* Sidebar fijo y negro */
+        /* Estilo del sidebar. */
+       /* Sidebar fijo y negro. */
     .sidebar {
-        width: 280px;
-        height: 100vh;
-        position: fixed;
-        left: 0;
-        top: 0;
-        background: black;
+        width: 280px; /* Ancho. */  
+        height: 100vh; /* Altura. */
+        position: fixed; /* Fijo. */
+        left: 0; /* Izquierda. */
+        top: 0; /* Arriba. */
+        background: black; /* Color. */
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
         padding: 0 0 20px 0;
         color: white;
     }
 
-    .sidebar::-webkit-scrollbar-thumb {
-            background-color: #16a34a; /* Color verde del scroll */
+    .sidebar::-webkit-scrollbar-thumb { /* Scroll. */
+            background-color: #16a34a; /* Color verde del scroll. */
             border-radius: 10px;
     }
 
-    .sidebar::-webkit-scrollbar-track {
+    .sidebar::-webkit-scrollbar-track { /* Scroll. */
             background-color: transparent;
         }
 
-    /* Marca o título */
+    /* Marca o título. */
     .sidebar .brand-container {
-        padding: 15px;
-        text-align: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 15px; /* Margen. */
+        text-align: center; /* Alineacion. */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Borde. */
     }
 
-    .sidebar .brand {
+    .sidebar .brand { /* Marca. */
         color: white;
         font-weight: 900;
         font-size: 1.4rem;
@@ -100,104 +100,104 @@
             margin-left: -1px;
         }
 
-        /* Estilos generales para todos los enlaces del menú (como estaban antes) */
-        /* Botones del menú */
+        /* Estilos generales para todos los enlaces del menú (como estaban antes). */
+        /* Botones del menú. */
     .sidebar .nav-link {
         color: white;
-        background-color:rgb(0, 0, 0); /* tono gris oscuro por defecto */
-        padding: 12px 20px;
-        margin: 10px 15px;
-        border-radius: 8px;
+        background-color:rgb(0, 0, 0); /* tono gris oscuro por defecto. */
+        padding: 12px 20px; /* Margen. */
+        margin: 10px 15px; /* Margen. */
+        border-radius: 8px; /* Radio de la curva. */
         display: flex;
-        align-items: center;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        font-size: 0.95rem;
+        align-items: center; /* Alineacion. */
+        text-decoration: none; /* Texto. */
+        transition: all 0.3s ease; /* Transicion. */
+        font-size: 0.95rem; /* Tamaño de la fuente. */
     }
-        /* Solo para el enlace del menú principal */
+        /* Solo para el enlace del menú principal. */
         .sidebar .nav-link.menu-principal {
             background: #0ea5e9;
             color: white;
         }
 
-        /* Movimiento al pasar el mouse solo en el enlace del menú principal */
+        /* Movimiento al pasar el mouse solo en el enlace del menú principal. */
         .sidebar .nav-link.menu-principal:hover {
-            transform: translateX(5px);
+            transform: translateX(5px); /* Movimiento. */
         }
 
         .sidebar .user-info {
-            padding: 15px;
-            background-color:rgb(0, 0, 0);
-            margin: 0 15px 20px 15px;
-            border-radius: 10px;
+            padding: 15px; /* Margen. */
+            background-color:rgb(0, 0, 0); /* Color. */
+            margin: 0 15px 20px 15px; /* Margen. */
+            border-radius: 10px; /* Radio de la curva. */
             display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            align-items: center; /* Alineacion. */
+            gap: 10px; /* Margen. */
+            cursor: pointer; /* Cursor. */
+            transition: all 0.3s ease; /* Transicion. */
         }
 
         .sidebar .user-info:hover {
-            background-color: #e2e8f0;
+            background-color: #e2e8f0; /* Color. */
         }
 
         .sidebar .user-info i.user-icon {
             background-color: #0ea5e9;
             color: white;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 10px; /* Margen. */
+            border-radius: 8px; /* Radio de la curva. */
         }
 
         .sidebar .user-info .user-details {
-            flex: 1;
+            flex: 1; /* Flex. */
         }
 
         .sidebar .user-info h5 {
-            margin: 0;
-            font-size: 0.95rem;
+            margin: 0; /* Margen. */
+            font-size: 0.95rem; /* Tamaño de la fuente. */
             font-weight: 600;
         }
 
         .sidebar .user-info .logout-icon {
-            color: #ef4444;
-            margin-left: auto;
+            color: #ef4444; /* Color. */
+            margin-left: auto; /* Margen. */
         }
 
         .sidebar .nav-link i {
-        margin-right: 12px;
-        width: 20px;
-        text-align: center;
+        margin-right: 12px; /* Margen. */
+        width: 20px; /* Ancho. */
+        text-align: center; /* Alineacion. */
     }
 
     /* Hover: un poco más claro */
     .sidebar .nav-link:hover {
-        background-color:rgb(141, 129, 129);
+        background-color:rgb(141, 129, 129); /* Color. */
     }
 
-    /* Solo el botón activo (seleccionado): blanco con texto negro */
-    .sidebar .nav-link.active {
-        background-color: white;
-        color: black;
-        font-weight: bold;
+    /* Solo el botón activo (seleccionado): blanco con texto negro. */
+    .sidebar .nav-link.active { 
+        background-color: white; /* Color. */
+        color: black; /* Color. */
+        font-weight: bold; /* Peso de la fuente. */
     }
 
-        /* Contenido principal */
+        /* Contenido principal. */
         .content {
-            margin-left: 280px;
-            padding: 30px;
-            transition: margin-left 0.3s;
+            margin-left: 280px; /* Margen. */
+            padding: 30px; /* Margen. */
+            transition: margin-left 0.3s; /* Transicion. */
         }
 
         /* Botón para toggle del sidebar */
         #toggleSidebar {
             cursor: pointer;
             font-size: 2.2rem; 
-           color:rgb(0, 0, 0); /* Verde moderno */ 
-            font-weight: 700;
-            background-color: #f8fafc;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+           color:rgb(0, 0, 0); /* Color. */ 
+            font-weight: 700; /* Peso de la fuente. */
+            background-color: #f8fafc; /* Color. */
+            width: 50px; /* Ancho. */
+            height: 50px; /* Alto. */
+            border-radius: 50%; /* Radio de la curva. */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -210,39 +210,39 @@
         }
 
         #toggleSidebar:hover {
-            transform: scale(1.1);
-            color:rgb(25, 192, 226); /* Verde un poco más oscuro al hacer hover */
+            transform: scale(1.1); /* Transformacion. */
+            color:rgb(25, 192, 226); /* Color. */
         }
 
-        /* Estilos para el botón cuando el sidebar está oculto */
+        /* Estilos para el botón cuando el sidebar está oculto. */
         #toggleSidebar.hidden {
             right: auto;
             left: 20px;
-            color: #16a34a; /* Verde un poco más oscuro al hacer hover */            
+            color: #16a34a; /* Color. */            
             color: white;
         }
 
-        /* Estilos cuando el menú está oculto */
+        /* Estilos cuando el menú está oculto. */
         .sidebar.hidden {
             left: -380px;
         }
 
         .content.full-width {
-            margin-left: 0;
+            margin-left: 0; /* Margen. */
         }
 
         /* Divider */
         .sidebar-divider {
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid #e2e8f0; /* Color. */
             margin: 15px;
         }
 
-        /* Estilos para secciones */
+        /* Estilos para secciones. */
         .sidebar-section-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
+            font-size: 0.75rem; /* Tamaño de la fuente. */
+            text-transform: uppercase; /* Transformacion. */
+            letter-spacing: 0.5px; /* Espacio entre letras. */
+            color: #94a3b8; /* Color. */
             font-weight: 600;
             padding: 0 15px;
             margin-top: 15px;
@@ -252,231 +252,231 @@
         /* Botón flotante para mostrar menú en móviles */
         .mobile-toggle {
             display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 300px;
-            z-index: 1002;
-            color:rgb(0, 0, 0); /* Verde un poco más oscuro al hacer hover */
-             color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            justify-content: center;
-            align-items: center;
+            position: fixed; /* Posicionamiento. */
+            bottom: 20px; /* Margen. */
+            right: 300px; /* Margen. */
+            z-index: 1002; /* Z-index. */
+            color:rgb(0, 0, 0); /* Color. */
+            color: white; /* Color. */
+            width: 50px; /* Ancho. */
+            height: 50px; /* Alto. */
+            border-radius: 50%; /* Radio de la curva. */
+            justify-content: center; /* Alineacion. */
+            align-items: center; /* Alineacion. */
             box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
             border: none;
         }
 
        
 
-        /* Estilos adicionales para el botón flotante */
+        /* Estilos adicionales para el botón flotante. */
         .floating-toggle {
             display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background-color:rgb(0, 0, 0); /* Verde un poco más oscuro al hacer hover */;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            z-index: 1100;
-            font-weight: 700;
-            font-size: 2.2rem;
-            transition: transform 0.3s ease;
+            position: fixed; /* Posicionamiento. */
+            top: 20px; /* Margen. */
+            left: 20px; /* Margen. */
+            background-color:rgb(0, 0, 0); /* Color. */
+            color: white; /* Color. */
+            width: 50px; /* Ancho. */
+            height: 50px; /* Alto. */
+            border-radius: 50%; /* Radio de la curva. */
+            justify-content: center; /* Alineacion. */
+            align-items: center; /* Alineacion. */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra. */
+            cursor: pointer; /* Cursor. */
+            z-index: 1100; /* Z-index. */
+            font-weight: 700; /* Peso de la fuente. */
+            font-size: 2.2rem; /* Tamaño de la fuente. */
+            transition: transform 0.3s ease; /* Transicion. */
         }
         
         .floating-toggle:hover {
-            transform: scale(1.1);
+            transform: scale(1.1); /* Transformacion. */
         }
 
         /* Sticky footer que permanece abajo aunque no haya contenido suficiente */
         html {
-            height: 100%;
+            height: 100%; /* Alto. */
         }
 
         body {
-            min-height: 100%;
-            display: flex;
-            flex-direction: column;
+            min-height: 100%; /* Alto. */
+            display: flex; /* Display. */
+            flex-direction: column; /* Flex. */
         }
 
         .content-wrapper {
-            flex: 1 0 auto;
+            flex: 1 0 auto; /* Flex. */
         }
 
         .footer {
-            flex-shrink: 0;
-            background-color: #f8f9fa;
-            text-align: center;
-            padding: 0.10rem 0;
-            border-top: 1px solid #e2e8f0;
-            width: 100%;
+            flex-shrink: 0; /* Flex. */
+            background-color: #f8f9fa; /* Color. */
+            text-align: center; /* Alineacion. */
+            padding: 0.10rem 0; /* Margen. */
+            border-top: 1px solid #e2e8f0; /* Sombra. */
+            width: 100%; /* Ancho. */
         }
 
         .footer-content {
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.8rem;
-            color: #718096;
+            font-family: 'Poppins', sans-serif; /* Tipo de fuente. */
+            font-size: 0.8rem; /* Tamaño de la fuente. */
+            color: #718096; /* Color. */
         }
 
         .modern-user-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex; /* Display. */
+    align-items: center; /* Alineacion. */
+    gap: 12px; /* Margen. */
+    padding: 12px 16px; /* Margen. */
+    background: rgba(255, 255, 255, 0.05); /* Color. */
+    border-radius: 12px; /* Radio de la curva. */
+    cursor: pointer; /* Cursor. */
+    transition: background 0.3s ease, transform 0.2s; /* Transicion. */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra. */
 }
 
 .modern-user-card:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.1); /* Color. */
+    transform: scale(1.02); /* Transformacion. */
 }
 
 .avatar-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; /* Display. */
+    align-items: center; /* Alineacion. */
+    justify-content: center; /* Alineacion. */
 }
 
 .avatar-icon {
-    font-size: 28px;
-    color: #ffffff; /* Verde moderno */
+    font-size: 28px; /* Tamaño de la fuente. */
+    color: #ffffff; /* Color. */
 }
 
 .user-details .username {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
+    margin: 0; /* Margen. */
+    font-size: 16px; /* Tamaño de la fuente. */
+    font-weight: 600; /* Peso de la fuente. */
+    color: #ffffff; /* Color. */
 }
 
 .user-details .user-role {
-    font-size: 13px;
-    color: #a0aec0;
+    font-size: 13px; /* Tamaño de la fuente. */
+    color: #a0aec0; /* Color. */
 }
 
 .arrow-icon {
-    margin-left: auto;
-    color: #a0aec0;
-    font-size: 16px;
-    transition: transform 0.3s ease;
+    margin-left: auto; /* Margen. */
+    color: #a0aec0; /* Color. */
+    font-size: 16px; /* Tamaño de la fuente. */
+    transition: transform 0.3s ease; /* Transicion. */
 }
 
 .modern-user-card:hover .arrow-icon {
-    transform: translateX(4px);
+    transform: translateX(4px); /* Transformacion. */
 }
 
 
 .modern-nav-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.05); /* translúcido claro */
-    border-radius: 12px;
+    display: flex; /* Display. */
+    align-items: center; /* Alineacion. */
+    gap: 12px; /* Margen. */
+    padding: 12px 16px; /* Margen. */
+    background: rgba(255, 255, 255, 0.05); /* Color. */
+    border-radius: 12px; /* Radio de la curva. */
     color: rgb(126, 117, 117); /* texto por defecto */
-    font-weight: 500;
-    text-decoration: none;
-    transition: background 0.3s ease, transform 0.2s, color 0.2s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    margin-bottom: 8px;
-    min-height: 44px;
+    font-weight: 500; /* Peso de la fuente. */
+    text-decoration: none; /* Texto. */
+    transition: background 0.3s ease, transform 0.2s, color 0.2s ease; /* Transicion. */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra. */
+    margin-bottom: 8px; /* Margen. */
+    min-height: 44px; /* Alto. */
 }
 
 .modern-nav-link i {
-    color: #22c55e; /* verde moderno */
-    min-width: 20px;
-    text-align: center;
-    transition: color 0.3s ease;
+    color: #22c55e; /* Color. */
+    min-width: 20px; /* Ancho. */
+    text-align: center; /* Alineacion. */
+    transition: color 0.3s ease; /* Transicion. */
 }
 
 .modern-nav-link:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.02);
-    color: rgb(90, 90, 90); /* más visible al pasar el mouse */
+    background: rgba(255, 255, 255, 0.1); /* Color. */
+    transform: scale(1.02); /* Transformacion. */
+    color: rgb(90, 90, 90); /* Color. */
 }
 
 .modern-nav-link.active {
-    background: rgba(182, 163, 163, 0.2); /* un poco más sólido */
-    color: rgb(70, 70, 70); /* texto oscuro y visible */
-    font-weight: 600;
-    border-left: 4px solid #22c55e;
-    padding-left: 12px;
+    background: rgba(182, 163, 163, 0.2); /* Color. */
+    color: rgb(70, 70, 70); /* Color. */
+    font-weight: 600; /* Peso de la fuente. */
+    border-left: 4px solid #22c55e; /* Borde. */
+    padding-left: 12px; /* Margen. */
 }
 
 .modern-nav-link.active i {
-    color: #22c55e; /* mantiene ícono verde */
+    color: #22c55e; /* Color. */
 }
 
 
 
 .brand-modern-title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px;
-    background-color: rgba(183, 170, 170, 0.08);
-    border-radius: 12px;
+    display: flex; /* Display. */
+    flex-direction: column; /* Flex. */
+    align-items: center; /* Alineacion. */
+    padding: 16px; /* Margen. */
+    background-color: rgba(183, 170, 170, 0.08); /* Color. */
+    border-radius: 12px; /* Radio de la curva. */
     margin: 2px 0 2px 0; /* ↑ esto lo baja */
-    color: white;
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
-    text-align: center;
-    transition: transform 0.2s ease;
+    color: white; /* Color. */
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05); /* Sombra. */
+    text-align: center; /* Alineacion. */
+    transition: transform 0.2s ease; /* Transicion. */
 }
 
 .brand-modern-title:hover {
-    transform: scale(1.02);
+    transform: scale(1.02); /* Transformacion. */
 }
 
 .brand-modern-title #brandLink {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    color: rgb(249, 245, 245);
+    font-size: 20px; /* Tamaño de la fuente. */
+    font-weight: 700; /* Peso de la fuente. */
+    margin-bottom: 6px; /* Margen. */
+    color: rgb(249, 245, 245); /* Color. */
 }
 
 .brand-modern-title .icon-below {
-    font-size: 24px;
-    color: #ffffff;
+    font-size: 24px; /* Tamaño de la fuente. */
+    color: #ffffff; /* Color. */
 }
 .sidebar {
     overflow-y: auto;
     overflow-x: hidden;
     scrollbar-width: thin;
-    /* Eliminamos margin-right y position absolute que causaban el espacio */
+    /* Eliminamos margin-right y position absolute que causaban el espacio. */
 }
 
-/* Scrollbar personalizada */
+/* Scrollbar personalizada. */
 .sidebar::-webkit-scrollbar {
-    width: 6px;
-    background: transparent;
+    width: 6px; /* Ancho. */
+    background: transparent; /* Color. */
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.3); /* Color. */
     border-radius: 3px;
 }
 
-/* Botón toggle - posición absoluta SIN afectar el flujo */
+/* Botón toggle - posición absoluta SIN afectar el flujo. */
 #toggleSidebar {
     position: absolute;
     top: 50px;
     right: -1px;
     z-index: 1001;
-    /* Mantiene todos tus estilos originales */
+    /* Mantiene todos tus estilos originales. */
     box-shadow: 0 0 0 2px rgba(0,0,0,0.1); /* Borde para mejor visibilidad */
 }
 
-/* Responsive ajustado */
+/* Responsive ajustado. */
 @media (max-width: 768px) {
     .sidebar {
         scrollbar-width: none;
@@ -499,9 +499,9 @@
     @yield('styles')
     </head>
     <body>
-        <!-- Sidebar -->
+        <!-- Sidebar. -->
         <div class="sidebar">
-            <!-- Botón para mostrar/ocultar el menú -->
+            <!-- Botón para mostrar/ocultar el menú. -->
             <div id="toggleSidebar">≡</div>
 
             <div class="brand-modern-title">
@@ -511,7 +511,7 @@
 
 
 
-            <!-- Usuario con función de logout -->
+            <!-- Usuario con función de logout. -->
             @if(Auth::check())
             <div class="user-info modern-user-card" id="user-profile">
                 <div class="avatar-container">
@@ -524,15 +524,17 @@
             </div>
 
 
-
-           <a href="{{ route('menu') }}" class="nav-link {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}">
+ <!-- Menú. -->
+ <a href="{{ route('menu') }}" class="nav-link {{ (request()->is('menu') || request()->is('/') || request()->is('home')) ? 'active' : '' }}">
     <i class="fas fa-home"></i> Inicio
 </a>
 
+ <!-- Reportes. -->
   <a href="{{ route('reportes.index') }}" class="nav-link {{ request()->routeIs('reportes.*') ? 'active' : '' }}">
     <i class="fas fa-chart-bar"></i> Reportes
   </a>
 
+<!-- ADMINISTRACIÓN DE REGISTROS. -->
 <div class="sidebar-section-title">ADMINISTRACIÓN DE REGISTROS</div>
 <a href="{{ route('empresa.index') }}" class="nav-link {{ request()->routeIs('empresa.*') ? 'active' : '' }}">
    <i class="fa-solid fa-building"></i>Registro de Empresa
@@ -541,11 +543,13 @@
     <i class="fas fa-desktop"></i>Registro Diagnóstico
 </a>
 
+<!-- Bitácora. -->
 @if(Auth::user()->role === 'Administrador')
 <a href="{{ route('bitacora.index') }}" class="nav-link {{ request()->routeIs('bitacoras.*') ? 'active' : '' }}">
    <i class="fa-solid fa-file"></i>Bitácora
 </a>
 
+<!-- ADMINISTRACIÓN DE USUARIO. -->
 <div class="sidebar-section-title">ADMINISTRACIÓN DE USUARIO</div>
 <a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user.*') ? 'active' : '' }}">
     <i class="fas fa-user"></i> Registro de Usuario
@@ -555,15 +559,16 @@
 </a>
 @endif
 
+<!-- Cerrar Sesión. -->
 <a href="#" id="sidebarLogout" class="nav-link text-start">
     <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
 </a>
-            <!-- Formulario oculto para logout -->
+            <!-- Formulario oculto para logout. -->
             <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
                 @csrf
             </form>
             @else
-            <!-- Mostrar opción de login para usuarios no autenticados -->
+            <!-- Mostrar opción de login para usuarios no autenticados. -->
             <div class="user-info" onclick="window.location.href='{{ route('login') }}'">
                 <i class="fas fa-sign-in-alt user-icon"></i>
                 <div class="user-details">
@@ -573,11 +578,11 @@
             @endif
         </div>
 
-        <!-- Botón P flotante cuando el sidebar está oculto -->
+        <!-- Botón P flotante cuando el sidebar está oculto. -->
         <div id="floatingToggle" class="floating-toggle">≡</div>
 
 
-        <!-- Contenido principal -->
+        <!-- Contenido principal. -->
         <div class="content">
             <div class="container mt-4">
                 @yield('contenido')
@@ -585,7 +590,7 @@
         </div>
 
         <div class="content-wrapper">
-            <!-- Todo el contenido de tus vistas irá aquí -->
+            <!-- Todo el contenido de tus vistas irá aquí. -->
             @yield('content')
         </div>
         
@@ -597,7 +602,7 @@
             </div>
         </footer>
 
-        <!-- Scripts -->
+        <!-- Scripts. -->
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const sidebar = document.querySelector('.sidebar');
@@ -623,7 +628,7 @@
                 const isPostLogin = sessionStorage.getItem('isPostLogin') === 'true';
                 const pathname = window.location.pathname;
                 
-                // Si acabamos de iniciar sesión O estamos en la página principal después del .
+                // Si acabamos de iniciar sesión O estamos en la página principal después de iniciar sesión.
                 if (isPostLogin || pathname === '/home' || pathname === '/' || pathname === '/menu') {
                     // Forzar menú oculto.
                     sidebar.classList.add('hidden');
@@ -674,21 +679,8 @@
                     localStorage.setItem('sidebarHidden', 'false');
                     updateToggleVisibility(false);
                 });
-
-                // Ocultar el menú cuando se selecciona una opción en pantallas pequeñas.
-               /* links.forEach(link => {
-                    link.addEventListener('click', function () {
-                        if (window.innerWidth <= 768) {
-                            sidebar.classList.add('hidden');
-                            content.classList.add('full-width');
-                            localStorage.setItem('sidebarHidden', 'true');
-                            updateToggleVisibility(true);
-                        }
-                    });
-                });*/
-
-
-
+                
+                // Cierra el sidebar en cualquier resolución.
                 links.forEach(link => {
                     link.addEventListener('click', function () {
                         // Cierra el sidebar en cualquier resolución.

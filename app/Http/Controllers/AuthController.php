@@ -8,11 +8,13 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    // Muestra la vista de login.
     public function showLogin()
     {
         return view('auth.login'); 
     }
 
+    // Autentica al usuario.
     public function login(Request $request)
     {
     $request->validate([
@@ -20,21 +22,21 @@ class AuthController extends Controller
         'password' => 'required'
     ]);
 
-    //  Buscar al usuario en la tabla users
+    //  Buscar al usuario en la tabla users.
     $user = User::where('name', $request->nombre)->first();
 
     if (!$user) {
         return back()->withErrors(['error' => 'Usuario no encontrado']);
     }
 
-    //  Buscar el estado del usuario en la tabla registro_rols
+    //  Buscar el estado del usuario en la tabla registro_rols.
     $rol = \App\Models\RegistroRol::where('rol', $user->role)->first();
 
     if (!$rol) {
         return back()->withErrors(['error' => 'Rol no encontrado. Contacta al administrador.']);
     }
 
-    //  Si el rol no es Administrador y está inactivo, bloquear login
+    //  Si el rol no es Administrador y está inactivo, bloquear login.
     if ($user->role !== 'Administrador' && $rol->estado == 0) {
         return back()->withErrors(['error' => 'Tu cuenta está inactiva. Contacta al administrador.']);
     }
@@ -47,12 +49,13 @@ class AuthController extends Controller
     return redirect()->intended('/menu'); 
 }
 
-    
+    // Muestra la vista de registro.
     public function showRegister()
     {   
         return view('auth.register'); 
     }
 
+    // Registra un nuevo usuario.
     public function register(Request $request)
     {
         $request->validate([
@@ -71,6 +74,7 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registro exitoso. Inicia sesión.');
     }
 
+    // Cierra la sesión del usuario.
     public function logout()
     {
         Auth::logout();

@@ -3,7 +3,7 @@
 @section('titulo', 'Editar Rol')
 
 @section('contenido')
-
+ <!-- Contenido de editar el rol. -->
 <div class="container mt-5">
     <div class="card">
         <div class="card-header">
@@ -23,7 +23,7 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
+<script>/* Script para cambiar el estado del rol. */ 
     $(document).ready(function() {
         $('#toggleEstado').click(function() {
             let button = $(this);
@@ -37,7 +37,7 @@
                     _token: "{{ csrf_token() }}",
                     id: roleId,
                     estado: newEstado
-                },
+                },/* Fin de los datos.*/ 
                 success: function(response) {
                     if (response.success) {
                         button.data('estado', newEstado);

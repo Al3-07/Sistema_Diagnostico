@@ -5,21 +5,21 @@
 @section('contenido')
 
 <style>  
-    :root {
-        --primary: #4361ee;
-        --primary-light: #3f37c9;
-        --secondary: #3a0ca3;
-        --accent: #f72585;
-        --light: #f8f9fa;
-        --dark: #212529;
-        --gray: #6c757d;
-        --light-gray: #e9ecef;
-        --success: #4cc9f0;
-        --warning: #f8961e;
-        --danger: #ef233c;
-        --border-radius: 12px;
-        --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    :root { /* Fin del root. */
+        --primary: #4361ee; /* Fin del primary. */
+        --primary-light: #3f37c9; /* Fin del primary-light. */
+        --secondary: #3a0ca3; /* Fin del secondary. */
+        --accent: #f72585; /* Fin del accent. */
+        --light: #f8f9fa; /* Fin del light. */
+        --dark: #212529; /* Fin del dark. */
+        --gray: #6c757d; /* Fin del gray. */
+        --light-gray: #e9ecef; /* Fin del light-gray. */
+        --success: #4cc9f0; /* Fin del success. */
+        --warning: #f8961e; /* Fin del warning. */
+        --danger: #ef233c; /* Fin del danger. */
+        --border-radius: 12px; /* Fin del border-radius. */
+        --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* Fin del box-shadow. */
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Fin del transition. */
     }
     
     body {
@@ -27,109 +27,109 @@
         background-color: var(--light);
         color: var(--dark);
         font-size: 15px;
-    }
+    } /* Fin del body. */
 
     .edit-container {
-        max-width: 900px;
-        margin: 1rem auto;
-        background: white;
-        border-radius: var(--border-radius);
-        box-shadow: var(--box-shadow);
-        padding: 1.5rem;
+        max-width: 900px; /* Fin del max-width. */
+        margin: 1rem auto; /* Fin del margin. */
+        background: white; /* Fin del background. */
+        border-radius: var(--border-radius); /* Fin del border-radius. */
+        box-shadow: var(--box-shadow); /* Fin del box-shadow. */
+        padding: 1.5rem; /* Fin del padding. */
         border: none;
         position: relative;
         overflow: hidden;
         transition: var(--transition);
-    }
+    } /* Fin del edit-container. */
 
     .edit-container::before {
         content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 5px;
-        height: 100%;
-        background: rgb(165, 165, 165);
-    }
+        position: absolute; /* Fin del position. */
+        top: 0; /* Fin del top. */
+        left: 0; /* Fin del left. */
+        width: 5px; /* Fin del width. */
+        height: 100%; /* Fin del height. */
+        background: rgb(165, 165, 165); /* Fin del background. */
+    } /* Fin del edit-container::before. */
 
     .edit-header {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-    }
+        display: flex; /* Fin del display. */
+        flex-direction: column; /* Fin del flex-direction. */
+        gap: 1rem; /* Fin del gap. */
+        margin-bottom: 1.5rem; /* Fin del margin-bottom. */
+    } /* Fin del edit-header. */
 
     .edit-title {
-        font-weight: 700;
-        font-size: 1.5rem;
-        color: var(--dark);
-        position: relative;
-        display: flex;
-        align-items: center;
+        font-weight: 700; /* Fin del font-weight. */
+        font-size: 1.5rem; /* Fin del font-size. */
+        color: var(--dark); /* Fin del color. */
+        position: relative; /* Fin del position. */
+        display: flex; /* Fin del display. */
+        align-items: center; /* Fin del align-items. */
         gap: 0.8rem;
         margin: 0;
-    }
+    } /* Fin del edit-title. */
 
     .edit-title::after {
         content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 50px;
-        height: 3px;
-        background: var(--primary);
+        position: absolute; /* Fin del position. */
+        bottom: -8px; /* Fin del bottom. */
+        left: 0; /* Fin del left. */
+        width: 50px; /* Fin del width. */
+        height: 3px; /* Fin del height. */
+        background: var(--primary); /* Fin del background. */
         border-radius: 2px;
     }
 
     .form-section {
-        margin-bottom: 1.5rem;
-    }
+        margin-bottom: 1.5rem; /* Fin del margin-bottom. */
+    } /* Fin del form-section. */
 
     .section-title {
-        font-weight: 600;
-        font-size: 1rem;
-        color: var(--primary);
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid var(--light-gray);
-    }
+        font-weight: 600; /* Fin del font-weight. */
+        font-size: 1rem; /* Fin del font-size. */
+        color: var(--primary); /* Fin del color. */
+        margin-bottom: 1rem; /* Fin del margin-bottom. */
+        display: flex; /* Fin del display. */
+        align-items: center; /* Fin del align-items. */
+        gap: 0.6rem; /* Fin del gap. */
+        padding-bottom: 0.5rem; /* Fin del padding-bottom. */
+        border-bottom: 1px solid var(--light-gray); /* Fin del border-bottom. */
+    } /* Fin del section-title. */
 
     .form-row {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
+        display: flex; /* Fin del display. */
+        flex-direction: column; /* Fin del flex-direction. */
+        gap: 1rem; /* Fin del gap. */
+    } /* Fin del form-row. */
 
     .form-group {
-        margin-bottom: 1rem;
-    }
+        margin-bottom: 1rem; /* Fin del margin-bottom. */
+    } /* Fin del form-group. */
 
     label {
-        font-weight: 600;
-        font-size: 0.9rem;
+        font-weight: 600; /* Fin del font-weight. */
+        font-size: 0.9rem; /* Fin del font-size. */
         margin-bottom: 0.4rem;
         color: var(--dark);
         display: block;
-    }
+    } /* Fin del label. */
 
     .form-control, .form-select {
-        border-radius: 8px;
-        border: 1px solid var(--light-gray);
-        padding: 0.65rem 0.9rem;
-        font-size: 0.95rem;
-        color: var(--dark);
-        transition: var(--transition);
+        border-radius: 8px; /* Fin del border-radius. */
+        border: 1px solid var(--light-gray); /* Fin del border. */
+        padding: 0.65rem 0.9rem; /* Fin del padding. */
+        font-size: 0.95rem; /* Fin del font-size. */
+        color: var(--dark); /* Fin del color. */
+        transition: var(--transition); /* Fin del transition. */
         background-color: white;
         width: 100%;
-    }
+    } /* Fin del form-control, .form-select. */
 
-    .form-control:focus, .form-select:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
-        outline: none;
+    .form-control:focus, .form-select:focus { /* Fin del form-control:focus, .form-select:focus. */
+        border-color: var(--primary); /* Fin del border-color. */
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15); /* Fin del box-shadow. */
+        outline: none; /* Fin del outline. */
     }
 
     .form-control.is-invalid {
@@ -137,170 +137,171 @@
     }
 
     .invalid-feedback {
-        font-size: 0.8rem;
-        color: var(--danger);
-        margin-top: 0.3rem;
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
+        font-size: 0.8rem; /* Fin del font-size. */
+        color: var(--danger); /* Fin del color. */
+        margin-top: 0.3rem; /* Fin del margin-top. */
+        display: flex; /* Fin del display. */
+        align-items: center; /* Fin del align-items. */
+        gap: 0.3rem; /* Fin del gap. */
     }
 
     .text-danger {
-        color: var(--danger);
-        font-size: 0.75rem;
-        margin-top: 2px;
-        display: block;
+        color: var(--danger); /* Fin del color. */
+        font-size: 0.75rem; /* Fin del font-size. */
+        margin-top: 2px; /* Fin del margin-top. */
+        display: block; /* Fin del display. */
     }
 
     /* Password toggle */
     .input-group {
         position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: stretch;
-        width: 100%;
-    }
+        display: flex; /* Fin del display. */
+        flex-wrap: wrap; /* Fin del flex-wrap. */
+        align-items: stretch; /* Fin del align-items. */
+        width: 100%; /* Fin del width. */
+    } /* Fin del input-group. */
     
-    .input-group .form-control {
-        position: relative;
-        flex: 1 1 auto;
-        width: 1%;
-        min-width: 0;
-    }
+    .input-group .form-control { /* Fin del input-group .form-control. */
+        position: relative; /* Fin del position. */
+        flex: 1 1 auto; /* Fin del flex. */
+        width: 1%; /* Fin del width. */
+        min-width: 0; /* Fin del min-width. */
+    } /* Fin del input-group .form-control. */
     
     .input-group .btn {
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        z-index: 4;
-        padding: 0 0.75rem;
-        background-color: transparent;
-        border: none;
-        color: var(--gray);
-    }
+        position: absolute; /* Fin del position. */
+        right: 0; /* Fin del right. */
+        top: 0; /* Fin del top. */
+        bottom: 0; /* Fin del bottom. */
+        z-index: 4; /* Fin del z-index. */
+        padding: 0 0.75rem; /* Fin del padding. */
+        background-color: transparent; /* Fin del background-color. */
+        border: none; /* Fin del border. */
+        color: var(--gray); /* Fin del color. */
+    } /* Fin del input-group .btn. */
 
     /* Buttons */
 .btn {
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.875rem;
-    transition: var(--transition);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 600; /* Fin del font-weight. */
+    padding: 0.5rem 1rem; /* Fin del padding. */
+    border-radius: 8px; /* Fin del border-radius. */
+    font-size: 0.875rem; /* Fin del font-size. */
+    transition: var(--transition); /* Fin del transition. */
+    display: inline-flex; /* Fin del display. */
+    align-items: center; /* Fin del align-items. */
+    justify-content: center; /* Fin del justify-content. */
+    gap: 0.5rem; /* Fin del gap. */
+    border: none; /* Fin del border. */
+    cursor: pointer; /* Fin del cursor. */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Fin del box-shadow. */
     min-width: 120px;
     text-align: center;
 }
 
 .btn-secondary {
-    background-color: var(--light-gray);
-    color: var(--dark);
-    border: 1px solid #d1d5db;
-}
+    background-color: var(--light-gray); /* Fin del background-color. */
+    color: var(--dark); /* Fin del color. */
+    border: 1px solid #d1d5db; /* Fin del border. */
+} /* Fin del btn-secondary. */
 
 .btn-secondary:hover {
-    background-color: #d1d5db;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: #d1d5db; /* Fin del background-color. */
+    transform: translateY(-2px); /* Fin del transform. */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Fin del box-shadow. */
 }
 
 .btn-primary {
-    background-color: var(--primary);
+    background-color: var(--primary); /* Fin del background-color. */
     color: white;
-}
+} /* Fin del btn-primary. */
 
 .btn-primary:hover {
-    background-color: var(--primary-light);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: var(--primary-light); /* Fin del background-color. */
+    transform: translateY(-2px); /* Fin del transform. */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Fin del box-shadow. */
 }
 
 .btn-success {
-    background-color:var(--primary);
+    background-color:var(--primary); /* Fin del background-color. */
     color: white;
-}
+} /* Fin del btn-success. */
 
 .btn-success:hover {
-    background-color:rgb(74, 141, 236);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color:rgb(74, 141, 236); /* Fin del background-color. */
+    transform: translateY(-2px); /* Fin del transform. */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Fin del box-shadow. */
 }
 
-/* Footer Actions */
+/* Footer Actions. */
 .footer-actions {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 1rem;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--light-gray);
+    display: flex; /* Fin del display. */
+    flex-direction: column-reverse; /* Fin del flex-direction. */
+    gap: 1rem; /* Fin del gap. */
+    margin-top: 2rem; /* Fin del margin-top. */
+    padding-top: 1.5rem; /* Fin del padding-top. */
+    border-top: 1px solid var(--light-gray); /* Fin del border-top. */
 }
 
 .action-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
+    display: flex; /* Fin del display. */
+    flex-direction: column; /* Fin del flex-direction. */
+    gap: 1rem; /* Fin del gap. */
+    width: 100%; /* Fin del width. */
 }
 
-/* Utility Classes */
+/* Utility Classes. */
 .d-flex {
-    display: flex;
-}
+    display: flex; /* Fin del display. */
+} /* Fin del d-flex. */
 
 .justify-content-end {
-    justify-content: flex-end;
-}
+    justify-content: flex-end; /* Fin del justify-content. */
+} /* Fin del justify-content-end. */
 
 .gap-3 {
-    gap: 1rem;
-}
+    gap: 1rem; /* Fin del gap. */
+} /* Fin del gap-3. */
 
-/* Responsive adjustments */
+/* Responsive adjustments. */
 @media (min-width: 576px) {
     .footer-actions {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1.5rem;
-    }
+        flex-direction: row; /* Fin del flex-direction. */
+        justify-content: space-between; /* Fin del justify-content. */
+        align-items: center; /* Fin del align-items. */
+        gap: 1.5rem; /* Fin del gap. */
+    } /* Fin del footer-actions. */
 
     .action-buttons {
-        flex-direction: row;
-        justify-content: flex-end;
-        gap: 1.5rem;
-        width: auto;
-    }
+        flex-direction: row; /* Fin del flex-direction. */
+        justify-content: flex-end; /* Fin del justify-content. */
+        gap: 1.5rem; /* Fin del gap. */
+        width: auto; /* Fin del width. */
+    } /* Fin del action-buttons. */
 
     .btn {
-        padding: 0.6rem 1.25rem;
-        font-size: 0.9rem;
-    }
-}
+        padding: 0.6rem 1.25rem; /* Fin del padding. */
+        font-size: 0.9rem; /* Fin del font-size. */
+    } /* Fin del btn. */
+} /* Fin del @media (min-width: 576px). */
 
 @media (min-width: 768px) {
     .footer-actions {
-        gap: 2rem;
-    }
+        gap: 2rem; /* Fin del gap. */
+    } /* Fin del footer-actions. */
 
     .action-buttons {
-        gap: 1.5rem;
+        gap: 1.5rem; /* Fin del gap. */
     }
 
     .btn {
-        padding: 0.7rem 1.5rem;
-        font-size: 0.95rem;
-        min-width: 140px;
-    }
+        padding: 0.7rem 1.5rem; /* Fin del padding. */
+        font-size: 0.95rem; /* Fin del font-size. */
+        min-width: 140px; /* Fin del min-width. */
+    } /* Fin del btn. */
 }
 </style>
 
+<!-- Fin del style. -->
 <div class="edit-container">
     <div class="edit-header">
         <h3 class="edit-title">
@@ -372,7 +373,7 @@
             </div>
         </div>
 
-        <!-- Botones para guardar y regresar -->
+        <!-- Botones para guardar y regresar. -->
         <div class="footer-actions">
             <div class="action-buttons">
                 <a href="{{ route('user.index') }}" class="btn btn-secondary">
@@ -386,9 +387,10 @@
     </form>
 </div>
 
-<script>
+<script>    
+/* Fin del script. */
 document.addEventListener('DOMContentLoaded', function() {
-    // Mostrar/ocultar contraseña
+    // Mostrar/ocultar contraseña.
     document.querySelectorAll(".toggle-password").forEach(button => {
         button.addEventListener("click", function() {
             let target = document.getElementById(this.getAttribute("data-target"));
@@ -442,12 +444,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     icon: "success",
                     confirmButtonText: "Aceptar"
                 }).then(() => {
-                    window.location.href = "{{ route('user.index') }}"; // Redirige a la lista de usuarios
+                    window.location.href = "{{ route('user.index') }}"; // Redirige a la lista de usuarios.
                 });
             } else {
                 let mensaje = "No se pudo crear el usuario";
                 if (data.errors) {
-                    mensaje = Object.values(data.errors).flat().join("\n"); // Muestra errores correctamente
+                    mensaje = Object.values(data.errors).flat().join("\n"); // Muestra errores correctamente.
                 }
                 Swal.fire("Error", mensaje, "error");
             }

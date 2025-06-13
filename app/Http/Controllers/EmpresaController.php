@@ -23,8 +23,8 @@ class EmpresaController extends Controller
      */
    public function create()
 {
-    $empresas = Empresa::all();  // Carga todas las empresas
-    return view('empresa.RECreate', compact('empresas')); // Envíalas a la vista
+    $empresas = Empresa::all();  // Carga todas las empresas.
+    return view('empresa.RECreate', compact('empresas')); // Envíalas a la vista.
     
 }
 
@@ -42,7 +42,7 @@ class EmpresaController extends Controller
 
 
         ]);
-        // Registrar en bitácora
+        // Registrar en bitácora.
     BitacoraHelper::registrar('Creó empresa', 'Empresa: ' . $empresa->empresa);
        
         return redirect()->route('empresa.index')->with('success', 'Empresa creada exitosamente.');
@@ -54,7 +54,7 @@ class EmpresaController extends Controller
     public function edit($id)
 {
     $empresa = Empresa::findOrFail($id);
-    $empresas = Empresa::all(); // Enviar también la lista de empresas
+    $empresas = Empresa::all(); // Enviar también la lista de empresas.
     return view('empresa.REEdit', compact('empresa', 'empresas'));
 }
 
@@ -72,7 +72,8 @@ class EmpresaController extends Controller
         $empresa->update([
             'empresa' => $request->empresa,
         ]);
-        BitacoraHelper::registrar('Editó empresa', 'Empresa ID: ' . $empresa->id);
+        // Registrar en bitácora.
+    BitacoraHelper::registrar('Editó empresa', 'Empresa ID: ' . $empresa->id);
 
         return redirect()->route('empresa.index')->with('success', 'Empresa actualizada correctamente.');
     }
@@ -84,7 +85,8 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::findOrFail($id);
         $empresa->delete();
-         BitacoraHelper::registrar('Eliminó empresa', 'Empresa ID: ' . $id);
+        // Registrar en bitácora.
+    BitacoraHelper::registrar('Eliminó empresa', 'Empresa ID: ' . $id);
 
         return redirect()->route('empresa.index')->with('success', 'Empresa eliminada correctamente.');
     }

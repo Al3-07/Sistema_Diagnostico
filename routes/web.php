@@ -29,32 +29,6 @@ Route::resource('empresa', EmpresaController::class);
 Route::resource('bitacoras', BitacoraController::class);
 Route::get('bitacora', [BitacoraController::class, 'bitacoraIndex'])->name('bitacora.index');
 
-
-/*Route::get('registrodiagnostico/table', [RegistroDiagnosticoController::class, 'getTableData'])->name('registrodiagnostico.table');
-
-// Vista índice (listar todos los diagnósticos)
-Route::get('registrodiagnostico', [RegistroDiagnosticoController::class, 'index'])->name('registrodiagnostico.index');
-
-// Formulario para crear nuevo diagnóstico
-Route::get('/diagnostico_create', [RegistroDiagnosticoController::class, 'create'])->name('registrodiagnostico.create');
-
-// Guardar nuevo diagnóstico
-Route::post('/diagnostico_store', [RegistroDiagnosticoController::class, 'store'])->name('registrodiagnostico.store');
-
-// Editar diagnóstico
-Route::get('/registrodiagnostico/{id}/edit', [RegistroDiagnosticoController::class, 'edit'])->name('registrodiagnostico.edit');
-
-// Actualizar diagnóstico
-Route::put('/registrodiagnostico/{id}', [RegistroDiagnosticoController::class, 'update'])->name('registrodiagnostico.update');
-
-// Eliminar diagnóstico
-Route::delete('/registrodiagnostico/{id}', [RegistroDiagnosticoController::class, 'destroy'])->name('registrodiagnostico.destroy');
-
-// Mostrar detalles de diagnóstico
-Route::get('registrodiagnostico/{id}', [RegistroDiagnosticoController::class, 'show'])->name('registrodiagnostico.show');
-Route::resource('registrodiagnostico', RegistroDiagnosticoController::class);
-*/
-
 //RUTAS PDF
 Route::get('/registro-diagnostico/{id}/pdf', [RegistroDiagnosticoController::class, 'generarPDF'])->name('registro_diagnostico.pdf');
 Route::get('/diagnostico/{id}/vista-previa', function ($id) {

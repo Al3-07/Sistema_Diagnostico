@@ -6,7 +6,7 @@
   Reportes
 </h2>
 
-  <!-- Filtros -->
+  <!-- Filtros. -->
   <div class="card shadow mb-4">
     <div class="card-body">
       <form method="GET" action="{{ route('reportes.index') }}" class="row g-3">
@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <!-- Reportes por empresa -->
+  <!-- Reportes por empresa. -->
   @php
     $agrupados = $reportes->groupBy(fn($r) => optional($r->empresa)->empresa ?? 'Sin empresa');
     $colores = ['primary', 'success', 'danger', 'warning', 'info']; // Bootstrap color classes
@@ -50,11 +50,10 @@
       <i class="fas fa-file-pdf"></i> PDF General
     </a>
   </div>
-</div>
-
+</div> <!-- Fin del card-header. -->
           <div class="card-body">
             <div style="max-height: 300px; overflow-y: auto;">
-              <table class="table table-bordered">
+              <table class="table table-bordered"> <!-- Fin de la tabla. -->
                 <thead>
                   <tr>
                     <th>Equipo</th>

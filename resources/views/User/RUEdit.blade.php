@@ -6,125 +6,125 @@
 
 <style>
     :root {
-        --primary: #4361ee;
-        --primary-light: #3f37c9;
-        --secondary: #3a0ca3;
-        --accent: #f72585;
-        --light: #f8f9fa;
-        --dark: #212529;
-        --gray: #6c757d;
-        --light-gray: #e9ecef;
-        --success: #4cc9f0;
-        --warning: #f8961e;
-        --danger: #ef233c;
-        --border-radius: 12px;
-        --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        --primary: #4361ee; /* Fin del primary. */
+        --primary-light: #3f37c9; /* Fin del primary-light. */
+        --secondary: #3a0ca3; /* Fin del secondary. */
+        --accent: #f72585; /* Fin del accent. */
+        --light: #f8f9fa; /* Fin del light. */
+        --dark: #212529; /* Fin del dark. */
+        --gray: #6c757d; /* Fin del gray. */
+        --light-gray: #e9ecef; /* Fin del light-gray. */
+        --success: #4cc9f0; /* Fin del success. */
+        --warning: #f8961e; /* Fin del warning. */
+        --danger: #ef233c; /* Fin del danger. */
+        --border-radius: 12px; /* Fin del border-radius. */
+        --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* Fin del box-shadow. */
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Fin del transition. */
     }
     
     .edit-container {
-        max-width: 900px;
-        margin: 1rem auto;
-        background: white;
-        border-radius: var(--border-radius);
-        box-shadow: var(--box-shadow);
-        padding: 1.5rem;
-        border: none;
-        position: relative;
-        overflow: hidden;
-        transition: var(--transition);
+        max-width: 900px; /* Fin del max-width. */
+        margin: 1rem auto; /* Fin del margin. */
+        background: white; /* Fin del background. */
+        border-radius: var(--border-radius); /* Fin del border-radius. */
+        box-shadow: var(--box-shadow); /* Fin del box-shadow. */
+        padding: 1.5rem; /* Fin del padding. */
+        border: none; /* Fin del border. */
+        position: relative; /* Fin del position. */
+        overflow: hidden; /* Fin del overflow. */
+        transition: var(--transition); /* Fin del transition. */
     }
 
     .edit-container::before {
         content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 5px;
-        height: 100%;
-        background:rgb(165, 165, 165);
+        position: absolute; /* Fin del position. */
+        top: 0; /* Fin del top. */
+        left: 0; /* Fin del left. */
+        width: 5px; /* Fin del width. */
+        height: 100%; /* Fin del height. */
+        background:rgb(165, 165, 165); /* Fin del background. */
     }
 
     @media (min-width: 768px) {
         .edit-container {
-            padding: 2rem;
-            margin: 2rem auto;
+            padding: 2rem; /* Fin del padding. */
+            margin: 2rem auto; /* Fin del margin. */
         }
     }
 
     @media (min-width: 992px) {
         .edit-container {
-            margin-top: 60px;
-            margin-left: 220px;
-            margin-right: 20px;
+            margin-top: 60px; /* Fin del margin-top. */
+            margin-left: 220px; /* Fin del margin-left. */
+            margin-right: 20px; /* Fin del margin-right. */
         }
     }
 
     .edit-container:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+        transform: translateY(-3px); /* Fin del transform. */
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1); /* Fin del box-shadow. */
     }
 
     .edit-header {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
+        display: flex; /* Fin del display. */
+        flex-direction: column; /* Fin del flex-direction. */
+        gap: 1rem; /* Fin del gap. */
+        margin-bottom: 1.5rem; /* Fin del margin-bottom. */
     }
 
     @media (min-width: 576px) {
         .edit-header {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: row; /* Fin del flex-direction. */
+            justify-content: space-between; /* Fin del justify-content. */
+            align-items: center; /* Fin del align-items. */
         }
     }
 
     .edit-title {
-        font-weight: 700;
-        font-size: 1.5rem;
-        color: var(--dark);
-        position: relative;
-        display: flex;
-        align-items: center;
+        font-weight: 700; /* Fin del font-weight. */
+        font-size: 1.5rem; /* Fin del font-size. */
+        color: var(--dark); /* Fin del color. */
+        position: relative; /* Fin del position. */
+        display: flex; /* Fin del display. */
+        align-items: center; /* Fin del align-items. */
         gap: 0.8rem;
         margin: 0;
     }
 
     @media (min-width: 768px) {
         .edit-title {
-            font-size: 1.8rem;
+            font-size: 1.8rem; /* Fin del font-size. */
         }
     }
 
     .edit-title::after {
         content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 50px;
-        height: 3px;
-        background: var(--primary);
+        position: absolute; /* Fin del position. */
+        bottom: -8px; /* Fin del bottom. */
+        left: 0; /* Fin del left. */
+        width: 50px; /* Fin del width. */
+        height: 3px; /* Fin del height. */
+        background: var(--primary); /* Fin del background. */
         border-radius: 2px;
     }
 
     .form-section {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.5rem; /* Fin del margin-bottom. */
     }
 
     @media (min-width: 768px) {
         .form-section {
-            margin-bottom: 2rem;
+            margin-bottom: 2rem; /* Fin del margin-bottom. */
         }
     }
 
     .section-title {
-        font-weight: 600;
-        font-size: 1rem;
-        color: var(--primary);
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
+        font-weight: 600; /* Fin del font-weight. */
+        font-size: 1rem; /* Fin del font-size. */
+        color: var(--primary); /* Fin del color. */
+        margin-bottom: 1rem; /* Fin del margin-bottom. */
+        display: flex; /* Fin del display. */
+        align-items: center; /* Fin del align-items. */
         gap: 0.6rem;
         padding-bottom: 0.5rem;
         border-bottom: 1px solid var(--light-gray);
@@ -132,196 +132,196 @@
 
     @media (min-width: 768px) {
         .section-title {
-            font-size: 1.1rem;
-            margin-bottom: 1.2rem;
+            font-size: 1.1rem; /* Fin del font-size. */
+            margin-bottom: 1.2rem; /* Fin del margin-bottom. */
         }
     }
 
     label {
-        font-weight: 600;
-        font-size: 0.9rem;
-        margin-bottom: 0.4rem;
-        color: var(--dark);
-        display: block;
+        font-weight: 600; /* Fin del font-weight. */
+        font-size: 0.9rem; /* Fin del font-size. */
+        margin-bottom: 0.4rem; /* Fin del margin-bottom. */
+        color: var(--dark); /* Fin del color. */
+        display: block; /* Fin del display. */
     }
 
     @media (min-width: 768px) {
         label {
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.95rem; /* Fin del font-size. */
+            margin-bottom: 0.5rem; /* Fin del margin-bottom. */
         }
     }
 
     .form-control {
-        border-radius: 8px;
-        border: 1px solid var(--light-gray);
-        padding: 0.65rem 0.9rem;
-        font-size: 0.95rem;
-        color: var(--dark);
-        transition: var(--transition);
+        border-radius: 8px; /* Fin del border-radius. */
+        border: 1px solid var(--light-gray); /* Fin del border. */
+        padding: 0.65rem 0.9rem; /* Fin del padding. */
+        font-size: 0.95rem; /* Fin del font-size. */
+        color: var(--dark); /* Fin del color. */
+        transition: var(--transition); /* Fin del transition. */
         background-color: white;
         width: 100%;
     }
 
     @media (min-width: 768px) {
         .form-control {
-            padding: 0.75rem 1rem;
-            font-size: 1rem;
+            padding: 0.75rem 1rem; /* Fin del padding. */
+            font-size: 1rem; /* Fin del font-size. */
         }
     }
 
     .form-control:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
-        outline: none;
+        border-color: var(--primary); /* Fin del border-color. */
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15); /* Fin del box-shadow. */
+        outline: none; /* Fin del outline. */
     }
 
     .form-control.is-invalid {
-        border-color: var(--danger);
+        border-color: var(--danger); /* Fin del border-color. */
     }
 
     .invalid-feedback {
-        font-size: 0.8rem;
-        color: var(--danger);
-        margin-top: 0.3rem;
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
+        font-size: 0.8rem; /* Fin del font-size. */
+        color: var(--danger); /* Fin del color. */
+        margin-top: 0.3rem; /* Fin del margin-top. */
+        display: flex; /* Fin del display. */
+        align-items: center; /* Fin del align-items. */
+        gap: 0.3rem; /* Fin del gap. */
     }
 
     .form-row {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        display: flex; /* Fin del display. */
+        flex-direction: column; /* Fin del flex-direction. */
+        gap: 1rem; /* Fin del gap. */
     }
 
     @media (min-width: 576px) {
         .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            display: grid; /* Fin del display. */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Fin del grid-template-columns. */
+            gap: 1.5rem; /* Fin del gap. */
         }
     }
 
     .form-group {
-        margin-bottom: 1rem;
+        margin-bottom: 1rem; /* Fin del margin-bottom. */
     }
 
     @media (min-width: 768px) {
         .form-group {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.2rem; /* Fin del margin-bottom. */
         }
     }
 
     .input-group {
-        position: relative;
-        display: flex;
-        align-items: center;
+        position: relative; /* Fin del position. */
+        display: flex; /* Fin del display. */
+        align-items: center; /* Fin del align-items. */
     }
 
     .input-group .form-control {
-        padding-right: 2.5rem;
+        padding-right: 2.5rem; /* Fin del padding-right. */
     }
 
     .input-group .btn {
-        position: absolute;
-        right: 0;
-        background: transparent;
-        border: none;
-        color: var(--gray);
-        padding: 0 0.75rem;
-        height: 100%;
-        display: flex;
+        position: absolute; /* Fin del position. */
+        right: 0; /* Fin del right. */
+        background: transparent; /* Fin del background. */
+        border: none; /* Fin del border. */
+        color: var(--gray); /* Fin del color. */
+        padding: 0 0.75rem; /* Fin del padding. */
+        height: 100%; /* Fin del height. */
+        display: flex; /* Fin del display. */
         align-items: center;
         justify-content: center;
     }
 
     .input-group .btn:hover {
-        color: var(--primary);
-        background: transparent;
+        color: var(--primary); /* Fin del color. */
+        background: transparent; /* Fin del background. */
     }
 
     .footer-actions {
-        display: flex;
-        flex-direction: column-reverse;
-        gap: 1.5rem;
-        margin-top: 2rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid var(--light-gray);
+        display: flex; /* Fin del display. */
+        flex-direction: column-reverse; /* Fin del flex-direction. */
+        gap: 1.5rem; /* Fin del gap. */
+        margin-top: 2rem; /* Fin del margin-top. */
+        padding-top: 1.5rem; /* Fin del padding-top. */
+        border-top: 1px solid var(--light-gray); /* Fin del border-top. */
     }
 
     @media (min-width: 576px) {
         .footer-actions {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
+            flex-direction: row; /* Fin del flex-direction. */
+            justify-content: space-between; /* Fin del justify-content. */
+            align-items: center; /* Fin del align-items. */
+            gap: 1rem; /* Fin del gap. */
         }
     }
 
     .action-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 0.8rem;
-        width: 100%;
+        display: flex; /* Fin del display. */
+        flex-direction: column; /* Fin del flex-direction. */
+        gap: 0.8rem; /* Fin del gap. */
+        width: 100%; /* Fin del width. */
     }
 
     @media (min-width: 576px) {
         .action-buttons {
-            flex-direction: row;
-            justify-content: flex-end;
-            gap: 1rem;
-            width: auto;
+            flex-direction: row; /* Fin del flex-direction. */
+            justify-content: flex-end; /* Fin del justify-content. */
+            gap: 1rem; /* Fin del gap. */
+            width: auto; /* Fin del width. */
         }
     }
 
     .btn-secondary, .btn-primary {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.875rem;
-        border-radius: 0.375rem;
-        border: none;
-        cursor: pointer;
-        font-weight: 500;
-        transition: all 0.2s ease;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        white-space: nowrap;
+        padding: 0.4rem 0.8rem; /* Fin del padding. */
+        font-size: 0.875rem; /* Fin del font-size. */
+        border-radius: 0.375rem; /* Fin del border-radius. */
+        border: none; /* Fin del border. */
+        cursor: pointer; /* Fin del cursor. */
+        font-weight: 500; /* Fin del font-weight. */
+        transition: all 0.2s ease; /* Fin del transition. */
+        display: inline-flex; /* Fin del display. */
+        align-items: center; /* Fin del align-items. */
+        justify-content: center; /* Fin del justify-content. */
+        text-align: center; /* Fin del text-align. */
+        white-space: nowrap; /* Fin del white-space. */
     }
 
     .btn-secondary {
-        background-color: var(--light-gray);
-        color: var(--dark);
+        background-color: var(--light-gray); /* Fin del background-color. */
+        color: var(--dark); /* Fin del color. */
     }
 
     .btn-secondary:hover {
-        background-color: #d1d5db;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        background-color: #d1d5db; /* Fin del background-color. */
+        transform: translateY(-2px); /* Fin del transform. */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Fin del box-shadow. */
     }
 
     .btn-primary {
-        background-color: var(--primary);
-        color: white;
+        background-color: var(--primary); /* Fin del background-color. */
+        color: white; /* Fin del color. */
     }
 
     .btn-primary:hover {
-        background-color: var(--primary-light);
-        transform: translateY(-2px);
+        background-color: var(--primary-light); /* Fin del background-color. */
+        transform: translateY(-2px); /* Fin del transform. */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }
 </style>
-
+<!-- Fin de los estilos -->
 <div class="edit-container">
     <form id="formEditarUsuario" method="POST" action="{{ route('user.update', $usuario->id) }}">
         @csrf
         @method('PUT')
-
+<!-- Fin del form -->
         <div class="edit-header">
             <h1 class="edit-title">Editar usuario</h1>
         </div>
-
+<!-- Fin del edit-header -->
         <div class="form-section">
             <h3 class="section-title">
                 <i class="fas fa-user-edit"></i> Información del usuario
@@ -334,7 +334,7 @@
                     <input type="text" id="nombreUsuario" name="nombre" class="form-control" value="{{ $usuario->name }}" required>
                 </div>
                 
-                <!-- Campo Rol -->
+                <!-- Campo Rol. -->
                 <div class="form-group">
                     <label for="rolUsuario">Rol:</label>
                     <select id="rolUsuario" name="rol" class="form-control" required>
@@ -346,7 +346,7 @@
             </div>
             
             <div class="form-row">
-                <!-- Campo Nueva Contraseña -->
+                <!-- Campo Nueva Contraseña. -->
                 <div class="form-group">
                     <label for="passwordUsuario">Nueva contraseña (opcional):</label>
                     <div class="input-group">
@@ -357,7 +357,7 @@
                     </div>
                 </div>
                 
-                <!-- Campo Confirmar Contraseña -->
+                <!-- Campo Confirmar Contraseña. -->
                 <div class="form-group">
                     <label for="passwordConfirmUsuario">Confirmar contraseña:</label>
                     <div class="input-group">
@@ -369,7 +369,7 @@
                 </div>
             </div>
         </div>
-
+<!-- Fin del form-section. -->
         <div class="footer-actions">
             <div class="action-buttons">
                 <a href="{{ route('user.index') }}" class="btn btn-secondary">
@@ -384,22 +384,22 @@
 </div>
 
 <script>
-    // Deshabilitar de actualizar
+    // Deshabilitar de actualizar.
     document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("formEditarUsuario");
         const submitButton = document.querySelector("button[type='submit']"); 
 
-        // Deshabilitar el botón al inicio
+        // Deshabilitar el botón al inicio.
         submitButton.disabled = true;
 
-        // Guardar valores originales
+        // Guardar valores originales.
         const initialFormData = new FormData(form);
 
         form.addEventListener("input", function () {
             const currentFormData = new FormData(form);
             let hasChanges = false;
 
-            // Comparar los valores actuales con los originales
+            // Comparar los valores actuales con los originales.
             for (let [key, value] of currentFormData.entries()) {
                 if (value !== initialFormData.get(key)) {
                     hasChanges = true;
@@ -413,7 +413,7 @@
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Mostrar/ocultar contraseña
+        // Mostrar/ocultar contraseña.
         document.querySelectorAll(".toggle-password").forEach(button => {
             button.addEventListener("click", function() {
                 let target = document.getElementById(this.getAttribute("data-target"));
@@ -431,7 +431,7 @@
             });
         });
 
-        // Mantiene el script original de edición de usuario
+        // Mantiene el script original de edición de usuario.
         document.getElementById("btnActualizarUsuario").addEventListener("click", function(event) {
             event.preventDefault(); // Evita que el formulario se envíe automáticamente
 
@@ -452,7 +452,7 @@
         function enviarFormulario() {
             let form = document.getElementById("formEditarUsuario");
             let formData = new FormData(form);
-            formData.append("_method", "PUT"); // Laravel requiere este método para actualizar
+            formData.append("_method", "PUT"); // Laravel requiere este método para actualizar.
 
             fetch(form.action, {
                 method: "POST", // Laravel espera POST con _method para PUT
@@ -465,9 +465,9 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Verificar si hubo cambios o no
+                    // Verificar si hubo cambios o no.
                     if (data.noChanges) {
-                        // No se detectaron cambios
+                        // No se detectaron cambios.
                         Swal.fire({
                             title: "Sin cambios",
                             text: data.message || "No se detectaron modificaciones",
@@ -477,7 +477,7 @@
                             window.location.href = "{{ route('user.index') }}";
                         });
                     } else {
-                        // Hubo cambios y se actualizó correctamente
+                        // Hubo cambios y se actualizó correctamente.
                         Swal.fire({
                             title: "Éxito",
                             text: data.message || "Usuario actualizado correctamente",
@@ -496,7 +496,7 @@
                     }
                     Swal.fire("Error", mensaje, "error");
                 }
-            })
+            })// Mensaje de error.
             .catch(error => {
                 console.error("Error:", error);
                 Swal.fire("Error", "Ocurrió un error inesperado", "error");

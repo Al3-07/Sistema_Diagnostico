@@ -6,149 +6,150 @@
 
 @include('sweetalert::alert')
 
-<style> /* Estilos CSS para la vista, agregados titulos, textos imagenes, botones.*/
-    body {
-        background: #f3f4f6;
+<style> 
+/* Estilos CSS para la vista, agregados titulos, textos imagenes, botones.*/
+    body {  
+        background: #f3f4f6; /* Fondo de la página.*/       
         font-family: 'Poppins', sans-serif;
-        color: #111827;
+        color: #111827; /* Color del texto.*/ 
     }
-
+    
     .container-custom {
-        max-width: 850px;
-        margin: 40px auto;
-        background: white;
-        border-radius: 16px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        padding: 2rem;
+        max-width: 850px;   /* Ancho maximo del contenedor.*/
+        margin: 40px auto; /* Margen superior e inferior.*/
+        background: white; /* Color de fondo del contenedor.*/
+        border-radius: 16px; /* Radio de la esquina del contenedor.*/
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Sombra del contenedor.*/
+        padding: 2rem; /* Margen interno del contenedor.*/
     }
 
     h3.title {
-        font-weight: 600;
-        font-size: 1.5rem;
-        text-align: center;
-        margin-bottom: 1.5rem;
-        color: #0f172a;
+        font-weight: 600; /* Peso de la fuente.*/
+        font-size: 1.5rem; /* Tamaño de la fuente.*/
+        text-align: center; /* Alineación del texto.*/
+        margin-bottom: 1.5rem; /* Margen inferior.*/
+        color: #0f172a; /* Color del texto.*/
     }
 
     label {
-        font-weight: 500;
-        font-size: 0.9rem;
-        margin-bottom: 5px;
-        color: #374151;
+        font-weight: 500; /* Peso de la fuente.*/
+        font-size: 0.9rem; /* Tamaño de la fuente.*/
+        margin-bottom: 5px; /* Margen inferior.*/
+        color: #374151; /* Color del texto.*/
     }
 
     .form-control {
-        border-radius: 10px;
-        border: 1px solid #d1d5db;
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-        color: #1f2937;
+        border-radius: 10px; /* Radio de la esquina del contenedor.*/
+        border: 1px solid #d1d5db; /* Bordes del contenedor.*/
+        padding: 0.6rem 1rem; /* Margen interno del contenedor.*/
+        font-size: 0.9rem; /* Tamaño de la fuente.*/
+        color: #1f2937; /* Color del texto.*/ 
     }
 
     .form-control:focus {
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        border-color: #3b82f6; /* Bordes del contenedor.*/
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Sombra del contenedor.*/
     }
 
     .form-control.is-invalid {
-        border-color: #dc3545;
+        border-color: #dc3545; /* Bordes del contenedor.*/
     }
 
     .text-danger {
-        font-size: 0.75rem;
-        color: #dc2626;
-        margin-top: 3px;
+        font-size: 0.75rem; /* Tamaño de la fuente.*/
+        color: #dc2626; /* Color del texto.*/
+        margin-top: 3px; /* Margen superior.*/
     }
 
     textarea.form-control {
-        height: 100px;
-        resize: vertical;
+        height: 100px; /* Altura del textarea.*/
+        resize: vertical; /* Redimensionar verticalmente.*/
     }
 
     .form-group {
-        margin-bottom: 1rem;
+        margin-bottom: 1rem; /* Margen inferior.*/
     }
 
     .form-row {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 1rem;
+        display: grid; /* Grid.*/
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Columnas.*/
+        gap: 1rem; /* Margen.*/
     }
 /*Muestra el tamaño de la imagen y su calidad.*/
     .img-preview {
-        margin-top: 0.5rem;
-        max-width: 100%;
-        height: auto;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 0.5rem; /* Margen superior.*/
+        max-width: 100%; /* Ancho maximo.*/
+        height: auto; /* Altura maxima.*/
+        border-radius: 10px; /* Radio de la esquina del contenedor.*/
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del contenedor.*/
         cursor: pointer;
     }
 /*Estilo del boton.*/
     .btn {
-        font-weight: 600;
-        padding: 0.5rem 1.25rem;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        transition: all 0.3s ease;
+        font-weight: 600; /* Peso de la fuente.*/
+        padding: 0.5rem 1.25rem; /* Margen interno del contenedor.*/
+        border-radius: 8px; /* Radio de la esquina del contenedor.*/
+        font-size: 0.9rem; /* Tamaño de la fuente.*/
+        transition: all 0.3s ease; /* Transicion.*/
     }
 
     .btn-secondary {
-        background-color: #95a5a6;
-        color: #1f2937;
-        border: none;
+        background-color: #95a5a6; /* Color del boton.*/
+        color: #1f2937; /* Color del texto.*/
+        border: none; /* Bordes del contenedor.*/
     }
 
     .btn-secondary:hover {
-        background-color: #7f8c8d;
+        background-color: #7f8c8d; /* Color del boton.*/
     }
 
     .btn-info {
-        background-color:  rgb(71, 154, 255); /* Verde un poco más oscuro al hacer hover */;
-        border-color: #3b82f6;
-        color: white;
+        background-color:  rgb(71, 154, 255); /* Color del boton.*/
+        border-color: #3b82f6; /* Color del texto.*/
+        color: white; /* Color del texto.*/
     }
 
     .btn-info:hover {
-        background-color: rgb(60, 140, 235);
-        border-color: #2563eb;
+        background-color: rgb(60, 140, 235); /* Color del boton.*/
+        border-color: #2563eb; /* Color del texto.*/
     }
 
     .btn-group {
-        display: flex;
-        justify-content: flex-end;
-        gap: 1rem;
-        margin-top: 2rem;
+        display: flex; /* Flexbox.*/
+        justify-content: flex-end; /* Alineación del texto.*/
+        gap: 1rem; /* Margen.*/
+        margin-top: 2rem; /* Margen superior.*/
     }
 /*Visualiza la imagen mas de cerca.*/
     .lightbox {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
+        position: fixed; /* Posicion fija.*/
+        top: 0; /* Margen superior.*/
+        left: 0; /* Margen izquierdo.*/
+        width: 100%; /* Ancho maximo.*/
+        height: 100%; /* Altura maxima.*/
+        background: rgba(0, 0, 0, 0.8); /* Color del texto.*/
+        display: none; /* Display none.*/
+        align-items: center; /* Alineación del texto.*/
+        justify-content: center; /* Alineación del texto.*/
+        z-index: 9999; /* Z-index.*/
     }
 
     .lightbox img {
-        max-width: 90%;
-        max-height: 90%;
-        border-radius: 12px;
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-        transition: transform 0.3s ease;
+        max-width: 90%; /* Ancho maximo.*/
+        max-height: 90%; /* Altura maxima.*/
+        border-radius: 12px; /* Radio de la esquina del contenedor.*/
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* Sombra del contenedor.*/
+        transition: transform 0.3s ease; /* Transicion.*/
     }
 
     .lightbox.show {
-        display: flex;
-        animation: fadeIn 0.3s ease;
+        display: flex; /* Display flex.*/
+        animation: fadeIn 0.3s ease; /* Transicion.*/
     }
 
     @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from { opacity: 0; } /* Opacidad.*/
+        to { opacity: 1; } /* Opacidad.*/
     }
 </style>
 <!-- Vista de editor . -->
@@ -180,7 +181,7 @@
                         <span class="text-danger">{{ $message }}</span>
                       @enderror
         </div>
-<!-- Muestra en texto los datos ya creados.. -->
+<!-- Muestra en texto los datos ya creados. -->
         <div class="form-row">
             <div class="form-group">
                 <label for="equipo">Hardware</label>
@@ -232,7 +233,7 @@
         </div>
 <!-- Muestra las imagenes tanto iniciales y finales. -->
       <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-  <!-- Imagen Antes -->
+  <!-- Imagen Antes. -->
   <div class="mb-4">
     <label class="form-label">Imagen del Equipo</label>
     <div class="image-upload-container">
@@ -241,7 +242,7 @@
         <p class="mb-3 text-muted">Suba una imagen o tome una foto del equipo</p>
 
         <div class="d-flex gap-2 justify-content-center w-100 flex-wrap">
-          <!-- Input normal para seleccionar archivo -->
+          <!-- Input normal para seleccionar archivo. -->
           <label for="foto_antes" class="btn btn-outline-primary flex-grow-1 flex-md-grow-0">
             <i class="fas fa-upload me-2"></i>Seleccionar
             <input type="file" name="foto_antes" id="foto_antes" 
@@ -249,7 +250,7 @@
                    onchange="previewImage(this, 'previewAntes')">
           </label>
 
-          <!-- Botón para abrir cámara -->
+          <!-- Botón para abrir cámara. -->
           <label for="foto_antes_camera_file" class="btn btn-primary flex-grow-1 flex-md-grow-0">
             <i class="fas fa-camera me-2"></i>Tomar Foto
             <input type="file" name="foto_antes_camera_file" id="foto_antes_camera_file" 
@@ -257,7 +258,7 @@
                    onchange="handleCameraFile(this, 'foto_antes_camera', 'previewAntes')">
           </label>
 
-          <!-- Input oculto para enviar Base64 -->
+          <!-- Input oculto para enviar Base64. -->
           <input type="hidden" name="foto_antes_camera" id="foto_antes_camera">
         </div>
 
@@ -266,7 +267,7 @@
         @enderror
       </div>
 
-      <!-- Vista previa de la imagen -->
+      <!-- Vista previa de la imagen antes. -->
       <img id="previewAntes" class="img-preview mt-3" onclick="openLightbox(this.src)">
     </div>
   </div>
@@ -280,7 +281,7 @@
         <p class="mb-3 text-muted">Suba una imagen o tome una foto del equipo</p>
 
         <div class="d-flex gap-2 justify-content-center w-100 flex-wrap">
-          <!-- Input normal para seleccionar archivo -->
+          <!-- Input normal para seleccionar archivo. -->
           <label for="foto_despues" class="btn btn-outline-primary flex-grow-1 flex-md-grow-0">
             <i class="fas fa-upload me-2"></i>Seleccionar
             <input type="file" name="foto_despues" id="foto_despues" 
@@ -288,7 +289,7 @@
                    onchange="previewImage(this, 'previewDespues')">
           </label>
 
-          <!-- Botón para abrir cámara -->
+          <!-- Botón para abrir cámara. -->
           <label for="foto_despues_camera_file" class="btn btn-primary flex-grow-1 flex-md-grow-0">
             <i class="fas fa-camera me-2"></i>Tomar Foto
             <input type="file" name="foto_despues_camera_file" id="foto_despues_camera_file" 
@@ -296,7 +297,7 @@
                    onchange="handleCameraFile(this, 'foto_despues_camera', 'previewDespues')">
           </label>
 
-          <!-- Input oculto para enviar Base64 -->
+          <!-- Input oculto para enviar Base64. -->
           <input type="hidden" name="foto_despues_camera" id="foto_despues_camera">
         </div>
 
@@ -305,10 +306,10 @@
         @enderror
       </div>
 
-      <!-- Vista previa de la imagen -->
+      <!-- Vista previa de la imagen despues. -->
       <img id="previewDespues" class="img-preview mt-3" onclick="openLightbox(this.src)">
     </div>
-    <div class="d-flex justify-content-end mt-auto pt-3">
+    <div class="d-flex justify-content-end mt-auto pt-3"><!-- Botones para actualizar y regresar. -->
             <a href="{{ route('registrodiagnostico.index') }}" class="btn btn-secondary me-2">
                 <i class="fas fa-arrow-left me-1"></i> Regresar
             </a>
@@ -318,9 +319,6 @@
         </div>
   </div>
 </div>
-
-
-<!-- Boton para actualizar. -->
     </form>
 </div>
 
@@ -329,7 +327,7 @@
     <img id="lightboxImage" src="" alt="Vista ampliada">
 </div>
 
-<script>    //Funcion para que las imagenes se puedan visualizar mas grandes o mas de cerca
+<script>    //Función para que las imagenes se puedan visualizar mas grandes o mas de cerca.
     function previewImage(input, previewId) {
         const file = input.files[0];
         const reader = new FileReader();
@@ -341,7 +339,8 @@
         };
         if (file) reader.readAsDataURL(file);
     }
-
+    
+    //Función para que las imagenes se puedan visualizar mas grandes o mas de cerca.
     function openLightbox(src) {
         const lightbox = document.getElementById('globalLightbox');
         const lightboxImg = document.getElementById('lightboxImage');
@@ -349,11 +348,12 @@
         lightbox.classList.add('show');
     }
 
+    //Función para que las imagenes se puedan visualizar mas grandes o mas de cerca.
     function closeLightbox() {
         const lightbox = document.getElementById('globalLightbox');
         lightbox.classList.remove('show');
     }
-     // Función para preview de archivos normales (antes o después)
+     // Función para preview de archivos normales (antes o después).
   function previewImage(input, previewId) {
     if (input.files && input.files[0]) {
       const reader = new FileReader();
@@ -364,23 +364,23 @@
     }
   }
 
-  // Convierte archivo de input file a base64, actualiza input hidden y vista previa
+  // Convierte archivo de input file a base64, actualiza input hidden y vista previa.
 function handleCameraFile(inputFile, hiddenInputId, previewImgId) {
     const file = inputFile.files[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onload = function(e) {
-        // e.target.result = base64
+        // e.target.result = base64.
         document.getElementById(hiddenInputId).value = e.target.result;
 
-        // Actualizar vista previa
+        // Actualizar vista previa.
         document.getElementById(previewImgId).src = e.target.result;
     };
     reader.readAsDataURL(file);
 }
 
-// Vista previa simple para inputs tipo file normales
+// Vista previa simple para inputs tipo file normales.
 function previewImage(inputFile, previewImgId) {
     const file = inputFile.files[0];
     if (!file) return;

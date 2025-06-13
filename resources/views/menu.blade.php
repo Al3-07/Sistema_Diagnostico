@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ asset('img/icono.PNG') }}" type="image/PNG">
 
-    <!-- Bootstrap y FontAwesome -->
+    <!-- Bootstrap y FontAwesome. -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -100,14 +100,14 @@
             font-weight: 900;
         }
 
-        /* Contenido principal */
+        /* Contenido principal. */
         .content {
             margin-left: 260px;
             padding: 20px;
             transition: margin-left 0.3s;
         }
 
-        /* Navbar */
+        /* Navbar. */
         .navbar {
             background: rgba(0, 0, 0, 0.7) !important;
         }
@@ -116,7 +116,7 @@
             color: white !important;
         }
 
-        /* Botón de ocultar */
+        /* Botón de ocultar. */
         #toggleSidebar {
             position: fixed;
             top: 15px;
@@ -153,11 +153,11 @@
             width: 100%;
             text-align: center;
             font-size: 40px;
-            padding: 15px 0; /* Aumentar el espacio arriba y abajo */
+            padding: 15px 0; /* Aumentar el espacio arriba y abajo. */
             color: white;
             font-family: 'Bebas Neue', sans-serif;
-            letter-spacing: 2px; /* Espaciado entre letras */
-            word-spacing: 5px; /* Espaciado entre palabras */
+            letter-spacing: 2px; /* Espaciado entre letras. */
+            word-spacing: 5px; /* Espaciado entre palabras. */
         }
 
         @keyframes slideIn {
@@ -193,7 +193,7 @@
 </footer>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Cambio de fondo automático cada 5 segundos
+        // Cambio de fondo automático cada 5 segundos.
         let images = [
             "img/Plasenciah.jpg",
             "img/fincap.jpg",

@@ -6,193 +6,193 @@
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
 
 <style>
-    /* Estilos mejorados con enfoque responsive */
+    /* Estilos mejorados con enfoque responsive. */
     :root {
-        --primary-color: #4361ee;
-        --secondary-color: #3f37c9;
-        --accent-color: #4cc9f0;
-        --light-bg: #f8f9fa;
-        --dark-text: #2b2d42;
-        --light-text: #8d99ae;
-        --success-color: #4caf50;
-        --warning-color: #ff9800;
-        --danger-color: #f44336;
-        --border-radius: 8px;
-        --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        --transition: all 0.3s ease;
+        --primary-color: #4361ee;   /* Color principal.*/
+        --secondary-color: #3f37c9;  /* Color secundario.*/
+        --accent-color: #4cc9f0;     /* Color de acento.*/
+        --light-bg: #f8f9fa;         /* Color de fondo claro.*/
+        --dark-text: #2b2d42;        /* Color de texto oscuro.*/
+        --light-text: #8d99ae;       /* Color de texto claro.*/
+        --success-color: #4caf50;    /* Color de éxito.*/
+        --warning-color: #ff9800;    /* Color de advertencia.*/
+        --danger-color: #f44336;     /* Color de peligro.*/
+        --border-radius: 8px;        /* Radio de la esquina.*/
+        --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra.*/
+        --transition: all 0.3s ease;  /* Transición.*/
     }
-    
+     /* Fin de los estilos. */
     .card-detail {
-        border: none;
-        border-radius: var(--border-radius);
-        box-shadow: var(--box-shadow);
-        overflow: hidden;
-        background: white;
-        transition: var(--transition);
+        border: none;   /* Borde.*/
+        border-radius: var(--border-radius); /* Radio de la esquina.*/
+        box-shadow: var(--box-shadow); /* Sombra.*/
+        overflow: hidden; /* Desbordamiento.*/
+        background: white; /* Fondo.*/
+        transition: var(--transition); /* Transición.*/
         margin-bottom: 2rem;
     }
-    
+    /* Fin de los estilos. */
     .card-header-custom {
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-        color: white;
-        padding: 1.25rem;
-        border-bottom: none;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); /* Gradiente.*/
+        color: white; /* Color del texto.*/
+        padding: 1.25rem; /* Margen interno.*/
+        border-bottom: none; /* Borde inferior.*/
     }
-    
+    /* Fin de los estilos. */
     .card-title {
-        font-weight: 700;
-        font-size: 1.25rem;
-        margin-bottom: 0.25rem;
+        font-weight: 700;           /* Peso de la fuente.*/
+        font-size: 1.25rem;         /* Tamaño de la fuente.*/
+        margin-bottom: 0.25rem;     /* Margen inferior.*/
     }
-    
+    /* Fin de los estilos. */
     .card-subtitle {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.8); /* Color del texto.*/
+        font-size: 0.85rem; /* Tamaño de la fuente.*/
     }
-    
+    /* Fin de los estilos. */
     .btn-back {
         background-color: white;
-        color: var(--primary-color);
+        color: var(--primary-color); /* Color del texto.*/  
         border: none;
-        border-radius: 50px;
-        padding: 0.4rem 1rem;
-        font-weight: 500;
-        transition:rgb(96, 142, 249);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        font-size: 0.85rem;
+        border-radius: 50px; /* Radio de la esquina.*/
+        padding: 0.4rem 1rem; /* Margen interno.*/
+        font-weight: 500; /* Peso de la fuente.*/
+        transition:rgb(96, 142, 249); /* Transición.*/
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra.*/
+        font-size: 0.85rem; /* Tamaño de la fuente.*/
     }
-    
+    /* Fin de los estilos. */
     .detail-container {
-        padding: 1.5rem;
+        padding: 1.5rem;    /* Margen interno.*/
     }
-    
+    /* Fin de los estilos. */
     .detail-header {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        margin-bottom: 1.25rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #eee;
+        display: flex; /* Flexbox.*/
+        flex-direction: column; /* Flexbox.*/
+        gap: 0.75rem; /* Margen interno.*/
+        margin-bottom: 1.25rem; /* Margen inferior.*/
+        padding-bottom: 1rem; /* Margen interno.*/
+        border-bottom: 1px solid #eee; /* Borde inferior.*/
     }
-    
+    /* Fin de los estilos. */
     .detail-date, .detail-correlative {
-        font-size: 0.85rem;
+        font-size: 0.85rem; /* Tamaño de la fuente.*/
     }
-    
+    /* Fin de los estilos. */
     .detail-correlative {
-        background-color: var(--accent-color);
-        color: white;
-        padding: 0.2rem 0.6rem;
-        border-radius: 50px;
-        font-weight: 600;
-        align-self: flex-start;
+        background-color: var(--accent-color); /* Color de fondo.*/
+        color: white; /* Color del texto.*/
+        padding: 0.2rem 0.6rem; /* Margen interno.*/
+        border-radius: 50px; /* Radio de la esquina.*/
+        font-weight: 600; /* Peso de la fuente.*/
+        align-self: flex-start; /* Alineacion.*/
     }
-    
+    /* Fin de los estilos. */
     .detail-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
+        display: grid; /* Grid.*/
+        grid-template-columns: 1fr; /* Grid.*/
+        gap: 1rem; /* Margen interno.*/
+        margin-bottom: 1.5rem; /* Margen inferior.*/
     }
-    
+    /* Fin de los estilos. */
     .detail-item {
-        padding: 0.85rem;
-        background-color: var(--light-bg);
-        border-radius: var(--border-radius);
+        padding: 0.85rem; /* Margen interno.*/
+        background-color: var(--light-bg); /* Color de fondo.*/
+        border-radius: var(--border-radius); /* Radio de la esquina.*/
     }
-    
+    /* Fin de los estilos. */
     .detail-label {
-        font-weight: 600;
-        color: var(--primary-color);
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 0.2rem;
+        font-weight: 600;   /* Peso de la fuente.*/
+        color: var(--primary-color); /* Color del texto.*/
+        font-size: 0.75rem; /* Tamaño de la fuente.*/
+        text-transform: uppercase; /* Transformacion.*/
+        letter-spacing: 0.5px; /* Espacio entre letras.*/
+        margin-bottom: 0.2rem; /* Margen inferior.*/
     }
-    
+    /* Fin de los estilos. */
     .detail-value {
-        color: var(--dark-text);
-        font-size: 0.9rem;
+        color: var(--dark-text); /* Color del texto.*/
+        font-size: 0.9rem; /* Tamaño de la fuente.*/
     }
-    
+    /* Fin de los estilos. */
     .section-title {
-        color: var(--dark-text);
-        font-weight: 600;
-        margin: 1.5rem 0 1rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid var(--light-bg);
-        font-size: 1.1rem;
+        color: var(--dark-text); /* Color del texto.*/
+        font-weight: 600; /* Peso de la fuente.*/
+        margin: 1.5rem 0 1rem; /* Margen interno.*/
+        padding-bottom: 0.5rem; /* Margen inferior.*/
+        border-bottom: 2px solid var(--light-bg); /* Borde inferior.*/
+        font-size: 1.1rem; /* Tamaño de la fuente.*/
     }
-    
+    /* Fin de los estilos. */
     .photo-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        margin-top: 1rem;
+        display: grid; /* Grid.*/
+        grid-template-columns: 1fr; /* Grid.*/
+        gap: 1.5rem; /* Margen interno.*/
+        margin-top: 1rem; /* Margen superior.*/
     }
-    
+    /* Fin de los estilos. */
     .photo-card {
-        background-color: white;
-        border-radius: var(--border-radius);
-        overflow: hidden;
-        box-shadow: var(--box-shadow);
+        background-color: white; /* Color de fondo.*/
+        border-radius: var(--border-radius); /* Radio de la esquina.*/
+        overflow: hidden; /* Desbordamiento.*/
+        box-shadow: var(--box-shadow); /* Sombra.*/
     }
-    
+    /* Fin de los estilos. */
     .photo-header {
-        background-color: var(--light-bg);
-        padding: 0.6rem 0.85rem;
-        border-bottom: 1px solid #eee;
-        font-weight: 600;
-        font-size: 0.9rem;
+        background-color: var(--light-bg); /* Color de fondo.*/
+        padding: 0.6rem 0.85rem; /* Margen interno.*/
+        border-bottom: 1px solid #eee; /* Borde inferior.*/
+        font-weight: 600; /* Peso de la fuente.*/
+        font-size: 0.9rem; /* Tamaño de la fuente.*/
     }
-    
+    /* Fin de los estilos. */
     .photo-body {
-        padding: 0.85rem;
+        padding: 0.85rem; /* Margen interno.*/
     }
-    
+    /* Fin de los estilos. */
     .photo-img {
-        width: 100%;
-        height: auto;
-        max-height: 250px;
-        object-fit: contain;
-        border-radius: 4px;
-        background-color: #f9f9f9;
+        width: 100%; /* Ancho maximo.*/
+        height: auto; /* Altura maxima.*/
+        max-height: 250px; /* Altura maxima.*/
+        object-fit: contain; /* Contenido.*/
+        border-radius: 4px; /* Radio de la esquina.*/
+        background-color: #f9f9f9; /* Color de fondo.*/
         cursor: pointer;
     }
-    
+    /* Fin de los estilos. */
     .no-photo {
-        height: 150px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--light-bg);
+        height: 150px; /* Altura maxima.*/
+        display: flex; /* Flexbox.*/
+        flex-direction: column; /* Flexbox.*/
+        align-items: center; /* Alineacion.*/
+        justify-content: center; /* Alineacion.*/
+        background-color: var(--light-bg); /* Color de fondo.*/
         color: var(--light-text);
         border-radius: 4px;
         font-style: italic;
         font-size: 0.85rem;
     }
-    
+    /* Fin de los estilos. */
     .action-buttons {
-        margin-top: 2rem;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.75rem;
+        margin-top: 2rem; /* Margen superior.*/
+        display: grid; /* Grid.*/
+        grid-template-columns: 1fr 1fr; /* Grid.*/
+        gap: 0.75rem; /* Margen interno.*/
     }
-    
+    /* Fin de los estilos. */
     .btn-action {
-        border-radius: 50px;
-        padding: 0.5rem;
-        font-weight: 500;
-        font-size: 0.8rem;
-        display: inline-flex;
+        border-radius: 50px; /* Radio de la esquina.*/
+        padding: 0.5rem; /* Margen interno.*/
+        font-weight: 500; /* Peso de la fuente.*/
+        font-size: 0.8rem; /* Tamaño de la fuente.*/
+        display: inline-flex; /* Flexbox.*/
         align-items: center;
         justify-content: center;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         border: none;
         text-align: center;
     }
-    
+    /* Fin de los estilos. */
     .btn-action i {
         margin-right: 0.3rem;
         font-size: 0.9rem;
@@ -202,12 +202,12 @@
     .lightbox {
         display: none;
         position: fixed;
-        z-index: 9999;
+        z-index: 9999; /* Z-index.*/
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.95);
+        background-color: rgba(0, 0, 0, 0.95); /* Color de fondo.*/
         align-items: center;
         justify-content: center;
     }
@@ -215,59 +215,60 @@
     .lightbox.show {
         display: flex;
     }
-    
+    /* Fin de los estilos. */
     .lightbox-content {
-        width: 90%;
-        max-width: 800px;
-        text-align: center;
+        width: 90%; /* Ancho maximo.*/
+        max-width: 800px; /* Ancho maximo.*/
+        text-align: center; /* Alineacion.*/
     }
     
     .lightbox-img {
-        max-width: 100%;
-        max-height: 80vh;
-        border-radius: 5px;
+        max-width: 100%; /* Ancho maximo.*/
+        max-height: 80vh; /* Altura maxima.*/
+        border-radius: 5px; /* Radio de la esquina.*/
     }
     
     .lightbox-close {
         position: absolute;
         top: 20px;
-        right: 20px;
-        color: white;
-        font-size: 30px;
-        cursor: pointer;
+        right: 20px;    /* Margen interno.*/
+        color: white;   /* Color del texto.*/
+        font-size: 30px; /* Tamaño de la fuente.*/
+        cursor: pointer; /* Cursor.*/
     }
     
     /* Modal */
     .modal-content {
-        border: none;
-        border-radius: var(--border-radius);
+        border: none;   /* Borde.*/
+        border-radius: var(--border-radius); /* Radio de la esquina.*/
     }
     
     .modal-header {
-        background-color: var(--primary-color);
-        color: white;
-        border-bottom: none;
-        padding: 1rem;
+        background-color: var(--primary-color); /* Color de fondo.*/
+        color: white; /* Color del texto.*/
+        border-bottom: none; /* Borde inferior.*/
+        padding: 1rem; /* Margen interno.*/
     }
     
     .modal-title {
-        font-weight: 600;
-        font-size: 1.1rem;
+        font-weight: 600; /* Peso de la fuente.*/
+        font-size: 1.1rem; /* Tamaño de la fuente.*/
     }
     
     .modal-body {
-        padding: 1.5rem;
+        padding: 1.5rem; /* Margen interno.*/
     }
     
+    /* Canvas */
     #firmaCanvas {
-        width: 100%;
-        height: 150px;
-        border: 1px solid #ddd;
-        border-radius: var(--border-radius);
-        background-color: white;
+        width: 100%; /* Ancho maximo.*/
+        height: 150px; /* Altura maxima.*/
+        border: 1px solid #ddd; /* Borde.*/
+        border-radius: var(--border-radius); /* Radio de la esquina.*/
+        background-color: white; /* Color de fondo.*/
     }
     
-    /* Media queries para tablets */
+    /* Media queries para tablets.   */
     @media (min-width: 576px) {
         .card-title {
             font-size: 1.5rem;
@@ -286,7 +287,7 @@
         }
     }
     
-    /* Media queries para escritorio */
+    /* Media queries para escritorio. */
     @media (min-width: 992px) {
         .card-header-custom {
             padding: 1.5rem;
@@ -313,7 +314,7 @@
         }
     }
     
-    /* Ajustes para pantallas muy pequeñas */
+    /* Ajustes para pantallas muy pequeñas. */
     @media (max-width: 400px) {
         .action-buttons {
             grid-template-columns: 1fr;
@@ -329,7 +330,7 @@
 <!-- Comienza la vista del Show. -->
 <div class="container mt-3 mb-4">
     <div class="card card-detail">
-        <!-- Encabezado -->
+        <!-- Encabezado. -->
         <div class="card-header card-header-custom">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
                 <div>
@@ -344,9 +345,9 @@
             </div>
         </div>
         
-        <!-- Contenido principal -->
+        <!-- Contenido principal. -->
         <div class="detail-container">
-            <!-- Encabezado de detalles -->
+            <!-- Encabezado de detalles. -->
             <div class="detail-header">
                 <span class="detail-date">
                     <i class="far fa-calendar-alt me-1"></i> 
@@ -397,7 +398,7 @@
                 </div>
             </div>
             
-            <!-- Imagen inicial -->
+            <!-- Imagen inicial. -->
 <div class="photo-card">
     <div class="photo-header">
         <i class="fas fa-camera me-2"></i>Imagen Inicial
@@ -422,7 +423,7 @@
     </div>
 </div>
 
-<!-- Imagen final -->
+<!-- Imagen final. -->
 <div class="photo-card">
     <div class="photo-header">
         <i class="fas fa-camera-retro me-2"></i>Imagen Final
@@ -448,7 +449,7 @@
 </div>
 
             
-            <!-- Botones de acción -->
+            <!-- Botones de acción. -->
             <div class="action-buttons">
                 @if(Auth::user()->role !== 'Visualizador')
                 <button onclick="abrirModalFirma('realizado')" class="btn btn-primary btn-action">
@@ -492,7 +493,7 @@
                 <i class="fas fa-eraser me-1"></i>Limpiar
             </button>
         </div>
-
+<!-- Boton para guardar la firma. -->
         <form id="firmaForm" method="POST" action="{{ route('guardar.firma', $registro->id) }}">
             @csrf
             <input type="hidden" name="tipo_firma" id="tipoFirmaInput">
@@ -506,7 +507,7 @@
   </div>
 </div>
 
-<!-- Lightbox para imágenes -->
+<!-- Lightbox para imágenes. -->
 <div id="lightbox" class="lightbox">
     <span class="lightbox-close">&times;</span>
     <div class="lightbox-content">
@@ -516,13 +517,13 @@
 </div>
 
 <script>
-    // Inicialización del pad de firma
+    // Inicialización del pad de firma.
     const canvas = document.getElementById('firmaCanvas');
     const signaturePad = new SignaturePad(canvas, {
         backgroundColor: 'rgb(255, 255, 255)',
         penColor: 'rgb(0, 0, 0)'
     });
-
+ // Redimensionar el canvas.
     function resizeCanvas() {
         const ratio = Math.max(window.devicePixelRatio || 1, 1);
         canvas.width = canvas.offsetWidth * ratio;
@@ -533,12 +534,12 @@
     
     window.addEventListener('resize', resizeCanvas);
     
-    // Limpiar firma
+    // Limpiar firma.
     document.getElementById('limpiarFirma').addEventListener('click', function () {
         signaturePad.clear();
     });
 
-    // Validar formulario de firma
+    // Validar formulario de firma.
     document.getElementById('firmaForm').addEventListener('submit', function (e) {
         if (signaturePad.isEmpty()) {
             e.preventDefault();
@@ -550,7 +551,7 @@
             });
             return;
         }
-
+ // Obtener la firma.
         const firmaData = signaturePad.toDataURL();
         document.getElementById('firmaInput').value = firmaData;
     });
@@ -562,7 +563,7 @@
         const modal = new bootstrap.Modal(document.getElementById('firmaModal'));
         modal.show();
         
-        // Ajustar canvas después de que el modal se muestra
+        // Ajustar canvas después de que el modal se muestra.
         setTimeout(resizeCanvas, 300);
     }
 
@@ -571,7 +572,7 @@
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCaption = document.getElementById('lightbox-caption');
     const closeBtn = document.querySelector('.lightbox-close');
-    
+     // Mostrar lightbox.
     function mostrarLightbox(imgElement, caption) {
         lightboxImg.src = imgElement.src;
         lightboxCaption.textContent = caption;
@@ -579,26 +580,26 @@
         document.body.style.overflow = 'hidden';
     }
     
+    // Cerrar lightbox.
     function cerrarLightbox() {
         lightbox.classList.remove('show');
         document.body.style.overflow = 'auto';
     }
     
-    closeBtn.addEventListener('click', cerrarLightbox);
+    closeBtn.addEventListener('click', cerrarLightbox); // Cerrar lightbox.
     
     lightbox.addEventListener('click', function(e) {
         if (e.target === lightbox) {
             cerrarLightbox();
         }
     });
-    
+    // Cerrar lightbox con tecla escape.
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && lightbox.classList.contains('show')) {
             cerrarLightbox();
         }
     });
 </script>
-
 @if (session('success'))
     <script>
         Swal.fire({

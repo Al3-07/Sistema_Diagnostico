@@ -6,243 +6,243 @@
 
 @include('sweetalert::alert')
 
-<style>
+<style> /* Estilos base. */
     :root {
         --primary-color: #2563eb;
-        --edit-color: #f59e0b; /* Naranja para acciones de edición */
-        --secondary-color: #16a34a;
-        --hover-color: #1e40af;
-        --text-dark: #1f2937;
-        --text-light: #6b7280;
-        --light-bg: #f9fafb;
-        --border-color: #e5e7eb;
+        --edit-color: #f59e0b; /* Naranja para acciones de edición. */
+        --secondary-color: #16a34a; /* Verde para acciones secundarias. */
+        --hover-color: #1e40af; /* Azul para acciones de hover. */
+        --text-dark: #1f2937; /* Texto oscuro. */
+        --text-light: #6b7280; /* Texto claro. */
+        --light-bg: #f9fafb; /* Fondo claro. */
+        --border-color: #e5e7eb; /* Color de borde. */
         --error-color: #dc2626;
-        --success-color: #16a34a;
-        --warning-bg: #fffbeb; /* Fondo para alertas de edición */
+        --success-color: #16a34a;   /* Verde para acciones de éxito. */
+        --warning-bg: #fffbeb; /* Fondo para alertas de edición. */
     }
-    
+    /* Contenedor. */
     .edit-container {
-        max-width: 850px;
-        margin: 2rem auto;
-        background: white;
-        border-radius: 16px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        padding: 2.5rem;
-        border: 1px solid var(--border-color);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-        overflow: hidden;
+        max-width: 850px; /* Ancho maximo. */
+        margin: 2rem auto; /* Margen. */
+        background: white; /* Fondo. */
+        border-radius: 16px; /* Radio de la curva. */
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Sombra. */
+        padding: 2.5rem; /* Margen. */
+        border: 1px solid var(--border-color); /* Borde. */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transicion. */
+        position: relative; /* Posicionamiento. */
+        overflow: hidden; /* Desbordamiento. */
     }
-
+    /* Fondo. */
     .edit-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 5px;
-        height: 100%;
+        content: '';  /* Contenido. */
+        position: absolute; /* Posicionamiento. */
+        top: 0; /* Margen. */
+        left: 0; /* Margen. */
+        width: 5px; /* Ancho. */
+        height: 100%; /* Altura. */
         background:rgb(146, 152, 155);
     }
-
+    /* Responsive. */
     @media (min-width: 992px) {
-        .edit-container {
-            margin-top: 100px;
-            margin-left: 200px;
+        .edit-container { /* Contenedor. */
+            margin-top: 100px; /* Margen. */
+            margin-left: 200px; /* Margen. */
         }
     }
-
+    /* Hover. */
     .edit-container:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        transform: translateY(-2px); /* Transformacion. */
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12); /* Sombra. */
     }
-
-    .edit-title {
-        font-weight: 700;
-        font-size: 1.8rem;
-        text-align: center;
-        margin-bottom: 2rem;
-        color: var(--text-dark);
-        position: relative;
+    /* Titulo. */
+    .edit-title {   
+        font-weight: 700; /* Peso de la fuente. */
+        font-size: 1.8rem; /* Tamaño de la fuente. */
+        text-align: center; /* Alineacion. */
+        margin-bottom: 2rem; /* Margen inferior. */
+        color: var(--text-dark); /* Color de texto oscuro. */
+        position: relative; /* Posicionamiento. */  
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 0.8rem;
     }
-
+    /* Titulo. */
     .edit-title:after {
-        content: '';
-        display: block;
-        width: 80px;
-        height: 4px;
-        margin: 1rem auto 0;
-        border-radius: 2px;
+        content: ''; /* Contenido. */
+        display: block; /* Desbordamiento. */
+        width: 80px; /* Ancho. */
+        height: 4px; /* Altura. */
+        margin: 1rem auto 0; /* Margen. */
+        border-radius: 2px; /* Radio de la curva. */
     }
-
+    /* Badge. */
     .edit-badge {
-        background-color: var(--edit-color);
-        color: white;
-        padding: 0.3rem 0.8rem;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
+        background-color: var(--edit-color); /* Color de fondo. */
+        color: white; /* Color de texto oscuro. */
+        padding: 0.3rem 0.8rem; /* Margen. */
+        border-radius: 20px; /* Radio de la curva. */
+        font-size: 0.8rem; /* Tamaño de la fuente. */
+        font-weight: 600; /* Peso de la fuente. */
+        display: inline-flex; /* Desbordamiento. */
+        align-items: center; /* Alineacion. */
+        gap: 0.3rem; /* Margen. */
     }
 
     label {
-        font-weight: 600;
-        font-size: 0.95rem;
-        margin-bottom: 0.5rem;
-        color: var(--text-dark);
-        display: block;
+        font-weight: 600; /* Peso de la fuente. */
+        font-size: 0.95rem; /* Tamaño de la fuente. */
+        margin-bottom: 0.5rem; /* Margen inferior. */
+        color: var(--text-dark); /* Color de texto oscuro. */
+        display: block; /* Desbordamiento. */
     }
-
+    /* Input. */
     .form-control {
-        border-radius: 10px;
-        border: 1px solid var(--border-color);
-        padding: 0.75rem 1rem;
-        font-size: 1rem;
-        color: var(--text-dark);
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 10px; /* Radio de la curva. */
+        border: 1px solid var(--border-color); /* Borde. */
+        padding: 0.75rem 1rem; /* Margen. */
+        font-size: 1rem; /* Tamaño de la fuente. */
+        color: var(--text-dark); /* Color de texto oscuro. */
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transicion. */
         background-color: #f8fafc;
     }
-
+    /* Focus. */
     .form-control:focus {
-        border-color: var(--edit-color);
-        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
-        outline: none;
-        background-color: white;
+        border-color: var(--edit-color); /* Color de borde. */
+        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1); /* Sombra. */
+        outline: none; /* Desbordamiento. */
+        background-color: white; /* Color de fondo. */
     }
-
+    /* Invalid. */
     .form-control.is-invalid {
-        border-color: var(--error-color);
+        border-color: var(--error-color); /* Color de borde. */
     }
-
+    /* Texto. */
     .text-danger {
-        font-size: 0.8rem;
-        color: var(--error-color);
-        margin-top: 0.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
+        font-size: 0.8rem; /* Tamaño de la fuente. */
+        color: var(--error-color); /* Color de texto oscuro. */
+        margin-top: 0.5rem; /* Margen superior. */
+        display: flex; /* Desbordamiento. */
+        align-items: center; /* Alineacion. */
+        gap: 0.3rem; /* Margen. */
     }
-
+    /* Grupo. */
     .form-group {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.5rem; /* Margen inferior. */
     }
-
+    /* Alerta. */
     .alert-warning {
-        background-color: var(--warning-bg);
-        color: #92400e;
-        border: 1px solid #fcd34d;
-        border-radius: 8px;
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
+        background-color: var(--warning-bg); /* Color de fondo. */
+        color: #92400e; /* Color de texto oscuro. */
+        border: 1px solid #fcd34d; /* Borde. */
+        border-radius: 8px; /* Radio de la curva. */
+        padding: 1rem; /* Margen. */
+        margin-bottom: 1.5rem; /* Margen inferior. */
+        display: flex; /* Desbordamiento. */
+        align-items: center; /* Alineacion. */
         gap: 0.5rem;
     }
 
     .btn {
-        font-weight: 600;
-        padding: 0.625rem 1.5rem;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        transition: all 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        border: none;
-        cursor: pointer;
+        font-weight: 600; /* Peso de la fuente. */
+        padding: 0.625rem 1.5rem; /* Margen. */
+        border-radius: 8px; /* Radio de la curva. */
+        font-size: 0.9rem; /* Tamaño de la fuente. */
+        transition: all 0.3s ease; /* Transicion. */
+        display: inline-flex; /* Desbordamiento. */
+        align-items: center; /* Alineacion. */
+        gap: 0.5rem; /* Margen. */
+        border: none; /* Borde. */
+        cursor: pointer; /* Cursor. */
     }
 
     .btn-secondary {
-        background-color: #e5e7eb;
-        color: var(--text-dark);
-        border: 1px solid var(--border-color);
+        background-color: #e5e7eb; /* Color de fondo. */
+        color: var(--text-dark); /* Color de texto oscuro. */
+        border: 1px solid var(--border-color); /* Borde. */
     }
 
-    .btn-secondary:hover {
+    .btn-secondary:hover { /* Hover. */ 
         background-color: #d1d5db;
         transform: translateY(-1px);
     }
 
-    .btn-edit {
+    .btn-edit { /* Editar. */
         background-color: rgb(85, 122, 255);
         color: white;
     }
 
-    .btn-edit:hover {
+    .btn-edit:hover { /* Hover. */
         background-color: rgb(71, 154, 255);
         transform: translateY(-1px);
     }
 
-    .buttons-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 2rem;
-        flex-wrap: wrap;
-        gap: 1rem;
+    .buttons-container { /* Botones. */
+        display: flex; /* Desbordamiento. */
+        justify-content: space-between; /* Alineacion. */
+        align-items: center; /* Alineacion. */
+        margin-top: 2rem; /* Margen superior. */
+        flex-wrap: wrap; /* Desbordamiento. */
+        gap: 1rem; /* Margen. */
     }
 
-    .edit-info {
-        font-size: 0.85rem;
-        color: var(--text-light);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+    .edit-info { /* Informacion. */
+        font-size: 0.85rem; /* Tamaño de la fuente. */
+        color: var(--text-light); /* Color de texto oscuro. */
+        display: flex; /* Desbordamiento. */
+        align-items: center; /* Alineacion. */
+        gap: 0.5rem; /* Margen. */
     }
 
-    .buttons-group {
-    display: flex;
-    gap: 1rem;
+    .buttons-group { /* Botones. */
+    display: flex; /* Desbordamiento. */
+    gap: 1rem; /* Margen. */
 }
 
-    /* Responsive adjustments */
+    /* Responsive adjustments. */
     @media (max-width: 768px) {
-        .edit-container {
-            padding: 1.5rem;
-            margin: 1rem;
-            margin-top: 80px;
-            margin-left: 1rem;
+        .edit-container { /* Contenedor. */
+            padding: 1.5rem; /* Margen. */
+            margin: 1rem; /* Margen. */
+            margin-top: 80px; /* Margen superior. */
+            margin-left: 1rem; /* Margen. */
         }
 
-        .edit-title {
-            font-size: 1.5rem;
-            flex-direction: column;
-            gap: 0.5rem;
+        .edit-title { /* Titulo. */
+            font-size: 1.5rem; /* Tamaño de la fuente. */
+            flex-direction: column; /* Desbordamiento. */
+            gap: 0.5rem; /* Margen. */
         }
 
-        /* Agrega solo estas nuevas reglas para los botones */
+        /* Agrega solo estas nuevas reglas para los botones. */
     .buttons-container {
-        flex-direction: column-reverse;
-        gap: 1.5rem;
+        flex-direction: column-reverse; /* Desbordamiento. */
+        gap: 1.5rem; /* Margen. */
     }
     
-    .buttons-group {
-        width: 80%;
-        flex-direction: column;
-        gap: 0.75rem;
+    .buttons-group { /* Botones. */
+        width: 80%; /* Ancho maximo. */
+        flex-direction: column; /* Desbordamiento. */
+        gap: 0.75rem; /* Margen. */
     }
     
-    .buttons-group .btn {
-        width: 100%;
+    .buttons-group .btn { /* Botones. */
+        width: 100%; /* Ancho maximo. */
     }
     
-    .edit-info {
-        width: 100%;
-        justify-content: center;
-        text-align: center;
-        margin-bottom: 0.5rem;
+    .edit-info { /* Informacion. */
+        width: 100%; /* Ancho maximo. */
+        justify-content: center; /* Alineacion. */
+        text-align: center; /* Alineacion. */
+        margin-bottom: 0.5rem; /* Margen inferior. */
     }
 }
    
 
-    @media (max-width: 576px) {
+    @media (max-width: 576px) { /* Responsive adjustments. */
         .edit-container {
-            padding: 1.25rem;
+            padding: 1.25rem; /* Margen. */
         }
 
         .form-control {
@@ -250,7 +250,7 @@
         }
     }
 </style>
-
+<!-- Formulario de edicion. -->
 <div class="edit-container">
     <h3 class="edit-title">
         <span>Editar Empresa</span>
@@ -258,7 +258,7 @@
             <i class="fas fa-edit"></i> Modo Edición
         </span>
     </h3>
-
+    <!-- Alertas. -->
     @if(session('warning'))
         <div class="alert-warning">
             <i class="fas fa-exclamation-triangle"></i> {{ session('warning') }}
@@ -271,7 +271,7 @@
         </div>
     @endif
 
-    <form action="{{ route('empresa.update', $empresa->id) }}" method="POST">
+    <form action="{{ route('empresa.update', $empresa->id) }}" method="POST">   <!-- Formulario de edicion. -->
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -287,13 +287,13 @@
             @enderror
         </div>
 
-        <div class="buttons-container">
-            <div class="edit-info">
+        <div class="buttons-container"> <!-- Botones. -->
+            <div class="edit-info"> <!-- Informacion. -->
                 <i class="fas fa-info-circle"></i>
                 <span>Registro creado el {{ $empresa->created_at->format('d/m/Y') }}</span>
             </div>
             
-            <div class="buttons-group">
+            <div class="buttons-group"> <!-- Botones. -->
                 <a href="{{ route('empresa.index') }}" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i> Cancelar
                 </a>
