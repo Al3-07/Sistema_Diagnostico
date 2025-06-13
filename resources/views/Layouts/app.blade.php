@@ -471,6 +471,7 @@
     position: absolute;
     top: 50px;
     right: -1px;
+    left: 220px;
     z-index: 1001;
     /* Mantiene todos tus estilos originales. */
     box-shadow: 0 0 0 2px rgba(0,0,0,0.1); /* Borde para mejor visibilidad */
